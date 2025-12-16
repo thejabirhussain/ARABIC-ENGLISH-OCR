@@ -1,0 +1,184 @@
+import { useState } from 'react'
+import UploadBox from './components/UploadBox'
+import OutputBox from './components/OutputBox'
+
+function App() {
+  const [file, setFile] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [loadingPdf, setLoadingPdf] = useState(false)
+  const [results, setResults] = useState(null)
+  const [translatedPdfUrl, setTranslatedPdfUrl] = useState(null)
+  const [error, setError] = useState(null)
+
+  const handleFileSelect = (selectedFile) => {
+    setFile(selectedFile)
+    setResults(null)
+    setTranslatedPdfUrl(null)
+    setError(null)
+  }
+
+  const handleProcess = async () => {
+    if (!file) {
+      setError('Please select a PDF file first')
+      return
+    }
+
+    setLoading(true)
+    setError(null)
+    setResults(null)
+    setTranslatedPdfUrl(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('http://localhost:8000/process', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.detail || 'Failed to process PDF')
+      }
+
+      const data = await response.json()
+      setResults(data)
+    } catch (err) {
+      setError(err.message || 'An error occurred while processing the PDF')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleTranslatePdf = async () => {
+    if (!file) {
+      setError('Please select a PDF file first')
+      return
+    }
+
+    setLoadingPdf(true)
+    setError(null)
+    setResults(null)
+    setTranslatedPdfUrl(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('http://localhost:8000/translate-pdf', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.detail || 'Failed to translate PDF')
+      }
+
+      // Get the PDF blob
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      setTranslatedPdfUrl(url)
+
+      // Get translation stats from headers
+      const stats = response.headers.get('X-Translation-Stats')
+      if (stats) {
+        console.log('Translation stats:', stats)
+      }
+    } catch (err) {
+      setError(err.message || 'An error occurred while translating the PDF')
+    } finally {
+      setLoadingPdf(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-ink-50">
+      {/* Top Navigation */}
+      <header className="border-b border-slate-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-lg bg-brand-700 text-white flex items-center justify-center font-semibold shadow-subtle">A</div>
+            <div>
+              <div className="text-ink-900 font-semibold">Arabia OCR</div>
+              <div className="text-xs text-ink-500">Premium Translation Suite</div>
+            </div>
+          </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm text-ink-600">
+            <span className="hover:text-ink-900 transition-colors">Home</span>
+            <span className="hover:text-ink-900 transition-colors">Docs</span>
+            <span className="hover:text-ink-900 transition-colors">Support</span>
+          </nav>
+        </div>
+      </header>
+
+      {/* Page Content */}
+      <main className="max-w-6xl mx-auto px-4 py-10">
+        <div className="mb-8">
+          <h1>Arabic OCR → English Translation</h1>
+          <p className="mt-2">Upload a scanned Arabic PDF to extract text and translate to English with high fidelity.</p>
+        </div>
+
+        <section className="card p-6 mb-6">
+          <UploadBox
+            onFileSelect={handleFileSelect}
+            selectedFile={file}
+            onProcess={handleProcess}
+            onTranslatePdf={handleTranslatePdf}
+            loading={loading}
+            loadingPdf={loadingPdf}
+          />
+        </section>
+
+        {error && (
+          <div className="mb-6 rounded-lg border border-red-200 bg-red-50 text-red-800 p-4">
+            <div className="flex items-start gap-3">
+              <svg className="h-5 w-5 mt-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fillRule="evenodd" d="M18 10A8 8 0 11.001 10 8 8 0 0118 10zm-8-4a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 6zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              </svg>
+              <div>
+                <p className="font-medium">There was an error processing your file</p>
+                <p className="text-sm mt-1 text-red-700">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {translatedPdfUrl && (
+          <div className="card p-6 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2>Translated PDF Ready</h2>
+            </div>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <p className="text-green-800 mb-4">
+                Your PDF has been translated with layout preservation. Download the translated English PDF below.
+              </p>
+              <a
+                href={translatedPdfUrl}
+                download="translated_english.pdf"
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path fillRule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.25l-2.22-2.22a.75.75 0 00-1.06 1.06l3.5 3.5a.75.75 0 001.06 0l3.5-3.5a.75.75 0 10-1.06-1.06l-2.22 2.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                </svg>
+                Download Translated PDF
+              </a>
+            </div>
+          </div>
+        )}
+
+        {results && (
+          <OutputBox
+            arabicText={results.arabic_text}
+            englishText={results.english_text}
+          />
+        )}
+      </main>
+    </div>
+  )
+}
+
+export default App
+
+
