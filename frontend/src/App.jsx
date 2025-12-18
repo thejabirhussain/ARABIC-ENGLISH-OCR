@@ -149,11 +149,6 @@ function App() {
           <div className="card p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2>Translated PDF Ready</h2>
-            </div>
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <p className="text-green-800 mb-4">
-                Your PDF has been translated with layout preservation. Download the translated English PDF below.
-              </p>
               <a
                 href={translatedPdfUrl}
                 download="translated_english.pdf"
@@ -164,6 +159,36 @@ function App() {
                 </svg>
                 Download Translated PDF
               </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[600px]">
+              {/* Original PDF */}
+              <div className="flex flex-col h-full">
+                <div className="bg-slate-100 px-3 py-2 rounded-t-lg border border-slate-200 border-b-0 text-sm font-medium text-slate-700 flex justify-between">
+                  <span>Original Arabic PDF</span>
+                  <span className="text-xs bg-slate-200 px-2 py-0.5 rounded text-slate-600">Source</span>
+                </div>
+                {file && (
+                  <iframe
+                    src={URL.createObjectURL(file)}
+                    className="w-full h-full border border-slate-200 rounded-b-lg bg-slate-50"
+                    title="Original PDF"
+                  />
+                )}
+              </div>
+
+              {/* Translated PDF */}
+              <div className="flex flex-col h-full">
+                <div className="bg-green-100 px-3 py-2 rounded-t-lg border border-green-200 border-b-0 text-sm font-medium text-green-800 flex justify-between">
+                  <span>Translated English PDF</span>
+                  <span className="text-xs bg-green-200 px-2 py-0.5 rounded text-green-700">Result</span>
+                </div>
+                <iframe
+                  src={translatedPdfUrl}
+                  className="w-full h-full border border-green-200 rounded-b-lg bg-green-50"
+                  title="Translated PDF"
+                />
+              </div>
             </div>
           </div>
         )}

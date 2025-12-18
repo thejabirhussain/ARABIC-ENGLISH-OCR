@@ -12,4 +12,7 @@ reportlab>=4.0.7
 pandas>=2.0.0
 opencv-python-headless>=4.5.0
 numpy>=1.24.0
+ocrmypdf>=14.0.0
+camelot-py[cv]>=0.11.0
+pymupdf>=1.24.0
 

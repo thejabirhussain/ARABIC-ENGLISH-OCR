@@ -131,8 +131,16 @@ async def translate_pdf_endpoint(file: UploadFile = File(...)):
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_output:
             output_pdf_path = tmp_output.name
         
-        # Translate PDF with layout
+        # Translate PDF with layout preservation
         stats = translate_pdf_with_layout(input_pdf_path, output_pdf_path)
+        
+        # Ensure stats has all required keys
+        if not stats:
+            stats = {
+                'pages_processed': 0,
+                'text_blocks_translated': 0,
+                'tables_translated': 0
+            }
         
         # Return the translated PDF
         return FileResponse(
@@ -140,9 +148,9 @@ async def translate_pdf_endpoint(file: UploadFile = File(...)):
             media_type='application/pdf',
             filename='translated_english.pdf',
             headers={
-                'X-Translation-Stats': f"pages={stats['pages_processed']}, "
-                                      f"blocks={stats['text_blocks_translated']}, "
-                                      f"tables={stats['tables_translated']}"
+                'X-Translation-Stats': f"pages={stats.get('pages_processed', 0)}, "
+                                      f"blocks={stats.get('text_blocks_translated', 0)}, "
+                                      f"tables={stats.get('tables_translated', 0)}"
             }
         )
         
