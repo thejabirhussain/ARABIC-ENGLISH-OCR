@@ -4,117 +4,201 @@ import torch
 # Global variables to cache the model and tokenizer
 _model = None
 _tokenizer = None
+_device = None
 
 def get_translation_model():
-    """Load and cache the translation model"""
-    global _model, _tokenizer
+    """Load and cache the translation model - using better model for accuracy"""
+    global _model, _tokenizer, _device
     
     if _model is None or _tokenizer is None:
-        model_name = "Helsinki-NLP/opus-mt-ar-en"
-        print(f"Loading translation model: {model_name}")
+        # Try better model first, fallback to original if it fails
+        model_options = [
+            "Helsinki-NLP/opus-mt-tc-big-ar-en",  # Bigger, more accurate model
+            "Helsinki-NLP/opus-mt-ar-en"  # Fallback to original
+        ]
         
-        _tokenizer = MarianTokenizer.from_pretrained(model_name)
-        _model = MarianMTModel.from_pretrained(model_name)
-        
-        # Set model to evaluation mode
-        _model.eval()
-        
-        print("Translation model loaded successfully")
+        for model_name in model_options:
+            try:
+                print(f"Loading translation model: {model_name}")
+                _tokenizer = MarianTokenizer.from_pretrained(model_name)
+                _model = MarianMTModel.from_pretrained(model_name)
+                
+                # Set model to evaluation mode
+                _model.eval()
+                _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                _model.to(_device)
+                
+                print(f"Translation model loaded successfully: {model_name}")
+                break
+            except Exception as e:
+                print(f"Failed to load {model_name}: {e}")
+                if model_name == model_options[-1]:
+                    raise
+                continue
     
     return _model, _tokenizer
 
 def translate_to_english(arabic_text: str) -> str:
     """
-    Translate Arabic text to English using Helsinki-NLP/opus-mt-ar-en model.
-    Handles long texts by splitting into sentences and translating each chunk.
+    Translate Arabic text to English with improved accuracy.
+    Uses sentence-by-sentence translation for better quality.
     """
     if not arabic_text or not arabic_text.strip():
         return ""
+
+    # Check if input actually contains Arabic - if not, might already be English
+    import re
+    arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+    if not arabic_pattern.search(arabic_text):
+        # No Arabic found - might already be English or numeric
+        # Return as-is if it looks like valid text
+        if re.search(r'[a-zA-Z]', arabic_text):
+            return arabic_text.strip()
+        # Otherwise, it's probably numeric/symbols, return as-is
+        return arabic_text.strip()
     
     model, tokenizer = get_translation_model()
     
-    # Split text into sentences/paragraphs for better translation
-    # Split by sentence endings (period, exclamation, question mark) or line breaks
+    # Clean and normalize the input text
+    text = arabic_text.strip()
+    
+    # Preserve line breaks - they might be important for structure
+    # Replace multiple spaces with single space, but keep line breaks
+    text = re.sub(r'[ \t]+', ' ', text)  # Multiple spaces to single
+    text = re.sub(r'\n\s*\n', '\n\n', text)  # Normalize paragraph breaks
+    
+    # Split into sentences more carefully
+    # Arabic sentence endings: . ! ? ؟ ؛
+    # But preserve line structure for paragraphs
+    lines = text.split('\n')
+    translated_lines = []
+    
+    for line in lines:
+        if not line.strip():
+            translated_lines.append("")
+            continue
+        
+        # Split line into sentences
+        sentence_endings = r'([.!؟!?؛]\s+)'
+        sentences = re.split(sentence_endings, line)
+        
+        # Recombine sentences with their punctuation
+        sentence_pairs = []
+        for i in range(0, len(sentences) - 1, 2):
+            sentence = sentences[i].strip()
+            punct = sentences[i+1] if i+1 < len(sentences) else ""
+            if sentence:
+                sentence_pairs.append((sentence, punct))
+        
+        # If no sentence endings found, treat as single sentence
+        if not sentence_pairs:
+            sentence_pairs = [(line.strip(), "")]
+        
+        # Translate each sentence individually for better accuracy
+        line_translated_parts = []
+        for sentence, punct in sentence_pairs:
+            if not sentence.strip():
+                continue
+            
+            # Skip if no Arabic
+            if not arabic_pattern.search(sentence):
+                line_translated_parts.append(sentence + punct)
+                continue
+            
+            # Translate sentence
+            try:
+                translated = _translate_batch(sentence, model, tokenizer)
+                
+                if translated and translated.strip():
+                    # Validate translation
+                    if arabic_pattern.search(translated):
+                        # Still has Arabic, retry once
+                        translated = _translate_batch(sentence, model, tokenizer)
+                        if arabic_pattern.search(translated):
+                            print(f"Warning: Failed to translate sentence: {sentence[:50]}...")
+                            continue
+                    
+                    # Check for bad translation
+                    if _is_bad_translation(translated, sentence):
+                        print(f"Warning: Bad translation detected, skipping: {sentence[:50]}...")
+                        continue
+                    
+                    line_translated_parts.append(translated.strip() + punct)
+            except Exception as e:
+                print(f"Translation error for sentence: {e}")
+                continue
+        
+        if line_translated_parts:
+            translated_lines.append(' '.join(line_translated_parts))
+        else:
+            translated_lines.append("")
+    
+    result = '\n'.join(translated_lines).strip()
+    
+    # Final validation
+    if result and arabic_pattern.search(result):
+        print(f"Warning: Translation result still contains Arabic characters")
+    
+    return result
+
+def _is_bad_translation(translated: str, original: str) -> bool:
+    """Detect if translation is clearly wrong/hallucinated"""
+    if not translated or not original:
+        return True
+    
     import re
     
-    # Split by Arabic sentence endings and line breaks
-    # Arabic punctuation: . ! ? ؛
-    sentences = re.split(r'([.!?؛]\s*)', arabic_text)
+    # Check for common hallucination patterns (repetitive nonsense)
+    bad_phrases = ['rabbit', 'lick', 'sleeve', 'european union']
+    translated_lower = translated.lower()
     
-    # Recombine sentences with their punctuation
-    chunks = []
-    current_chunk = ""
-    max_chunk_length = 400  # Characters, not tokens (safer)
+    # Check for excessive repetition of bad phrases
+    for phrase in bad_phrases:
+        count = translated_lower.count(phrase)
+        if count > 2:  # More than 2 occurrences is suspicious
+            return True
     
-    for i in range(0, len(sentences), 2):
-        sentence = sentences[i] if i < len(sentences) else ""
-        punctuation = sentences[i+1] if i+1 < len(sentences) else ""
-        full_sentence = sentence + punctuation
-        
-        if not full_sentence.strip():
-            continue
-            
-        # If adding this sentence would exceed max length, translate current chunk first
-        if current_chunk and len(current_chunk) + len(full_sentence) > max_chunk_length:
-            if current_chunk.strip():
-                chunks.append(current_chunk.strip())
-            current_chunk = full_sentence
-        else:
-            current_chunk += full_sentence
+    # Check for same phrase repeated multiple times
+    words = translated_lower.split()
+    if len(words) > 5:
+        # Check if any word appears more than 40% of the time
+        word_counts = {}
+        for word in words:
+            # Ignore common words
+            if word not in ['the', 'a', 'an', 'and', 'or', 'in', 'on', 'at', 'to', 'for', 'of', 'with']:
+                word_counts[word] = word_counts.get(word, 0) + 1
+        if word_counts:
+            max_count = max(word_counts.values())
+            if max_count > len(words) * 0.4:  # More than 40% same word
+                return True
     
-    # Add remaining chunk
-    if current_chunk.strip():
-        chunks.append(current_chunk.strip())
+    # Check if translation is suspiciously short compared to original
+    # But be lenient - Arabic can be more compact than English
+    if len(translated.strip()) < len(original.strip()) * 0.15:
+        return True
     
-    # If no sentences found, split by line breaks
-    if not chunks:
-        lines = arabic_text.split('\n')
-        current_chunk = ""
-        for line in lines:
-            if not line.strip():
-                if current_chunk.strip():
-                    chunks.append(current_chunk.strip())
-                    current_chunk = ""
-                chunks.append("")  # Preserve empty lines
-            else:
-                if current_chunk and len(current_chunk) + len(line) > max_chunk_length:
-                    chunks.append(current_chunk.strip())
-                    current_chunk = line
-                else:
-                    if current_chunk:
-                        current_chunk += " " + line
-                    else:
-                        current_chunk = line
-        if current_chunk.strip():
-            chunks.append(current_chunk.strip())
+    # Check for patterns like "X, X, X" (excessive repetition)
+    if re.search(r'\b(\w+)\s*,\s*\1\s*,\s*\1', translated, re.IGNORECASE):
+        return True
     
-    # Translate each chunk
-    translated_chunks = []
-    for chunk in chunks:
-        if not chunk.strip():
-            translated_chunks.append("")
-        else:
-            translated = _translate_batch(chunk, model, tokenizer)
-            if translated:
-                translated_chunks.append(translated)
-    
-    # Join all translated chunks
-    translated_text = ' '.join(translated_chunks)
-    
-    # Clean up extra spaces
-    translated_text = re.sub(r'\s+', ' ', translated_text)
-    translated_text = translated_text.strip()
-    
-    return translated_text
+    return False
 
 def _translate_batch(text: str, model, tokenizer) -> str:
-    """Translate a batch of text"""
     try:
         if not text or not text.strip():
             return ""
         
+        # Skip if text doesn't contain Arabic (might be already English or numeric)
+        import re
+        arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+        if not arabic_pattern.search(text):
+            # No Arabic - return as-is
+            return text.strip()
+        
+        # Clean text - remove excessive whitespace
+        text = ' '.join(text.split())
+        
         # Tokenize input text with proper truncation
-        # Use max_length=512 for input, but allow longer output
         inputs = tokenizer(
             text, 
             return_tensors="pt", 
@@ -122,20 +206,52 @@ def _translate_batch(text: str, model, tokenizer) -> str:
             truncation=True, 
             max_length=512
         )
+        if next(model.parameters()).is_cuda:
+            inputs = {k: v.to(model.device) for k, v in inputs.items()}
         
-        # Translate with longer max_length for output
+        # Translate with better generation parameters for accuracy
         with torch.no_grad():
             translated = model.generate(
                 **inputs, 
                 max_length=512,  # Output max length
-                num_beams=4,
-                early_stopping=True
+                num_beams=5,  # Increased beams for better quality
+                early_stopping=True,
+                length_penalty=1.2,  # Prefer longer, more complete translations
+                no_repeat_ngram_size=3,  # Reduce repetition
+                do_sample=False  # Deterministic output
             )
         
         # Decode translated text
-        translated_text = tokenizer.decode(translated[0], skip_special_tokens=True)
+        translated_text = tokenizer.decode(translated[0].detach().cpu(), skip_special_tokens=True)
         
-        return translated_text.strip()
+        result = translated_text.strip()
+        
+        # Validate result - should not contain Arabic
+        if result and arabic_pattern.search(result):
+            print(f"Warning: Translation result contains Arabic: {result[:50]}...")
+            return ""
+        
+        # Check for bad translations
+        if _is_bad_translation(result, text):
+            print(f"Warning: Detected bad translation, retrying...")
+            # Retry with different parameters
+            with torch.no_grad():
+                translated = model.generate(
+                    **inputs,
+                    max_length=512,
+                    num_beams=8,  # More beams
+                    early_stopping=True,
+                    length_penalty=1.5,
+                    no_repeat_ngram_size=4
+                )
+            result = tokenizer.decode(translated[0].detach().cpu(), skip_special_tokens=True).strip()
+            
+            # Check again
+            if _is_bad_translation(result, text):
+                print(f"Warning: Translation still appears bad: {result[:50]}...")
+                return ""
+        
+        return result
     except Exception as e:
         # If translation fails, try with smaller chunk
         print(f"Translation error: {str(e)}")
@@ -150,8 +266,46 @@ def _translate_batch(text: str, model, tokenizer) -> str:
                     try:
                         trans1 = _translate_batch(part1, model, tokenizer)
                         trans2 = _translate_batch(part2, model, tokenizer)
-                        return (trans1 + " " + trans2).strip()
+                        if trans1 and trans2:
+                            return (trans1 + " " + trans2).strip()
                     except:
                         pass
-        return f"[Translation error: {str(e)}]"
+        # Return empty string instead of error message to avoid rendering errors
+        return ""
+
+def _translate_chunks(chunks, model, tokenizer, batch_size: int = 8):
+    results = []
+    i = 0
+    while i < len(chunks):
+        batch = [c for c in chunks[i:i+batch_size] if c and c.strip()]
+        if not batch:
+            results.extend(["" for _ in chunks[i:i+batch_size]])
+            i += batch_size
+            continue
+        try:
+            inputs = tokenizer(
+                batch,
+                return_tensors="pt",
+                padding=True,
+                truncation=True,
+                max_length=512
+            )
+            if next(model.parameters()).is_cuda:
+                inputs = {k: v.to(model.device) for k, v in inputs.items()}
+            with torch.no_grad():
+                outputs = model.generate(
+                    **inputs,
+                    max_length=512,
+                    num_beams=5,  # Increased for better quality
+                    early_stopping=True,
+                    length_penalty=1.2,
+                    no_repeat_ngram_size=3
+                )
+            decoded = tokenizer.batch_decode(outputs.detach().cpu(), skip_special_tokens=True)
+            results.extend([d.strip() for d in decoded])
+        except Exception:
+            for c in batch:
+                results.append(_translate_batch(c, model, tokenizer))
+        i += batch_size
+    return results
 

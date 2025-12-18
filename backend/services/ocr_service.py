@@ -6,6 +6,8 @@ import os
 import re
 from pdf2image import convert_from_path
 from PyPDF2 import PdfReader
+import cv2
+import numpy as np
 
 def extract_arabic_text(pdf_path: str) -> str:
     """
@@ -35,6 +37,9 @@ def extract_arabic_text(pdf_path: str) -> str:
                 # Convert to RGB if needed
                 if image.mode != 'RGB':
                     image = image.convert('RGB')
+
+                # OpenCV preprocessing: grayscale, denoise, binarize, deskew
+                preprocessed = _preprocess_for_ocr(image)
                 
                 # Try multiple PSM modes for best results
                 # PSM 6: Assume a single uniform block of text (good for paragraphs)
@@ -45,9 +50,10 @@ def extract_arabic_text(pdf_path: str) -> str:
                 
                 for psm in psm_modes:
                     try:
-                        config = f'--psm {psm} -l ara'
+                        # Use LSTM engine and preserve spacing for layout fidelity
+                        config = f"--oem 1 --psm {psm} -l ara -c preserve_interword_spaces=1"
                         text = pytesseract.image_to_string(
-                            image, 
+                            preprocessed,
                             lang='ara',
                             config=config
                         )
@@ -68,8 +74,8 @@ def extract_arabic_text(pdf_path: str) -> str:
             except Exception as e:
                 # Try alternative PSM mode if first attempt fails
                 try:
-                    config = '--psm 3 -l ara'
-                    text = pytesseract.image_to_string(image, lang='ara', config=config)
+                    config = '--oem 1 --psm 3 -l ara -c preserve_interword_spaces=1'
+                    text = pytesseract.image_to_string(preprocessed, lang='ara', config=config)
                     if text and text.strip():
                         cleaned_text = '\n'.join(line.strip() for line in text.split('\n') if line.strip())
                         if cleaned_text:
@@ -151,4 +157,62 @@ def extract_arabic_text(pdf_path: str) -> str:
         
         # If all methods fail, raise the original error
         raise Exception(f"Image-based text extraction failed: {str(e)}")
+
+def _preprocess_for_ocr(pil_image):
+    """Preprocess PIL image for better Arabic OCR using OpenCV."""
+    # Convert PIL to OpenCV BGR
+    img = np.array(pil_image)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+    # Grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Denoise while preserving edges
+    gray = cv2.bilateralFilter(gray, d=9, sigmaColor=75, sigmaSpace=75)
+
+    # Binarization (adaptive for uneven illumination)
+    bin_img = cv2.adaptiveThreshold(
+        gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 35, 15
+    )
+
+    # Invert text to black on white if needed
+    # Ensure text is dark for Tesseract
+    pixels_mean = np.mean(bin_img)
+    if pixels_mean > 127:
+        bin_img = cv2.bitwise_not(bin_img)
+
+    # Morphological opening to remove small noise
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 1))
+    bin_img = cv2.morphologyEx(bin_img, cv2.MORPH_OPEN, kernel, iterations=1)
+
+    # Deskew using Hough line-based angle estimation
+    angle = _estimate_skew_angle(bin_img)
+    if abs(angle) > 0.5 and abs(angle) < 15:
+        bin_img = _rotate_image(bin_img, angle)
+
+    # Return as RGB PIL-compatible image for pytesseract
+    bin_img = cv2.cvtColor(bin_img, cv2.COLOR_GRAY2RGB)
+    return bin_img
+
+def _estimate_skew_angle(binary_img):
+    edges = cv2.Canny(binary_img, 50, 150, apertureSize=3)
+    lines = cv2.HoughLines(edges, 1, np.pi / 180, threshold=200)
+    if lines is None:
+        return 0.0
+    angles = []
+    for rho_theta in lines[:100]:
+        rho, theta = rho_theta[0]
+        # Convert to degrees, map near horizontal lines to small angles
+        angle = (theta * 180 / np.pi) - 90
+        if -15 <= angle <= 15:
+            angles.append(angle)
+    if not angles:
+        return 0.0
+    return float(np.median(angles))
+
+def _rotate_image(img, angle):
+    (h, w) = img.shape[:2]
+    center = (w // 2, h // 2)
+    M = cv2.getRotationMatrix2D(center, angle, 1.0)
+    return cv2.warpAffine(img, M, (w, h), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
 
