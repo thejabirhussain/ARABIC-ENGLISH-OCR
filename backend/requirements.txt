@@ -12,4 +12,4 @@ reportlab>=4.0.7
 pandas>=2.0.0
 opencv-python-headless>=4.5.0
 numpy>=1.24.0
-
+ocrmypdf

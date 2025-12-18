@@ -28,7 +28,7 @@ brew install tesseract tesseract-lang poppler
 # 2. Setup backend
 cd backend
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate or venv\Scripts\activate #(for windows)
 pip install -r requirements.txt
 
 # 3. Setup frontend
@@ -98,5 +98,3 @@ SAMPLE-OCR/
 ├── setup.sh          # Automated setup script
 └── README.md         # Full documentation
 ```
-
-
