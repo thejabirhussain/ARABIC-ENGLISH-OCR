@@ -32,7 +32,7 @@ function App() {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('http://localhost:8000/process', {
+      const response = await fetch('http://127.0.0.1:8000/process', {
         method: 'POST',
         body: formData,
       })
@@ -66,7 +66,7 @@ function App() {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('http://localhost:8000/translate-pdf', {
+      const response = await fetch('http://127.0.0.1:8000/translate-pdf', {
         method: 'POST',
         body: formData,
       })
