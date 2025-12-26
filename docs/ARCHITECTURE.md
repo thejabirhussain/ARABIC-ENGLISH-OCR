@@ -16,18 +16,121 @@ This document explains the backend architecture and the end-to-end processing fl
   - `POST /process`: OCR-only text extraction and translation, returns JSON with Arabic and English text.
   - `POST /translate-pdf`: Full PDF-to-PDF translation with layout preservation, returns a translated PDF.
 
+## System Architecture
+
+```mermaid
+graph TB
+    %% Styles
+    classDef client fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef frontend fill:#e1f5fe,stroke:#0277bd,stroke-width:2px;
+    classDef backend fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef service fill:#fff3e0,stroke:#ef6c00,stroke-width:1px,stroke-dasharray: 5 5;
+    classDef external fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px;
+
+    subgraph Client ["Client Layer"]
+        User(("User (Browser)")):::client
+    end
+
+    subgraph FE ["Frontend Layer"]
+        Web["React UI\n(Vite + Tailwind)"]:::frontend
+    end
+
+    subgraph BE ["Backend Layer (FastAPI)"]
+        API["API Gateway\n(main.py)"]:::backend
+        
+        subgraph Services ["Core Services"]
+            Orchestrator["PDF Translation Service\n(In-Place Pipeline)"]:::service
+            Layout["Layout Extraction\n(PyMuPDF)"]:::service
+            Trans["Translation Service\n(MarianMT)"]:::service
+            OCR["OCR Service\n(Tesseract/ocrmypdf)"]:::service
+        end
+    end
+
+    subgraph Ext ["External / Models"]
+        Model["Helsinki-NLP Model"]:::external
+        Tess["Tesseract Engine"]:::external
+    end
+
+    %% Connections
+    User <-->|HTTP/HTTPS| Web
+    Web <-->|REST API| API
+    
+    API -->|POST /translate-pdf| Orchestrator
+    API -->|POST /process| OCR
+
+    Orchestrator --> Layout
+    Orchestrator --> Trans
+    Orchestrator -.->|Fallback| OCR
+
+    OCR --> Tess
+    Trans --> Model
+```
+
+## Sequence Diagram: PDF Translation Flow
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as User
+    participant FE as Frontend
+    participant API as Backend API
+    participant PDF as PDF Service
+    participant TR as Translator
+    participant EXT as Ext. Libs (PyMuPDF)
+
+    U->>FE: Uploads PDF
+    FE->>API: POST /translate-pdf (file)
+    API->>PDF: translate_pdf_with_layout(input_path, output_path)
+    
+    rect rgb(240, 248, 255)
+        note right of PDF: Pre-Processing
+        PDF->>PDF: _ensure_searchable_pdf()
+        alt PDF is Image/Scanned
+            PDF->>EXT: Run ocrmypdf (Add Text Layer)
+        end
+    end
+
+    loop For Each Page
+        PDF->>EXT: fitz.open() & find_tables()
+        
+        opt Tables Found
+            loop Each Cell
+                PDF->>TR: translate_to_english(cell_text)
+                TR-->>PDF: english_text
+                PDF->>EXT: Draw White Rect (Cover)
+                PDF->>EXT: Insert Textbox (English)
+            end
+        end
+
+        PDF->>EXT: get_text("dict") (Extract Layout Blocks)
+        loop Each Text Block
+            PDF->>TR: translate_to_english(block_text)
+            TR-->>PDF: english_text
+            
+            note right of PDF: In-Place Replacement
+            PDF->>EXT: Draw White Rect (Cover Original)
+            PDF->>EXT: Insert Textbox (English, Auto-fit)
+        end
+    end
+
+    PDF->>EXT: doc.save(output_path)
+    PDF-->>API: Returns Translation Stats
+    API-->>FE: Stream FileResponse (translated.pdf)
+    FE->>U: Download/Display PDF
+```
+
 ## High-Level Flow
-1. Client uploads a PDF to `POST /translate-pdf`.
-2. Backend saves the file to a temp path.
-3. `pdf_translation_service.translate_pdf_with_layout` executes a strict in-place translation pipeline:
-   - Ensures the PDF is searchable; if not, attempts `ocrmypdf` OCR pass (optional, if available).
-   - Extracts layout-aware `TextBlock`s with positions using `layout_extraction_service.extract_text_blocks_with_layout`.
-   - For each block containing Arabic:
-     - Normalizes digits (`normalize_arabic_numerals` via layout service helper).
-     - Translates block text to English via `translate_service.translate_to_english`.
-     - Replaces original content in-place on the PDF (PyMuPDF): draws a covering rectangle and writes translated text, fitting font size to the original block rectangle.
-   - Saves the modified PDF to output temp path and returns stats (pages, blocks, tables translated).
-4. Endpoint streams the translated PDF back to the client with basic stats in response headers.
+1. **Client Upload**: User uploads a PDF via the React frontend.
+2. **Searchability Check**: Backend checks if the PDF has a text layer; if not, it applies OCR (`ocrmypdf`) to make it searchable.
+3. **In-Place Translation**: 
+    - The `pdf_translation_service` processes the PDF page by page.
+    - It detects **Tables** first to handle them cell-by-cell.
+    - It then processes remaining **Text Blocks**, translating Arabic text to English.
+4. **Layout Preservation**: 
+    - Original text is visually "erased" ensuring the background is clean.
+    - Translated English text is drawn into the exact same coordinates (bounding box).
+    - Font size is dynamically adjusted to fit the translated text within the box.
+5. **Response**: The modified PDF is saved and streamed back to the user.
 
 ## Detailed Components
 - **layout_extraction_service**
@@ -85,6 +188,26 @@ This document explains the backend architecture and the end-to-end processing fl
 ## Dependencies and Optional Tools
 - Core: FastAPI, PyMuPDF (fitz), pdfplumber, pytesseract, transformers/torch, pdf2image, OpenCV.
 - Optional: `ocrmypdf` (adds text layer to scanned PDFs), `camelot-py` (better table extraction), CUDA for GPU acceleration.
+
+## Tech Stack Specification
+
+- **Backend**
+  - Framework: FastAPI, Uvicorn
+  - OCR: pytesseract (Tesseract ara), pdf2image, OpenCV
+  - PDF processing: PyMuPDF (fitz), pdfplumber, PyPDF2 (aux)
+  - Translation: Hugging Face Transformers (MarianMT), Torch
+  - Table extraction: camelot-py (optional), pandas
+  - Rendering (legacy): ReportLab
+  - Utilities: python-multipart, numpy
+
+- **Frontend**
+  - React 18, Vite, TailwindCSS
+  - TypeScript types for React (dev), @vitejs/plugin-react
+
+- **Runtime/Environment**
+  - Tesseract OCR with Arabic language data installed
+  - Optional: ocrmypdf for scanned PDFs; CUDA-enabled PyTorch for GPU acceleration
+  - CORS enabled for localhost dev (5173/3000)
 
 ## Configuration and Environment
 - No explicit `.env` is required by default.

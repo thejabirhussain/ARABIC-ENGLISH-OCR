@@ -111,10 +111,15 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
     # Open the PDF
     doc = fitz.open(working_pdf_path)
     arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+    # Regex for pure numbers/symbols (dates, currency, percentages, simple integers)
+    # Matches: 123, 1,234.56, $100, 50%, 12/12/2024, etc.
+    numeric_pattern = re.compile(r'^[\d\s\.,\-%$€£/]+$') 
+    
     stats = {
         'pages_processed': len(doc),
         'text_blocks_translated': 0,
-        'tables_translated': 0
+        'tables_translated': 0,
+        'full_translated_text': []  # Accumulate text here
     }
 
     # Path to our custom font
@@ -149,6 +154,95 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                     has_custom_font_bold = False
             print(f"\nProcessing page {page_num + 1}/{len(doc)}...")
 
+            # --- Table Detection Phase ---
+            # Used to identify grids and process them cell-by-cell for alignment
+            # Also creates an exclusion zone for standard text blocks
+            table_exclusion_rects = []
+            
+            try:
+                tables = page.find_tables()
+                if tables:
+                    print(f"  Found {len(tables)} tables.")
+                    for table in tables:
+                        table_exclusion_rects.append(table.bbox)
+                        
+                        # Process cells
+                        for row in table.rows:
+                            for cell in row.cells:
+                                # Get text from cell area
+                                cell_text = page.get_text("text", clip=cell).strip()
+                                
+                                if not cell_text:
+                                    continue
+                                    
+                                # Check if cell is largely Arabic
+                                if arabic_pattern.search(cell_text):
+                                    # Normalize
+                                    normalized_text = normalize_arabic_numerals(cell_text)
+                                    
+                                    # Numeric Guard: If it looks like a number/date, DON'T translate
+                                    if numeric_pattern.match(normalized_text):
+                                        translated_text = normalized_text # Keep as is
+                                        # print(f"    Skipping translation for numeric: {normalized_text}")
+                                    else:
+                                        # Translate
+                                        try:
+                                            translated_text = translate_to_english(normalized_text)
+                                        except Exception as te:
+                                            print(f"    Table cell translation error: {te}")
+                                            translated_text = normalized_text
+                                    
+                                    if translated_text:
+                                        # Accumulate for RAG
+                                        stats['full_translated_text'].append(translated_text)
+                                        # Cover and Insert
+                                        # Use padding for cover
+                                        cell_rect = fitz.Rect(cell)
+                                        cover_rect = fitz.Rect(cell_rect[0]-1, cell_rect[1]-1, cell_rect[2]+1, cell_rect[3]+1)
+                                        
+                                        shape = page.new_shape()
+                                        shape.draw_rect(cover_rect)
+                                        shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                        shape.commit()
+                                        
+                                        # Insert with auto-scaling
+                                        # For tables, we might want smaller default font
+                                        current_fontsize = 8 # Default for tables often smaller
+                                        
+                                        # Try to determine custom font
+                                        font_to_use = "noto" if has_custom_font else "helv"
+                                        
+                                        remaining = page.insert_textbox(
+                                            cell_rect,
+                                            translated_text,
+                                            fontsize=current_fontsize,
+                                            fontname=font_to_use,
+                                            align=0
+                                        )
+                                        
+                                        # Simple resizing for cells
+                                        while remaining < 0 and current_fontsize > 4:
+                                            current_fontsize -= 0.5
+                                            # Re-cover
+                                            shape = page.new_shape()
+                                            shape.draw_rect(cover_rect)
+                                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                            shape.commit()
+                                            
+                                            remaining = page.insert_textbox(
+                                                cell_rect,
+                                                translated_text,
+                                                fontsize=current_fontsize,
+                                                fontname=font_to_use,
+                                                align=0
+                                            )
+                                            
+                    stats['tables_translated'] += len(tables)
+
+            except Exception as e:
+                print(f"  Table processing warning: {e}")
+
+            # --- Text Block Phase ---
             # Get text blocks (grouped by layout structure)
             # using "dict" to get structural info including bounding boxes
             text_dict = page.get_text("dict")
@@ -160,6 +254,18 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                 if "lines" not in block:
                     continue
                 
+                # Check intersection with detected tables
+                block_rect = fitz.Rect(block["bbox"])
+                in_table = False
+                for t_rect in table_exclusion_rects:
+                    if fitz.Rect(t_rect).intersects(block_rect):
+                        in_table = True
+                        break
+                
+                if in_table:
+                    # Skip this block as it was likely processed in Table Phase
+                    continue
+
                 # Group spans in this block into a single text block
                 block_text_parts = []
                 block_spans = []
@@ -268,6 +374,9 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
 
                     # Only replace if translation returned something and isn't just Arabic again
                     if translated_text and not arabic_pattern.search(translated_text):
+                        # Accumulate for RAG
+                        stats['full_translated_text'].append(translated_text)
+                        
                         # Create rectangle for the text area
                         rect = fitz.Rect(bbox)
                         
@@ -368,6 +477,10 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         print(f"In-place translation complete!")
         print(f"Output saved to: {output_path}")
         print("=" * 60)
+        # Join all text for the final return
+        stats['full_text_content'] = "\n\n".join(stats['full_translated_text'])
+        del stats['full_translated_text'] # Remove list to keep dict clean
+
         return stats
 
     except Exception as e:
