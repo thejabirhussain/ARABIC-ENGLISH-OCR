@@ -105,91 +105,287 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
     is_temp_file = working_pdf_path != pdf_path
 
     print("=" * 60)
-    print("Starting in-place PDF translation (Unified Layout Mode)")
+    print("Starting in-place PDF translation (block-level processing)")
     print("=" * 60)
 
-    # Open the PDF for writing
+    # Open the PDF
     doc = fitz.open(working_pdf_path)
     arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+    # Regex for pure numbers/symbols (dates, currency, percentages, simple integers)
+    # Matches: 123, 1,234.56, $100, 50%, 12/12/2024, etc.
+    numeric_pattern = re.compile(r'^[\d\s\.,\-%$€£/]+$') 
+    
     stats = {
         'pages_processed': len(doc),
         'text_blocks_translated': 0,
-        'tables_translated': 0
+        'tables_translated': 0,
+        'full_translated_text': []  # Accumulate text here
     }
 
+    # Path to our custom font
+    font_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "fonts", "NotoSans-Regular.ttf")
+    font_path_bold = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "fonts", "NotoSans-Bold.ttf")
+    
+    has_custom_font = os.path.exists(font_path)
+    has_custom_font_bold = os.path.exists(font_path_bold)
+    
+    if has_custom_font:
+        print(f"Using custom font: {font_path}")
+    if has_custom_font_bold:
+        print(f"Using custom bold font: {font_path_bold}")
+
     try:
-        # Use the robust extraction service to get blocks
-        # This handles OCR, line grouping, and filtering better than a simple loop
-        all_blocks = extract_text_blocks_with_layout(working_pdf_path)
-        
-        # Group blocks by page
-        blocks_by_page = {}
-        for block in all_blocks:
-            if block.page_num not in blocks_by_page:
-                blocks_by_page[block.page_num] = []
-            blocks_by_page[block.page_num].append(block)
-
         for page_num in range(len(doc)):
-            page_index = page_num  # 0-indexed for fitz
-            page = doc[page_index]
-            page_h = page.rect.height
+            page = doc[page_num]
             
-            # Get blocks for this page (1-indexed in extraction service)
-            page_blocks = blocks_by_page.get(page_num + 1, [])
+            # Register custom font for this page if available
+            if has_custom_font:
+                try:
+                    page.insert_font(fontname="noto", fontfile=font_path)
+                except Exception as fe:
+                    print(f"Font registration warning: {fe}")
+                    has_custom_font = False
             
-            print(f"\nProcessing page {page_num + 1}/{len(doc)}... Found {len(page_blocks)} blocks")
+            if has_custom_font_bold:
+                try:
+                    page.insert_font(fontname="noto-bold", fontfile=font_path_bold)
+                except Exception as fe:
+                    print(f"Bold Font registration warning: {fe}")
+                    has_custom_font_bold = False
+            print(f"\nProcessing page {page_num + 1}/{len(doc)}...")
 
-            for block_idx, text_block in enumerate(page_blocks):
-                original_text = text_block.text
+            # --- Table Detection Phase ---
+            # Used to identify grids and process them cell-by-cell for alignment
+            # Also creates an exclusion zone for standard text blocks
+            table_exclusion_rects = []
+            
+            try:
+                tables = page.find_tables()
+                if tables:
+                    print(f"  Found {len(tables)} tables.")
+                    for table in tables:
+                        table_exclusion_rects.append(table.bbox)
+                        
+                        # Process cells
+                        for row in table.rows:
+                            for cell in row.cells:
+                                # Get text from cell area
+                                cell_text = page.get_text("text", clip=cell).strip()
+                                
+                                if not cell_text:
+                                    continue
+                                    
+                                # Check if cell is largely Arabic
+                                if arabic_pattern.search(cell_text):
+                                    # Normalize
+                                    normalized_text = normalize_arabic_numerals(cell_text)
+                                    
+                                    # Numeric Guard: If it looks like a number/date, DON'T translate
+                                    if numeric_pattern.match(normalized_text):
+                                        translated_text = normalized_text # Keep as is
+                                        # print(f"    Skipping translation for numeric: {normalized_text}")
+                                    else:
+                                        # Translate
+                                        try:
+                                            translated_text = translate_to_english(normalized_text)
+                                        except Exception as te:
+                                            print(f"    Table cell translation error: {te}")
+                                            translated_text = normalized_text
+                                    
+                                    if translated_text:
+                                        # Accumulate for RAG
+                                        stats['full_translated_text'].append(translated_text)
+                                        # Cover and Insert
+                                        # Use padding for cover
+                                        cell_rect = fitz.Rect(cell)
+                                        cover_rect = fitz.Rect(cell_rect[0]-1, cell_rect[1]-1, cell_rect[2]+1, cell_rect[3]+1)
+                                        
+                                        shape = page.new_shape()
+                                        shape.draw_rect(cover_rect)
+                                        shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                        shape.commit()
+                                        
+                                        # Insert with auto-scaling
+                                        # For tables, we might want smaller default font
+                                        current_fontsize = 8 # Default for tables often smaller
+                                        
+                                        # Try to determine custom font
+                                        font_to_use = "noto" if has_custom_font else "helv"
+                                        
+                                        remaining = page.insert_textbox(
+                                            cell_rect,
+                                            translated_text,
+                                            fontsize=current_fontsize,
+                                            fontname=font_to_use,
+                                            align=0
+                                        )
+                                        
+                                        # Simple resizing for cells
+                                        while remaining < 0 and current_fontsize > 4:
+                                            current_fontsize -= 0.5
+                                            # Re-cover
+                                            shape = page.new_shape()
+                                            shape.draw_rect(cover_rect)
+                                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                            shape.commit()
+                                            
+                                            remaining = page.insert_textbox(
+                                                cell_rect,
+                                                translated_text,
+                                                fontsize=current_fontsize,
+                                                fontname=font_to_use,
+                                                align=0
+                                            )
+                                            
+                    stats['tables_translated'] += len(tables)
+
+            except Exception as e:
+                print(f"  Table processing warning: {e}")
+
+            # --- Text Block Phase ---
+            # Get text blocks (grouped by layout structure)
+            # using "dict" to get structural info including bounding boxes
+            text_dict = page.get_text("dict")
+            
+            # Collect all text blocks with their bounding boxes
+            text_blocks = []
+            
+            for block in text_dict["blocks"]:
+                if "lines" not in block:
+                    continue
                 
-                # Verify it contains Arabic before processing
-                if not arabic_pattern.search(original_text):
+                # Check intersection with detected tables
+                block_rect = fitz.Rect(block["bbox"])
+                in_table = False
+                for t_rect in table_exclusion_rects:
+                    if fitz.Rect(t_rect).intersects(block_rect):
+                        in_table = True
+                        break
+                
+                if in_table:
+                    # Skip this block as it was likely processed in Table Phase
                     continue
 
-                # Convert coordinates: TextBlock is Bottom-Left (PDF standard), Fitz is Top-Left
-                # TextBlock: x0, y0 (bottom), x1, y1 (top) - wait, standard PDF is y=0 at bottom.
-                # Let's verify layout_extraction_service.py again.
-                # It does: `by0 = height - y1` (where y1 was bottom-y in fitz? No, fitz is top-left).
-                # Fitz: (x0, top, x1, bottom).
-                # Layout Service converts to: (x0, height-bottom, x1, height-top).
-                # So stored y0 is bottom-y, y1 is top-y in Math cartesian?
-                # Actually usually standard PDF is (0,0) at bottom-left.
-                # So if we have (x0, y0, x1, y1) in PDF coordinates:
-                # Fitz Rect should be (x0, page_h - y1, x1, page_h - y0).
+                # Group spans in this block into a single text block
+                block_text_parts = []
+                block_spans = []
+                min_x, min_y = float('inf'), float('inf')
+                max_x, max_y = float('-inf'), float('-inf')
                 
-                # TextBlock stores: y0=bottom, y1=top (Cartesian).
-                # Fitz needs: top, bottom (Screen/Image).
-                # Rect (x0, top, x1, bottom)
+                for line in block["lines"]:
+                    # Sort spans by x-coordinate using bbox[0]
+                    # For Arabic (RTL), we usually want reading order right-to-left if spans are stored visually
+                    # But often PyMuPDF extracts physically.
+                    # We will detect if line has Arabic, and if so, sort spans descending (Right-to-Left)
+                    
+                    spans = line["spans"]
+                    if not spans:
+                        continue
+                        
+                    # Check for Arabic in this line
+                    line_text = " ".join([s.get("text", "") for s in spans])
+                    is_arabic_line = bool(arabic_pattern.search(line_text))
+                    
+                    # Sort spans appropriately
+                    if is_arabic_line:
+                        # Sort Right-to-Left (descending X)
+                        spans.sort(key=lambda s: s["bbox"][0], reverse=True)
+                    else:
+                        # Sort Left-to-Right (ascending X) - default
+                        spans.sort(key=lambda s: s["bbox"][0])
+
+                    for span in spans:
+                        span_text = span.get("text", "").strip()
+                        if span_text:
+                            block_text_parts.append(span_text)
+                            block_spans.append(span)
+                        # Update bounding box
+                        bbox = span["bbox"]
+                        min_x = min(min_x, bbox[0])
+                        min_y = min(min_y, bbox[1])
+                        max_x = max(max_x, bbox[2])
+                        max_y = max(max_y, bbox[3])
                 
-                x0 = text_block.x0
-                y0_cartesian = text_block.y0
-                x1 = text_block.x1
-                y1_cartesian = text_block.y1
+                if block_text_parts:
+                    # Combine text parts
+                    # Note: Original order often works for PyMuPDF extraction even for RTL 
+                    # because it extracts in reading order usually.
+                    combined_text = " ".join(block_text_parts)
+                    
+                    # Check if block contains Arabic
+                    if arabic_pattern.search(combined_text):
+                        # Get average font properties from spans
+                        font_sizes = [s.get("size", 12) for s in block_spans]
+                        avg_font_size = sum(font_sizes) / len(font_sizes) if font_sizes else 12
+                        
+                        text_blocks.append({
+                            'text': combined_text,
+                            'bbox': [min_x, min_y, max_x, max_y],
+                            'font_size': avg_font_size,
+                            'spans': block_spans
+                        })
+
+            print(f"Found {len(text_blocks)} Arabic text blocks on page {page_num + 1}")
+
+            # --- Layout Analysis Phase ---
+            # Determine structural types (Heading vs Body) based on relative font sizes
+            if text_blocks:
+                all_sizes = [b['font_size'] for b in text_blocks]
+                if all_sizes:
+                    page_avg_size = sum(all_sizes) / len(all_sizes)
+                    print(f"Page {page_num+1} stats: Avg Font Size={page_avg_size:.2f}")
+                    
+                    for block in text_blocks:
+                        size = block['font_size']
+                        # Simple heuristics for structure
+                        if size > page_avg_size * 1.15:
+                            block['type'] = 'heading'
+                            block['md_prefix'] = '## ' if size < page_avg_size * 1.5 else '# '
+                        elif size < page_avg_size * 0.85:
+                            block['type'] = 'small'
+                            block['md_prefix'] = ''
+                        else:
+                            block['type'] = 'body'
+                            block['md_prefix'] = ''
+                            
+                        # Debug structure
+                        # print(f"  Block type: {block['type']} (Size: {size:.1f})")
+
+            # --- Text Replacement Phase ---
+            # Process each text block
+            for block_idx, text_block in enumerate(text_blocks):
+                original_text = text_block['text']
+                bbox = text_block['bbox']
                 
-                # Convert to Fitz coordinates (Top-Left 0,0)
-                # Top y in fitz = Page Height - Max Cartesian Y
-                rect_top = page_h - y1_cartesian
-                # Bottom y in fitz = Page Height - Min Cartesian Y
-                rect_bottom = page_h - y0_cartesian
-                
-                rect = fitz.Rect(x0, rect_top, x1, rect_bottom)
-                
-                # Validate rect
-                if rect.is_empty or rect.width < 1 or rect.height < 1:
+                # Filter out very small blocks or noise
+                if (bbox[2] - bbox[0]) < 5 or (bbox[3] - bbox[1]) < 5:
                     continue
 
                 # Normalize numerals
                 normalized_text = normalize_arabic_numerals(original_text)
 
-                # Translate
+                # Translate the complete block
                 try:
+                    # Skip numeric-heavy blocks if needed, but "in-place" usually implies 
+                    # replacing everything that was selected as Arabic block.
+                    # We'll check if it's translatable.
+                    
                     translated_text = translate_to_english(normalized_text)
 
+                    # Only replace if translation returned something and isn't just Arabic again
                     if translated_text and not arabic_pattern.search(translated_text):
-                        # Cover original text
-                        # Expand slightly to cover anti-aliasing
-                        cover_rect = fitz.Rect(rect.x0-2, rect.y0-2, rect.x1+2, rect.y1+2)
+                        # Accumulate for RAG
+                        stats['full_translated_text'].append(translated_text)
                         
+                        # Create rectangle for the text area
+                        rect = fitz.Rect(bbox)
+                        
+                        # Apply padding to ensure we cover the old text fully
+                        # Expand slightly (1-2 points) to cover anti-aliasing artifacts
+                        cover_rect = fitz.Rect(bbox[0]-1, bbox[1]-1, bbox[2]+1, bbox[3]+1)
+
+                        # Draw white rectangle to cover original text
+                        # We use shape to ensure it's drawn over existing content
                         shape = page.new_shape()
                         shape.draw_rect(cover_rect)
                         shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
@@ -197,47 +393,71 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
 
                         # Insert new text
                         try:
-                            # Estimate font size based on height
-                            # English text is usually shorter vertically but wider horizontally
-                            # than Arabic roughly.
-                            # Start with height-based guess.
+                            # 1. Calculate optimal font size
+                            box_width = rect.width
                             box_height = rect.height
-                            initial_font_size = min(box_height * 0.8, 12) # Cap at 12 to avoid massive text
-                            if box_height > 20: 
-                                initial_font_size = 10 # Reset for large blocks to standard reading size
                             
-                            # Adaptive fitting
-                            curr_size = initial_font_size
-                            min_size = 4
+                            # Start with original font size but cap it reasonable for English
+                            # Arabic often compact; English might need adjustment.
+                            # Usually English takes more horizontal space but less vertical per line height sometimes.
+                            current_fontsize = text_block['font_size']
                             
-                            remaining = -1
-                            while remaining < 0 and curr_size >= min_size:
-                                # We need to overwrite the whiteout if we retry, 
-                                # because insert_textbox draws immediately.
-                                # Actually, we can just draw whiteout once, and then try inserting.
-                                # If it fails (overflows), we clear and try smaller.
-                                
-                                # Re-draw whiteout to clear previous attempt
-                                shape = page.new_shape()
-                                shape.draw_rect(cover_rect)
-                                shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                shape.commit()
-                                
-                                remaining = page.insert_textbox(
-                                    rect,
-                                    translated_text,
-                                    fontsize=curr_size,
-                                    fontname="helv",
-                                    align=0, # Left
-                                )
-                                curr_size -= 0.5
+                            # Insert textbox allows auto-wrapping
+                            # We might need to scale down if it returns a negative result (overflow)
+                            
+                            # Determine correct font
+                            block_type = text_block.get('type', 'body')
+                            
+                            font_to_use = "helv"
+                            if has_custom_font:
+                                if block_type == 'heading' and has_custom_font_bold:
+                                    font_to_use = "noto-bold"
+                                else:
+                                    font_to_use = "noto"
+                            
+                            remaining_text = page.insert_textbox(
+                                rect,
+                                translated_text,
+                                fontsize=current_fontsize,
+                                fontname=font_to_use,
+                                align=0,  # Left align
+                                encoding=0 # PDF standard encoding? 0 is usually fine for Latin
+                            )
+                            
+                            if remaining_text < 0:
+                                # Start resizing loop
+                                # Minimum legible size
+                                min_fontsize = 6
+                                while remaining_text < 0 and current_fontsize > min_fontsize:
+                                    current_fontsize -= 0.5
+                                    # Clear previous attempt (conceptually, we just overwrite on top or we assumed we haven't committed? 
+                                    # insert_textbox commits immediately. 
+                                    # So we should validte size *before* committing or overwrite with white again.
+                                    # PyMuPDF insert_textbox draws immediately.
+                                    # So we need to cover again.
+                                    
+                                    shape = page.new_shape()
+                                    shape.draw_rect(cover_rect)
+                                    shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                    shape.commit()
+                                    
+                                    remaining_text = page.insert_textbox(
+                                        rect,
+                                        translated_text,
+                                        fontsize=current_fontsize,
+                                        fontname=font_to_use,
+                                        align=0
+                                    )
                             
                             stats['text_blocks_translated'] += 1
 
                         except Exception as insert_error:
                             print(f"    Text insertion error: {insert_error}")
+                            # Fallback: simple text insertion if textbox fails completely
+                            # (Unlikely if rect is valid, but good safety)
+                            pass
                     else:
-                        pass # Translation failed or empty
+                        print(f"    Skipping: Translation failed or empty")
 
                 except Exception as e:
                     print(f"    Block processing error: {e}")
@@ -257,6 +477,10 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         print(f"In-place translation complete!")
         print(f"Output saved to: {output_path}")
         print("=" * 60)
+        # Join all text for the final return
+        stats['full_text_content'] = "\n\n".join(stats['full_translated_text'])
+        del stats['full_translated_text'] # Remove list to keep dict clean
+
         return stats
 
     except Exception as e:

@@ -5,17 +5,22 @@ import os
 import tempfile
 from services.ocr_service import extract_arabic_text
 from services.translate_service import translate_to_english
+from services.translate_service import translate_to_english
 from services.pdf_translation_service import translate_pdf_with_layout
+from services.rag_service import rag_service
+from pydantic import BaseModel
+import uuid
 
 app = FastAPI(title="Arabic OCR Translation API")
 
 # CORS middleware to allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost:5174", "http://127.0.0.1:5173", "http://127.0.0.1:5174"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["X-Document-ID", "X-Translation-Stats"]
 )
 
 @app.get("/")
@@ -24,9 +29,14 @@ def read_root():
         "message": "Arabic OCR Translation API is running",
         "endpoints": {
             "/process": "Extract text and translate (returns JSON)",
-            "/translate-pdf": "Translate PDF with layout preservation (returns PDF)"
+            "/translate-pdf": "Translate PDF with layout preservation (returns PDF)",
+            "/chat": "Chat with the translated document using AI"
         }
     }
+
+class ChatRequest(BaseModel):
+    doc_id: str
+    query: str
 
 @app.post("/process")
 async def process_pdf(file: UploadFile = File(...)):
@@ -142,6 +152,17 @@ async def translate_pdf_endpoint(file: UploadFile = File(...)):
                 'tables_translated': 0
             }
         
+        # Index content for RAG
+        doc_id = str(uuid.uuid4())
+        full_text = stats.get('full_text_content', '')
+        
+        if full_text:
+            print(f"Indexing document {doc_id} for RAG...")
+            # We run this synchronously for now to ensure it's ready when user wants to chat
+            # In production, use BackgroundTasks
+            rag_service.index_document(doc_id, full_text)
+            print(f"Indexing complete for {doc_id}")
+        
         # Return the translated PDF
         return FileResponse(
             output_pdf_path,
@@ -150,7 +171,8 @@ async def translate_pdf_endpoint(file: UploadFile = File(...)):
             headers={
                 'X-Translation-Stats': f"pages={stats.get('pages_processed', 0)}, "
                                       f"blocks={stats.get('text_blocks_translated', 0)}, "
-                                      f"tables={stats.get('tables_translated', 0)}"
+                                      f"tables={stats.get('tables_translated', 0)}",
+                'X-Document-ID': doc_id
             }
         )
         
@@ -168,6 +190,18 @@ async def translate_pdf_endpoint(file: UploadFile = File(...)):
                 pass
         # Note: output file will be deleted after response is sent
         # For production, you might want to keep it temporarily or use a cleanup task
+
+@app.post("/chat")
+async def chat_endpoint(request: ChatRequest):
+    """
+    Chat with a translated document using RAG (Ollama + Qdrant).
+    """
+    try:
+        response = rag_service.chat_with_document(request.doc_id, request.query)
+        return {"response": response}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import UploadBox from './components/UploadBox'
 import OutputBox from './components/OutputBox'
+import ChatSidebar from './components/ChatSidebar'
 
 function App() {
   const [file, setFile] = useState(null)
@@ -8,12 +9,17 @@ function App() {
   const [loadingPdf, setLoadingPdf] = useState(false)
   const [results, setResults] = useState(null)
   const [translatedPdfUrl, setTranslatedPdfUrl] = useState(null)
+  const [docId, setDocId] = useState(null)
+  const [showChat, setShowChat] = useState(false)
   const [error, setError] = useState(null)
 
   const handleFileSelect = (selectedFile) => {
     setFile(selectedFile)
     setResults(null)
+    setResults(null)
     setTranslatedPdfUrl(null)
+    setDocId(null)
+    setShowChat(false)
     setError(null)
   }
 
@@ -26,13 +32,15 @@ function App() {
     setLoading(true)
     setError(null)
     setResults(null)
+    setResults(null)
     setTranslatedPdfUrl(null)
+    setDocId(null)
 
     try {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('http://localhost:8000/process', {
+      const response = await fetch('http://127.0.0.1:8000/process', {
         method: 'POST',
         body: formData,
       })
@@ -60,13 +68,15 @@ function App() {
     setLoadingPdf(true)
     setError(null)
     setResults(null)
+    setResults(null)
     setTranslatedPdfUrl(null)
+    setDocId(null)
 
     try {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('http://localhost:8000/translate-pdf', {
+      const response = await fetch('http://127.0.0.1:8000/translate-pdf', {
         method: 'POST',
         body: formData,
       })
@@ -85,6 +95,12 @@ function App() {
       const stats = response.headers.get('X-Translation-Stats')
       if (stats) {
         console.log('Translation stats:', stats)
+      }
+
+      // Get Document ID for Chat
+      const newDocId = response.headers.get('X-Document-ID')
+      if (newDocId) {
+        setDocId(newDocId)
       }
     } catch (err) {
       setError(err.message || 'An error occurred while translating the PDF')
@@ -114,7 +130,10 @@ function App() {
       </header>
 
       {/* Page Content */}
-      <main className="max-w-6xl mx-auto px-4 py-10">
+      <main
+        className={`max-w-6xl mx-auto px-4 py-10 transition-all duration-300 ease-in-out ${showChat ? 'mr-[420px]' : ''
+          }`}
+      >
         <div className="mb-8">
           <h1>Arabic OCR → English Translation</h1>
           <p className="mt-2">Upload a scanned Arabic PDF to extract text and translate to English with high fidelity.</p>
@@ -126,10 +145,18 @@ function App() {
             selectedFile={file}
             onProcess={handleProcess}
             onTranslatePdf={handleTranslatePdf}
+            onChat={() => setShowChat(true)}
+            docId={docId}
             loading={loading}
             loadingPdf={loadingPdf}
           />
         </section>
+
+        <ChatSidebar
+          isOpen={showChat}
+          onClose={() => setShowChat(false)}
+          docId={docId}
+        />
 
         {error && (
           <div className="mb-6 rounded-lg border border-red-200 bg-red-50 text-red-800 p-4">
@@ -200,6 +227,29 @@ function App() {
           />
         )}
       </main>
+
+      {/* Processing Popup */}
+      {loadingPdf && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center animate-in fade-in zoom-in duration-300">
+            <div className="mx-auto w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
+              <svg className="animate-spin h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">Processing Document</h3>
+            <p className="text-slate-600">
+              AI-powered translation and vector indexing in progress. This ensures high-quality results and enables chat.
+            </p>
+            <div className="mt-6 flex justify-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse delay-75"></span>
+              <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse delay-150"></span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
