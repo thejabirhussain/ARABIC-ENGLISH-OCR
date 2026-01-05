@@ -1,0 +1,149 @@
+================================================================================
+🚀 ROHKUN CODE AUDIT - Project: backend
+================================================================================
+https://rohkun.com  |  © 2025 Rohkun Labs
+--------------------------------------------------------------------------------
+📅 Report Generated: 2026-01-02  |  Analyzer Version: 2.0.0
+User: local@user
+Report ID: RHKN-1EE9C7
+================================================================================
+OVERVIEW
+================================================================================
+Files Processed: 28
+Languages Detected: Python
+Total Lines Analyzed: 5,600
+Deterministic Accuracy: Nearly all detections are deterministic
+Average Analysis Time: 2.6 sec
+Token Savings: 400 tokens ($0.01 equivalent)
+
+================================================================================
+KEY INSIGHTS
+================================================================================
+ℹ️  Endpoints found but no API calls detected - may be used by external clients
+⚠️  5 high-impact nodes detected - changes would affect many files
+================================================================================
+SUMMARY METRICS
+================================================================================
+Backend Endpoints Detected: 4 confident + 0 uncertain
+Frontend API Calls Found: 0 confident + 0 uncertain
+Total Patterns: 4 (4 deterministic)
+Detection Methods: All detections use AST parsing
+================================================================================
+BACKEND ENDPOINTS
+================================================================================
+✓ CONFIDENT FINDINGS
+These endpoints were parsed deterministically from your code:
+
+GET    /                                        [/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/main.py:28]
+POST   /chat                                    [/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/controllers/chat_controller.py:7]
+POST   /translate-pdf                           [/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/controllers/pdf_controller.py:12]
+POST   /process                                 [/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/controllers/ocr_controller.py:10]
+
+================================================================================
+FRONTEND API CALLS
+================================================================================
+✓ CONFIDENT FINDINGS
+These API calls were parsed deterministically from your code:
+
+
+================================================================================
+CONNECTION VERIFICATION
+================================================================================
+⚠️  No connections found
+
+
+================================================================================
+DEPENDENCIES
+================================================================================
+Imports Detected: 87
+Function Calls Detected: 690
+Function Definitions Detected: 46
+
+Sample Imports:
+  • unknown [from debug_translation.py:1]
+  • unknown [from debug_translation.py:2]
+  • unknown [from debug_translation.py:7]
+  • unknown [from main.py:1]
+  • unknown [from main.py:2]
+  ... and 82 more imports
+
+================================================================================
+LANGUAGE COVERAGE
+================================================================================
+Python: 4 files | Endpoints: 4 | API Calls: 0 | Confidence: High
+================================================================================
+BLAST RADIUS ANALYSIS
+================================================================================
+High Impact Nodes: 5
+
+These nodes have many dependents - changes would affect many files:
+
+• func:str (CRITICAL)
+  Changing function 'func:str' has no detected dependents.
+• func:print (HIGH)
+  Changing function 'func:print' has no detected dependents.
+• func:len (HIGH)
+  Changing function 'func:len' has no detected dependents.
+• func:text.strip (HIGH)
+  Changing function 'func:text.strip' has no detected dependents.
+• func:enumerate (HIGH)
+  Changing function 'func:enumerate' has no detected dependents.
+
+================================================================================
+CONFIDENCE DISTRIBUTION
+================================================================================
+Distribution: No confidence data
+
+Confidence Levels:
+• CERTAIN: AST-based detection with literal paths (most reliable)
+• HIGH: Framework pattern matching (very reliable)
+• MEDIUM: Heuristic-based detection (requires verification)
+• LOW: Pattern-based guesses (manual review recommended)
+
+================================================================================
+TOKEN SAVINGS SUMMARY
+================================================================================
+Without Rohkun: ~400 tokens ($0.01)
+With Rohkun: ~80 tokens ($0.00)
+Saved: 320 tokens (~$0.01 saved per report)
+
+================================================================================
+DISCLAIMER
+================================================================================
+This report is generated using static deterministic analysis. Dynamic values
+such as environment variables, runtime imports, or reflection may affect final
+behavior. For validation, run the application with live configuration and
+compare logs with static output. Accuracy estimates are based on parser
+confidence levels at analysis time.
+
+================================================================================
+PATH FORWARD
+================================================================================
+[MEDIUM] Improve connection quality (currently: very low (minimal connections found))
+Reason: Low connection rate may indicate integration issues
+Benefit: Better frontend-backend integration
+
+================================================================================
+VISUALIZATION
+================================================================================
+🎨 View interactive 3D network graph:
+   Run 'rohkun run' and check the visualization link in the output
+   Or visit: http://localhost:8000 (if server is running)
+
+================================================================================
+
+================================================================================
+CONTINUITY TRACKING
+================================================================================
+Project: RHKN-1EE9C7
+Snapshot: #1
+Drift Score: 0.00 (baseline)
+Previous Scan: N/A
+
+Drift Levels:
+  • 0.0-0.2: Low drift (healthy, focused changes)
+  • 0.2-0.5: Medium drift (review changes)
+  • 0.5+: High drift (significant refactor)
+
+END OF REPORT
+================================================================================
