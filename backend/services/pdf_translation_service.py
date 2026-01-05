@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 from typing import Tuple, List, Optional
+import pandas as pd
 from services.layout_extraction_service import (
     extract_text_blocks_with_layout,
     TextBlock,

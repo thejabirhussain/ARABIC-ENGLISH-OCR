@@ -1,0 +1,35 @@
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:79: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_normalized = df.applymap(normalize_cell)
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:93: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_normalized.applymap(collect_if_arabic)
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:118: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_translated = df_normalized.applymap(apply_translation)
+Translating debug_reversal.pdf to debug_reversal_output.pdf...
+============================================================
+STRICT MODE: Using In-Place Translation Only
+Reconstruction/Re-rendering is disabled to preserve specific layout.
+============================================================
+============================================================
+Starting in-place PDF translation (block-level processing)
+============================================================
+Using custom font: /Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/assets/fonts/NotoSans-Regular.ttf
+Using custom bold font: /Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/assets/fonts/NotoSans-Bold.ttf
+Initializing Maryum Table Services...
+Maryum Services initialized successfully.
+
+Processing page 1/1...
+  Maryum found 1 tables on page 1.
+Found 3 Arabic text blocks on page 1
+Page 1 stats: Avg Font Size=9.76
+DEBUG_TEXT: 'اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ 4202 9'
+Loading translation model: Helsinki-NLP/opus-mt-tc-big-ar-en
+Translation model loaded successfully: Helsinki-NLP/opus-mt-tc-big-ar-en
+DEBUG_TEXT: 'ﻗﺎﺋﻤﺔ اﻟﻤﺮﻛﺰ اﻟﻤﺎﻟﻲ اﻟﻤﻮﺣﺪة'
+DEBUG_TEXT: 'ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻتاﻟﺴﻌﻮدﻳﺔﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ'
+
+============================================================
+In-place translation complete!
+Output saved to: debug_reversal_output.pdf
+============================================================
+Translation successful!
+Stats: {'pages_processed': 1, 'text_blocks_translated': 3, 'tables_translated': 1, 'full_text_content': "2023\n\n2024\n\nExplain.\n\nSame as December 31.\n\n2023\n\nAs of December 31, 2024.\n\nProperty Rights and Liabilities\n\nAssets\n\n30,000,000\n\n30,000,000\n\nProperty rights\n\n115,122,579\n\nNon-current assets 112,580,575\n\n110,889,032\n\n110,889,032\n\n19\n\nCapital\n\n5,578,572\n\nBored, Factories & Equipment 7 4,835,543\n\n(1,576,557)\n\n(4,112,475)\n\n20\n\nGeneral reserve\n\n19,763,009\n\nAssets Right of Use 8 19,141,633\n\n28,116,139\n\n20\n\nOther reserves\n\nIntangibles 9\n\n20,056,576\n\nRemaining profit.\n\n41,237,301\n\nInvestments in a partner and joint ventures 10 35,435,785\n\n167,428,614\n\n156,833,133\n\nProprietary rights relating to the shareholders of the parent company\n\n332,458\n\nInvestments in debt instruments 11 332,458\n\n27,853,926\n\n27,085,026\n\n21\n\nNon-controlling property rights\n\n236,485\n\nInvestments in equity instruments 12 253,402\n\n195,282,540\n\n183,918,159\n\nTotal Property Rights\n\n1,749,286\n\nTotal Tax Assets 31 2,365,609\n\n3,745,176\n\nMoney Tools 13 3,669,688\n\nL M Tolabat Guerra\n\n6 6 2 , 1 1 0 6,\n\nM W Judah T W L L Dine Other 14 4 3 2 0 02 8\n\n23,255,179\n\n26,165,086\n\n22\n\nDion\n\n2 13 , 6 7 7 , 193\n\nA C C D E F C D A C D D E D E E F G G D E G D H I D\n\n4,622,459\n\n3,983,960\n\n22\n\nLease obligations\n\n12,894,392\n\n13,507,010\n\n23\n\nEmployee Benefits\n\nAl - Asas\n\n2 4 9 , 4 1 8\n\n2 8 5 , 1 1 6\n\n1 3\n\nI'm sorry, but I've got a lot of doubt.\n\n3 2 2 , 2 3 3 , 8 1\n\n3 1 8 5 1 8 8 1 8 1 1 8\n\n4 4 1 , 1 1 0 , 2\n\n4 9 8 , 5 7 9 , 1\n\n3 1\n\nAdwa T A L Y H S C E\n\n4 7 3 , 5 9 2 , 9 1\n\nL L L Dine T Gary H 7 1 3 2 8 9 3 4 0 2\n\n9 8 4 , 0 9 0 , 1\n\n5 6 5 , 0 7 8\n\n4 2\n\nPJSC PJAC\n\n5 5 1 , 5 9 2 , 5\n\nM, C, D, T, L, M, Akh Rei 4 1 2 6 3 , 8 9 2 , 0 1\n\n0 4 9 , 8 0 6 , 1\n\n9 4 2 , 5 0 ,6 1\n\n5 2\n\nM L P R S E F R S\n\n7 1 6 , 2 4 8 , 9\n\nA short investment for 11 7 0 8 8 6 7\n\n46,297,545\n\n48,719,346\n\nTotal Untraded Liabilities\n\n32,414,996\n\nCash is like cash 18 30,539,668\n\n85,180,365\n\n87,760,241\n\n2,414,233\n\n2,080,922\n\nI'm looking forward to the first one.\n\n4 5 9 , 3 2 4 , 5 1\n\nAssets held for sale 4 335 and 5 2 6 3, 2 6 3\n\n4 53 , 1 0 3 2,\n\n6 9 ,9 2 2 2,0\n\n22\n\nSGT L L L\n\n9 31 , 4 0 6 , 0 0 1\n\nA C D E F G H I J L L L M C D T Rolling 66 8 3 38 1 9\n\n2 6 3 , 3 0 9\n\n5 0 1 5, 4 9\n\n2 2\n\nA L C D E F G H I J K L M N O P R S T U V W U V U V\n\n294,380,451\n\nA A C D E F G H I L M C D T 278,018,793\n\n20,087,016\n\n19,793,604\n\n2 2\n\nA L C D E F G H I L M N L T A M T L L L\n\n1,175,962\n\n137,248\n\n26\n\nDine commercials.\n\n18,198,349\n\n19,695,999\n\n24\n\nAllocations\n\n604,302\n\n587,075\n\n25\n\nOther Wanted\n\n1,414,718\n\n118,339\n\n31\n\nIncome tax is due.\n\n47,099,476\n\n45,381,288\n\n31\n\nThey deserved it.\n\n5,700,890\n\n-\n\n52,800,366\n\n45,381,288\n\n4 335 and\n\nLiabilities directly related to assets held for sale\n\nReyes Board of Directors\n\nNaib Al Reyes Finance Executive\n\n99,097,911\n\n94,100,634\n\nTotal traded liabilities\n\nPart.\n\n294,380,451\n\n278,018,793\n\nTotal liabilities\n\nThe attached explanations from 1 to 42 are not part of these consolidated financial statements.\n\nTotalProperty and Liabilities\n\nSABK 9 4202 Consolidated Annual Financial Statements\n\nConsolidated financial position list\n\nAmounts in thousands of Saudi RiyalsOther"}

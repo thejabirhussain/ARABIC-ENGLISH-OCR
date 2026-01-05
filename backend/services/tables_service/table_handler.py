@@ -74,7 +74,12 @@ class TableHandler:
                 x_center = (w["x0"] + w["x1"]) / 2
                 for i in range(n_cols):
                     if col_bounds[i] <= x_center <= col_bounds[i + 1]:
-                        col_tokens[i].append({"text": w["text"].strip(), "x": x_center})
+                        col_tokens[i].append({
+                            "text": w["text"].strip(), 
+                            "x": x_center,
+                            "x0": w["x0"],
+                            "x1": w["x1"]
+                        })
                         break
             
             # Build cell text with RTL handling
@@ -99,8 +104,40 @@ class TableHandler:
                 # Sort tokens visually from Right to Left if RTL
                 toks_sorted = sorted(toks, key=lambda t: t["x"], reverse=rtl)
                 
-                parts = [fix_rtl_token(t["text"]) for t in toks_sorted]
-                final_text = " ".join(p for p in parts if p).strip()
+                parts = []
+                for idx, t in enumerate(toks_sorted):
+                    fixed_text = fix_rtl_token(t["text"])
+                    
+                    if idx > 0:
+                        separator = " "
+                        prev_t = toks_sorted[idx-1]
+                        
+                        if rtl:
+                            # RTL: Sort Descending X. T[idx-1] is Right, T[idx] is Left.
+                            # Gap = RightToken.LeftEdge - LeftToken.RightEdge
+                            gap = prev_t["x0"] - t["x1"]
+                            
+                            # If gap is very small, likely fragments of same word
+                            if gap < 3.0: 
+                                separator = ""
+                                # print(f"MERGE RTL: '{prev_t['text']}' - '{t['text']}' (Gap={gap:.2f})")
+                            else:
+                                # print(f"SPACE RTL: '{prev_t['text']}' - '{t['text']}' (Gap={gap:.2f})")
+                                pass
+                        else:
+                            # LTR: Sort Ascending X. T[idx-1] is Left, T[idx] is Right.
+                            # Gap = RightToken.LeftEdge - LeftToken.RightEdge
+                            gap = t["x0"] - prev_t["x1"]
+                            if gap < 2.0: # Stricter for English
+                                separator = ""
+                        
+                        parts.append(separator)
+                    
+                    parts.append(fixed_text)
+
+                final_text = "".join(p for p in parts if p).strip()
+                # if rtl:
+                #    print(f"ROW FRAGMENTS: {[t['text'] for t in toks_sorted]} -> FINAL: '{final_text}'")
                 
                 row_text.append(final_text)
                 row_layout.append(CellLayout(final_text, cell_x0, cell_y0, cell_x1, cell_y1))
