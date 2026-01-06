@@ -11,6 +11,8 @@ function App() {
   const [translatedPdfUrl, setTranslatedPdfUrl] = useState(null)
   const [docId, setDocId] = useState(null)
   const [showChat, setShowChat] = useState(false)
+  const [stats, setStats] = useState(null)
+  const [timing, setTiming] = useState(null)
   const [error, setError] = useState(null)
 
   const handleFileSelect = (selectedFile) => {
@@ -18,7 +20,10 @@ function App() {
     setResults(null)
     setResults(null)
     setTranslatedPdfUrl(null)
+    setTranslatedPdfUrl(null)
     setDocId(null)
+    setStats(null)
+    setTiming(null)
     setShowChat(false)
     setError(null)
   }
@@ -34,7 +39,10 @@ function App() {
     setResults(null)
     setResults(null)
     setTranslatedPdfUrl(null)
+    setTranslatedPdfUrl(null)
     setDocId(null)
+    setStats(null)
+    setTiming(null)
 
     try {
       const formData = new FormData()
@@ -70,7 +78,10 @@ function App() {
     setResults(null)
     setResults(null)
     setTranslatedPdfUrl(null)
+    setTranslatedPdfUrl(null)
     setDocId(null)
+    setStats(null)
+    setTiming(null)
 
     try {
       const formData = new FormData()
@@ -92,9 +103,25 @@ function App() {
       setTranslatedPdfUrl(url)
 
       // Get translation stats from headers
-      const stats = response.headers.get('X-Translation-Stats')
-      if (stats) {
-        console.log('Translation stats:', stats)
+      // Get translation stats from headers
+      const statsHeader = response.headers.get('X-Translation-Stats')
+      const timingHeader = response.headers.get('X-Translation-Timing')
+
+      if (statsHeader) {
+        try {
+          setStats(JSON.parse(statsHeader))
+        } catch (e) {
+          console.log("Could not parse stats JSON, falling back to regex or ignore")
+          // Fallback for legacy string format if needed, but we essentially switched to JSON
+        }
+      }
+
+      if (timingHeader) {
+        try {
+          setTiming(JSON.parse(timingHeader))
+        } catch (e) {
+          console.error(e)
+        }
       }
 
       // Get Document ID for Chat
@@ -187,6 +214,44 @@ function App() {
                 Download Translated PDF
               </a>
             </div>
+
+            {/* Performance Stats Banner */}
+            {timing && (
+              <div className="mb-6 bg-slate-50 border border-slate-200 rounded-lg p-4 flex flex-wrap gap-6 items-center text-sm">
+                <div>
+                  <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Total Time</span>
+                  <span className="text-slate-900 font-bold text-lg">{timing.total_sec}s</span>
+                </div>
+                <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
+                <div>
+                  <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Translation</span>
+                  <span className="text-slate-900 font-medium">{timing.translation_sec}s</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Vector Indexing</span>
+                  <span className="text-slate-900 font-medium">{timing.indexing_sec}s</span>
+                </div>
+                {stats && (
+                  <>
+                    <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
+                    <div className="flex gap-4">
+                      <div>
+                        <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Pages</span>
+                        <span className="text-slate-700 font-medium">{stats.pages}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Blocks</span>
+                        <span className="text-slate-700 font-medium">{stats.blocks}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-xs uppercase tracking-wider font-semibold mb-1">Tables</span>
+                        <span className="text-slate-700 font-medium">{stats.tables}</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[600px]">
               {/* Original PDF */}

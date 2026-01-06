@@ -142,7 +142,8 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         'pages_processed': len(doc),
         'text_blocks_translated': 0,
         'tables_translated': 0,
-        'full_translated_text': []  # Accumulate text here
+        'full_translated_text': [],  # Accumulate English text here
+        'full_original_text': []     # Accumulate Arabic text here
     }
 
     # Path to our custom font
@@ -274,6 +275,9 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                         # Use standard pandas read
                                         df = pd.read_csv(trans_csv, header=None)
                                         
+                                        # Load original CSV for stats
+                                        orig_df = pd.read_csv(orig_csv, header=None)
+                                        
                                         # Use simplistic check - if dataframe is empty, likely no translation
                                         if df.empty:
                                             continue
@@ -308,8 +312,10 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                         # Add to exclusion
                                         table_exclusion_rects.append((min_x, min_y, max_x, max_y))
 
+
                                         # Clean up any NaN
                                         df = df.fillna("")
+                                        orig_df = orig_df.fillna("")
                                         
                                         # MEGA COVER: Cover the entire table area once to ensure no background text persists in gaps
                                         try:
@@ -338,6 +344,24 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                                 
                                                 # Add to stats
                                                 stats['full_translated_text'].append(trans_text)
+                                                
+                                                # Add original text to stats
+                                                if r_idx < len(orig_df) and c_idx < len(orig_df.columns):
+                                                     orig_val = orig_df.iloc[r_idx, c_idx]
+                                                     if str(orig_val).strip():
+                                                         stats['full_original_text'].append(str(orig_val).strip())
+                                                
+                                                # Get original text for stats if possible
+                                                # We need to read original CSV or infer it.
+                                                # Reading the original CSV is safest if aligned.
+                                                try:
+                                                    # Lazy load original DF only if needed?
+                                                    # Better to trust that if we are here, we are iterating the structure
+                                                    # But we don't have orig_df loaded yet.
+                                                    pass # Will handle outside loop to be efficient or just accept missing for now?
+                                                    # Let's try to load orig once
+                                                except:
+                                                    pass
                                                 
                                                 # Re-insertion Box
                                                 # Ensure valid rect
@@ -448,6 +472,7 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                         if translated_text:
                                             # Accumulate for RAG
                                             stats['full_translated_text'].append(translated_text)
+                                            stats['full_original_text'].append(cell_text)
                                             # Cover and Insert
                                             # Use padding for cover
                                             cell_rect = fitz.Rect(cell)
@@ -629,6 +654,7 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                     if translated_text and not arabic_pattern.search(translated_text):
                         # Accumulate for RAG
                         stats['full_translated_text'].append(translated_text)
+                        stats['full_original_text'].append(original_text)
                         
                         # Create rectangle for the text area
                         rect = fitz.Rect(bbox)
@@ -741,8 +767,12 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         print(f"Output saved to: {output_path}")
         print("=" * 60)
         # Join all text for the final return
+        # Join all text for the final return
         stats['full_text_content'] = "\n\n".join(stats['full_translated_text'])
+        stats['full_original_content'] = "\n\n".join(stats['full_original_text'])
+        
         del stats['full_translated_text'] # Remove list to keep dict clean
+        del stats['full_original_text']
 
         return stats
 

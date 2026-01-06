@@ -33,10 +33,26 @@ class RAGService:
             self.ollama_client = ollama.Client(host=OLLAMA_HOST)
             print(f"Connected to Ollama at {OLLAMA_HOST} using model {CHAT_MODEL}")
             
+            
         except Exception as e:
             print(f"Failed to connect to services: {e}")
             self.client = None
             self.ollama_client = None
+
+    def list_models(self) -> List[str]:
+        """List available local models from Ollama."""
+        try:
+            if not self.ollama_client:
+                 self.ollama_client = ollama.Client(host=OLLAMA_HOST)
+            
+            models_resp = self.ollama_client.list()
+            # Handle different response structures if necessary
+            # Usually returns {'models': [{'name': '...', ...}, ...]}
+            model_names = [m['name'] for m in models_resp.get('models', [])]
+            return model_names
+        except Exception as e:
+            print(f"Error listing models: {e}")
+            return [CHAT_MODEL]  # Return default if failed
 
     def _ensure_collection(self):
         """Create collection if it doesn't exist."""
@@ -122,7 +138,7 @@ class RAGService:
         
         return False
 
-    def chat_with_document(self, doc_id: str, query: str) -> str:
+    def chat_with_document(self, doc_id: str, query: str, model_name: Optional[str] = None) -> str:
         """
         RAG flow: Retrieve relevant chunks -> Chat with LLM.
         """
@@ -173,11 +189,14 @@ class RAGService:
         ]
 
         # 4. Generate Response
+        target_model = model_name if model_name else CHAT_MODEL
+        
         try:
             if not self.ollama_client:
                  self.ollama_client = ollama.Client(host=OLLAMA_HOST)
             
-            response = self.ollama_client.chat(model=CHAT_MODEL, messages=messages)
+            print(f"Chatting using model: {target_model}")
+            response = self.ollama_client.chat(model=target_model, messages=messages)
             return response['message']['content']
         except Exception as e:
             return f"Error generating response: {str(e)}"

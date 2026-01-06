@@ -2,6 +2,9 @@ from fastapi import APIRouter, File, UploadFile, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
 import uuid
 import os
+import time
+import json
+from pathlib import Path
 from services.pdf_translation_service import translate_pdf_with_layout
 from services.rag_service import rag_service
 from utils.validators import validate_pdf
@@ -18,16 +21,33 @@ async def translate_pdf_endpoint(background_tasks: BackgroundTasks, file: Upload
     input_pdf_path = None
     output_pdf_path = None
     
+    # Timing Tracking
+    timings = {
+        "start": time.time(),
+        "upload_processed": 0,
+        "translation_complete": 0,
+        "vector_indexing_complete": 0
+    }
+    
     try:
+        print(f"\n[START] Processing new PDF translation request")
+        
+        # 1. Validation & Setup
         content = await validate_pdf(file)
+        timings["upload_processed"] = time.time()
+        print(f"[STEP] File uploaded and validated ({len(content)} bytes)")
         
         # Save input file
         input_pdf_path = save_content_to_temp(content, suffix='.pdf')
         # Create placeholder for output
         output_pdf_path = save_content_to_temp(b"", suffix='.pdf')
         
-        # Translate PDF with layout preservation
+        # 2. Translation & Layout Preservation
+        print(f"[STEP] Starting Translation & Layout Preservation...")
+        translation_start = time.time()
         stats = translate_pdf_with_layout(input_pdf_path, output_pdf_path)
+        timings["translation_complete"] = time.time()
+        print(f"[STEP] Translation complete in {timings['translation_complete'] - translation_start:.2f}s")
         
         if not stats:
             stats = {
@@ -36,31 +56,81 @@ async def translate_pdf_endpoint(background_tasks: BackgroundTasks, file: Upload
                 'tables_translated': 0
             }
         
-        # Index content for RAG
+
+        # 3. Pre-Vector Storage (Verified English & Arabic Source)
         doc_id = str(uuid.uuid4())
         full_text = stats.get('full_text_content', '')
+        full_original_text = stats.get('full_original_content', '')
         
         if full_text:
-            print(f"Indexing document {doc_id} for RAG...")
+            try:
+                # Create storage directory for English
+                storage_dir = os.path.join(os.getcwd(), "verified_english_docs")
+                os.makedirs(storage_dir, exist_ok=True)
+                
+                # Save English text file
+                text_file_path = os.path.join(storage_dir, f"{doc_id}.txt")
+                with open(text_file_path, "w", encoding="utf-8") as f:
+                    f.write(full_text)
+                print(f"[STEP] Verified English text saved to: {text_file_path}")
+            except Exception as e:
+                print(f"[WARNING] Failed to save verified English text: {e}")
+
+        if full_original_text:
+            try:
+                # Create storage directory for Arabic
+                storage_dir_ar = os.path.join(os.getcwd(), "verified_arabic_docs")
+                os.makedirs(storage_dir_ar, exist_ok=True)
+                
+                # Save Arabic text file
+                text_file_path_ar = os.path.join(storage_dir_ar, f"{doc_id}.txt")
+                with open(text_file_path_ar, "w", encoding="utf-8") as f:
+                    f.write(full_original_text)
+                print(f"[STEP] Verified Arabic text saved to: {text_file_path_ar}")
+            except Exception as e:
+                print(f"[WARNING] Failed to save verified Arabic text: {e}")
+
+        # 4. Vector Storage (RAG Indexing)
+        if full_text:
+            print(f"[STEP] Indexing document {doc_id} to Qdrant...")
+            indexing_start = time.time()
             rag_service.index_document(doc_id, full_text)
-            print(f"Indexing complete for {doc_id}")
+            timings["vector_indexing_complete"] = time.time()
+            print(f"[STEP] Indexing complete in {timings['vector_indexing_complete'] - indexing_start:.2f}s")
+        else:
+            timings["vector_indexing_complete"] = time.time()
         
-        # Schedule cleanup of input file (immediate)
-        # cleanup_file(input_pdf_path) # Doing it in finally block is safer
+        # Calculate full duration
+        total_duration = time.time() - timings["start"]
+        print(f"[DONE] Request processed in {total_duration:.2f}s\n")
         
         # Schedule cleanup of output file after response
         background_tasks.add_task(cleanup_file, output_pdf_path)
         background_tasks.add_task(cleanup_file, input_pdf_path)
+
+        # Build detailed stats header
+        translation_stats = {
+            "pages": stats.get('pages_processed', 0),
+            "blocks": stats.get('text_blocks_translated', 0),
+            "tables": stats.get('tables_translated', 0)
+        }
+        
+        timing_stats = {
+            "total_sec": round(total_duration, 2),
+            "translation_sec": round(timings["translation_complete"] - timings["upload_processed"], 2),
+            "indexing_sec": round(timings["vector_indexing_complete"] - timings["translation_complete"], 2) if full_text else 0
+        }
 
         return FileResponse(
             output_pdf_path,
             media_type='application/pdf',
             filename='translated_english.pdf',
             headers={
-                'X-Translation-Stats': f"pages={stats.get('pages_processed', 0)}, "
-                                      f"blocks={stats.get('text_blocks_translated', 0)}, "
-                                      f"tables={stats.get('tables_translated', 0)}",
-                'X-Document-ID': doc_id
+                'X-Translation-Stats': json.dumps(translation_stats),
+                'X-Translation-Timing': json.dumps(timing_stats),
+                'X-Document-ID': doc_id,
+                # Legacy header for backward compatibility if simple parsing used
+                'X-Legacy-Stats': f"pages={stats.get('pages_processed', 0)}, blocks={stats.get('text_blocks_translated', 0)}"
             }
         )
         
