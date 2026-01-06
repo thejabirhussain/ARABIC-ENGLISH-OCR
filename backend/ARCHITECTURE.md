@@ -1,202 +1,106 @@
-# PDF Translation Architecture
+# PDF Translation System Architecture
 
 ## Overview
+This system is an **Advanced Financial Document Translation Pipeline** designed to convert Arabic PDFs to English while preserving complex layouts, tables, and financial formatting. It specifically addresses challenges like text overlap, fragmented Arabic tokens, and accurate table reconstruction.
 
-This system extends the basic Arabic OCR → English translation to handle complex financial PDFs with layout preservation.
+## System Architecture Diagram
 
-## Architecture
-
-```
-┌─────────────────┐
-│   FastAPI App   │
-│   main.py       │
-└────────┬────────┘
-         │
-         ├─── /process (existing)
-         │    └─── Returns JSON with text
-         │
-         └─── /translate-pdf (new)
-              └─── Returns translated PDF
-                   │
-                   └─── pdf_translation_service.py
-                        │
-                        ├─── layout_extraction_service.py
-                        │    ├─── pdfplumber (text-based)
-                        │    └─── pytesseract (scanned)
-                        │
-                        ├─── table_extraction_service.py
-                        │    ├─── Camelot (text-based tables)
-                        │    ├─── pdfplumber (fallback)
-                        │    └─── OCR-based detection
-                        │
-                        ├─── translate_service.py (existing)
-                        │
-                        └─── pdf_renderer_service.py
-                             └─── ReportLab
-```
-
-## Services
-
-### 1. Layout Extraction Service (`layout_extraction_service.py`)
-
-**Purpose**: Extract text blocks with bounding boxes from PDFs.
-
-**Methods**:
-- `extract_text_blocks_with_layout()`: Main entry point
-- `_group_words_into_blocks()`: Groups words into text blocks
-- `_extract_with_ocr()`: OCR-based extraction with bounding boxes
-- `normalize_arabic_numerals()`: Converts ٠-٩ to 0-9
-
-**Handles**:
-- Text-based PDFs (pdfplumber)
-- Scanned PDFs (pytesseract with TSV output)
-- Mixed PDFs
-
-### 2. Table Extraction Service (`table_extraction_service.py`)
-
-**Purpose**: Extract tables with cell-level content and positions.
-
-**Methods**:
-- `extract_tables_from_pdf()`: Main entry point
-- `_extract_tables_with_pdfplumber()`: Fallback method
-- `extract_tables_from_ocr()`: OCR-based table detection
-- `_detect_table_structure()`: Detects table structure from blocks
-
-**Handles**:
-- Text-based tables (Camelot)
-- OCR-based tables (bounding box analysis)
-- Complex layouts
-
-### 3. PDF Translation Service (`pdf_translation_service.py`)
-
-**Purpose**: Orchestrates the entire translation pipeline.
-
-**Flow**:
-1. Extract text blocks with layout
-2. Extract tables
-3. Translate text blocks (normalize numerals first)
-4. Translate table cells
-5. Render new PDF
-
-### 4. PDF Renderer Service (`pdf_renderer_service.py`)
-
-**Purpose**: Render translated content into a new PDF.
-
-**Methods**:
-- `render_translated_pdf()`: Main rendering function
-- `_render_text_block()`: Renders individual text blocks
-- `_render_table()`: Renders tables
-- `_get_pdf_page_size()`: Gets original page dimensions
-
-**Features**:
-- Preserves page size
-- Maintains layout
-- Auto-adjusts font size for overflow
-- Handles LTR alignment
-
-## Data Structures
-
-### TextBlock
-```python
-class TextBlock:
-    text: str
-    x0, y0, x1, y1: float  # Bounding box
-    page_num: int
-    is_table: bool
+```mermaid
+graph TD
+    User([User / Frontend]) -->|Upload PDF| API[FastAPI Backend - main.py]
+    
+    subgraph Pipeline [Translation Pipeline]
+        annot1[Orchestrator: pdf_translation_service.py]
+        
+        API --> annot1
+        
+        subgraph extraction [Extraction & Analyis]
+            annot1 -->|Extract| PDFPlumber[pdfplumber]
+            annot1 -->|Detect Tables| TableService[Table Detection Service]
+            
+            TableService -->|Heuristic Filter| DensityCheck{Density Check}
+            DensityCheck -->|Avg Words/Cell > 12| TextLayout[Text Paragraph]
+            DensityCheck -->|Avg Words/Cell < 12| DataTable[Financial Table]
+            
+            PDFPlumber -->|Extract Words| Words[Word Tokens]
+            Words -->|Sort & Gap-Merge| TextBlocks[Consolidated Text Blocks]
+        end
+        
+        subgraph translation [Translation Layer]
+            direction TB
+            DataTable -->|Extract CSV| TableHandler[Table Handler]
+            TableHandler -->|Process| MaryumTrans[TranslationService]
+            
+            TextLayout -->|Treat as Text| TextBlocks
+            
+            TextBlocks -->|Normalize| Norm[Text Normalizer]
+            Norm -->|Translation Model| Helsinki[Helsinki-NLP Model]
+            
+            MaryumTrans -->|Tokenize| Batch[Batch Translator]
+            Batch -->|Translation Model| Helsinki
+            
+            Helsinki -->|Raw English| PostProcess[Post Processor]
+            
+            PostProcess -->|Apply Glossary| Glossary{Financial Glossary}
+            Glossary -->|Correction| CleanText[Final English Text]
+        end
+        
+        subgraph rendering [Rendering & Layout]
+            annot1 -->|Layout Instructions| PyMuPDF[PyMuPDF / Fitz]
+            
+            PyMuPDF -->|Action 1| MegaCover[Mega Cover: White-out Table Areas]
+            PyMuPDF -->|Action 2| RenderText[Render Text Blocks]
+            PyMuPDF -->|Action 3| RenderTables[Render Table Cells]
+            
+            RenderTables -->|Fit Check| FontSize[Auto-Resize Font]
+            FontSize -->|Loop| RenderTables
+        end
+        
+        CleanText --> rendering
+    end
+    
+    rendering -->|Output| FinalPDF[Translated PDF]
+    FinalPDF --> User
 ```
 
-### TableCell
-```python
-class TableCell:
-    text: str
-    row, col: int
-    x0, y0, x1, y1: float
-    page_num: int
-```
+## Core Components
 
-### Table
-```python
-class Table:
-    cells: List[TableCell]
-    page_num: int
-    num_rows: int
-    num_cols: int
-```
+### 1. **Orchestrator (`pdf_translation_service.py`)**
+ The central controller that manages the document lifecycle. It iterates through pages, invokes detectors, and coordinates the translation and rendering phases. It now includes intelligent filtering to distinguish between **Data Tables** and **Multi-Column Text**.
 
-## API Endpoints
+### 2. **Table Detection & Handling (`services/tables_service/`)**
+ - **Detection (`table_detection_service.py`)**: Uses a custom heuristic algorithm to find table regions based on vertical and horizontal alignment.
+ - **Density Filter**: A crucial post-detection step that analyzes "Words Per Cell". 
+   - *High Density (>12 words)*: Classified as a Text Layout (Paragraph) -> Sent to Text Translation.
+   - *Low Density (<12 words)*: Classified as a Data Table -> Sent to Table Translation.
+ - **Gap-Based Merging (`table_handler.py`)**: Solves the "Fragmented Arabic" issue by merging disjointed text tokens based on proximity before translation.
 
-### POST /translate-pdf
+### 3. **Translation Engine**
+ - **Model**: `Helsinki-NLP/opus-mt-tc-big-ar-en` (Primary) with fallback.
+ - **Normalization**: Converts Arabic numerals (١٢٣) to English (123) and standardizes punctuation.
+ - **Financial Glossary (`translation_service.py`)**: A post-processing layer that enforces standard financial terminology (e.g., correcting "Untraded liabilities" to "Non-current liabilities").
 
-**Input**: PDF file (multipart/form-data)
+### 4. **Rendering Engine (In-Place)**
+ - **Mega Cover**: Before rendering a table, the system draws a single white rectangle over the *entire* table area. This prevents original Arabic text from bleeding through the gaps between English rows.
+ - **Auto-Resizing**: Dynamically reduces font size (down to 4pt) to ensure translated English text fits exactly within the original cell boundaries without overlapping neighbors.
 
-**Output**: Translated PDF file
+## Data Flow
+1.  **Upload**: User uploads a PDF.
+2.  **Detection**: System scans for tables. Candidates are filtered by text density.
+3.  **Extraction**: 
+    -   Tables are converted to CSV-like structures.
+    -   Text outside tables is grouped into blocks.
+4.  **Translation**: 
+    -   Text is batch-translated.
+    -   Financial terms are corrected via Glossary.
+5.  **Rendering**: 
+    -   Original PDF page is modified in-place.
+    -   Table areas are whited out ("Mega Cover").
+    -   Translated text is drawn with precise alignment.
+6.  **Output**: Final PDF is returned to the user.
 
-**Process**:
-1. Save uploaded PDF
-2. Extract layout and text
-3. Extract tables
-4. Translate content
-5. Render new PDF
-6. Return PDF file
-
-**Response Headers**:
-- `X-Translation-Stats`: Statistics about translation
-
-## Dependencies
-
-- `pdfplumber`: Text extraction with coordinates
-- `camelot-py`: Table extraction
-- `reportlab`: PDF rendering
-- `pytesseract`: OCR with bounding boxes
-- `pandas`: Data manipulation for tables
-
-## Limitations
-
-1. **Font Matching**: Currently uses Helvetica. Original fonts not preserved.
-2. **Complex Layouts**: Very complex layouts may not be perfectly preserved.
-3. **Images**: Images are not translated or preserved.
-4. **Handwriting**: Handwritten text not supported.
-5. **Multi-column**: Complex multi-column layouts may need refinement.
-6. **Table Detection**: OCR-based table detection is basic; can be improved with ML.
-
-## Future Improvements
-
-1. **Font Detection**: Detect and use original fonts
-2. **Image Handling**: Preserve and optionally translate images
-3. **Better Table Detection**: Use ML models for table structure detection
-4. **Layout Analysis**: Use layout analysis models (e.g., LayoutLM)
-5. **Caching**: Cache translation results
-6. **Batch Processing**: Support multiple PDFs
-7. **Progress Tracking**: WebSocket for progress updates
-8. **Quality Metrics**: Add translation quality scores
-
-## Example Flow
-
-```
-1. User uploads Arabic PDF
-   ↓
-2. Extract text blocks with coordinates
-   ↓
-3. Extract tables with cell positions
-   ↓
-4. Normalize Arabic numerals (٠→0)
-   ↓
-5. Translate Arabic → English
-   ↓
-6. Render new PDF with:
-   - Original page size
-   - Translated text in original positions
-   - Translated tables
-   ↓
-7. Return translated PDF
-```
-
-## Testing
-
-Test with:
-- Simple text PDFs
-- Scanned PDFs
-- PDFs with tables
-- Financial documents
-- Multi-page PDFs
+## Future Roadmaps
+-   **Structure Recognition**: Moving from heuristics to AI-based table detection (e.g., Table Transformer).
+-   **Font Matching**: Attempting to match the weight and style of the original Arabic font.
+-   **Vector Search**: Integrating RAG flows more deeply for "Chat with PDF" features.
 

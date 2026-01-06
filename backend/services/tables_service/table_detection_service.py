@@ -49,7 +49,13 @@ class TableDetectionService:
             region_words = [w for w in words if self._is_in_region(w, region)]
             columns = self._detect_columns(region_words, region)
             
-            logger.info(f"Table {idx+1}: bbox=({region['x0']:.1f}, {region['y0']:.1f}, {region['x1']:.1f}, {region['y1']:.1f}), columns={len(columns)-1}")
+            # Filter: A valid table must have at least 2 columns (1 internal separator)
+            num_cols = len(columns) - 1
+            if num_cols < 2:
+                logger.info(f"Ignoring Region {idx} (bbox={region['x0']:.1f},{region['y0']:.1f}): Only 1 column (likely paragraph)")
+                continue
+
+            logger.info(f"Table {idx+1}: bbox=({region['x0']:.1f}, {region['y0']:.1f}, {region['x1']:.1f}, {region['y1']:.1f}), columns={num_cols}")
             
             configs.append(TableConfig(
                 page=page_num,
@@ -286,7 +292,8 @@ class TableDetectionService:
         gaps = []
         for i in range(len(x_positions) - 1):
             gap_size = x_positions[i+1] - x_positions[i]
-            if gap_size > 6:  # Minimum gap threshold
+            # Increased threshold from 6 to 15 to avoid detecting 'rivers' in justified text as columns
+            if gap_size > 15:  # Minimum gap threshold
                 gap_center = (x_positions[i] + x_positions[i+1]) / 2
                 crossing_words = [w for w in words if w['x0'] < gap_center < w['x1']]
                 if len(crossing_words) == 0:

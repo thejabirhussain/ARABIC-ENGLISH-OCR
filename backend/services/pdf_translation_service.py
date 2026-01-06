@@ -207,11 +207,54 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                     m_configs = maryum_detector.detect_tables_on_page(working_pdf_path, page_num)
                     
                     if m_configs:
+                        # FILTER: Remove configs that are likely text paragraphs (high word density)
+                        # This resolves the conflict where 2-column text is detected as a table
+                        final_configs = []
+                        for cfg in m_configs:
+                            # 1. Check for single column (already done in detector, but double check)
+                            num_cols = len(cfg.columns) - 1
+                            if num_cols < 2:
+                                print(f"  Skipping Table candidate (cols={num_cols}): likely single column text.")
+                                continue
+                            
+                            # 2. Check Text Density
+                            # Extract raw text from the region
+                            cfg_rect = fitz.Rect(cfg.bbox.x0, cfg.bbox.y0, cfg.bbox.x1, cfg.bbox.y1)
+                            region_text = page.get_text("text", clip=cfg_rect)
+                            total_words = len(region_text.split())
+                            
+                            # Estimate cells: (height / 20px) * num_cols
+                            approx_rows = max(1, cfg_rect.height / 20)
+                            approx_cells = approx_rows * num_cols
+                            
+                            # Keywords per cell
+                            density = total_words / approx_cells if approx_cells > 0 else 0
+                            
+                            # Threshold: Data tables usually has < 5-8 words per cell. 
+                            # Text paragraphs often have > 10-15.
+                            # We use 12 as a safe threshold.
+                            if density > 12:
+                                print(f"  Skipping Table candidate (density={density:.1f}): likely multi-column text.")
+                                continue
+                                
+                            final_configs.append(cfg)
+
+                        m_configs = final_configs
+                        
                         print(f"  Maryum found {len(m_configs)} tables on page {page_num+1}.")
                         
                         # 2. Extract & Translate
-                        # Using temp dir for intermediate processing
-                        with tempfile.TemporaryDirectory() as temp_dir:
+                        # DEBUG: Save intermediate CSVs to a persistent folder instead of temp
+                        debug_dir = os.path.join(os.path.dirname(output_path), "debug_tables")
+                        os.makedirs(debug_dir, exist_ok=True)
+                        
+                        # Use debug_dir instead of temp_dir
+                        # with tempfile.TemporaryDirectory() as temp_dir:
+                        if True: # Indentation preservation scope
+                            temp_dir = debug_dir
+                            
+                            # Clean old files in debug dir for this page to differ between runs? 
+                            # Optional, but good practice. For now, we overwrite.
                             # Extract returns list of (csv_path, layout)
                             extracted_data = maryum_extractor.extract_tables(
                                 working_pdf_path, m_configs, temp_dir, f"p{page_num}"
@@ -268,6 +311,18 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                         # Clean up any NaN
                                         df = df.fillna("")
                                         
+                                        # MEGA COVER: Cover the entire table area once to ensure no background text persists in gaps
+                                        try:
+                                            # Add padding to ensuring we cover slightly outside the detected bounds
+                                            # to catch any anti-aliasing or slight misalignment
+                                            mega_cover_rect = fitz.Rect(min_x-2, min_y-2, max_x+2, max_y+2)
+                                            shape = page.new_shape()
+                                            shape.draw_rect(mega_cover_rect)
+                                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                                            shape.commit()
+                                        except Exception as cover_e:
+                                            print(f"Warning: Failed to cover table area: {cover_e}")
+                                        
                                         # Iterate Layout
                                         for r_idx, row_layout in enumerate(layout):
                                             for c_idx, cell_layout in enumerate(row_layout):
@@ -288,14 +343,8 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                                 # Ensure valid rect
                                                 cell_rect = fitz.Rect(cell_layout.x0, cell_layout.y0, cell_layout.x1, cell_layout.y1)
                                                 
-                                                # Cover old content with white rect
-                                                # Add 1px padding to ensure full coverage
-                                                cover_rect = fitz.Rect(cell_rect[0]-1, cell_rect[1]-1, cell_rect[2]+1, cell_rect[3]+1)
-                                                
-                                                shape = page.new_shape()
-                                                shape.draw_rect(cover_rect)
-                                                shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                                shape.commit()
+                                                # REMOVED: Per-cell covering.
+                                                # Mega Cover already cleared the table area.
                                                 
                                                 # Font settings
                                                 # English tables usually small font
@@ -619,26 +668,36 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                 else:
                                     font_to_use = "noto"
                             
+                            # Reduce initial font size to avoid overlap
+                            # English often takes more width than Arabic for same meaning
+                            current_fontsize = text_block['font_size'] * 0.85
+                            
+                            # Add margins/padding to rect to prevent touching borders
+                            padding_x = 2
+                            padding_y = 1
+                            text_rect = fitz.Rect(
+                                rect.x0 + padding_x, 
+                                rect.y0 + padding_y, 
+                                rect.x1 - padding_x, 
+                                rect.y1 - padding_y
+                            )
+                            
                             remaining_text = page.insert_textbox(
-                                rect,
+                                text_rect,
                                 translated_text,
                                 fontsize=current_fontsize,
                                 fontname=font_to_use,
                                 align=0,  # Left align
-                                encoding=0 # PDF standard encoding? 0 is usually fine for Latin
+                                encoding=0
                             )
                             
                             if remaining_text < 0:
                                 # Start resizing loop
                                 # Minimum legible size
-                                min_fontsize = 6
+                                min_fontsize = 5
                                 while remaining_text < 0 and current_fontsize > min_fontsize:
-                                    current_fontsize -= 0.5
-                                    # Clear previous attempt (conceptually, we just overwrite on top or we assumed we haven't committed? 
-                                    # insert_textbox commits immediately. 
-                                    # So we should validte size *before* committing or overwrite with white again.
-                                    # PyMuPDF insert_textbox draws immediately.
-                                    # So we need to cover again.
+                                    current_fontsize -= 1.0 # Aggressive step down
+                                    # Clear previous attempt
                                     
                                     shape = page.new_shape()
                                     shape.draw_rect(cover_rect)
@@ -646,7 +705,7 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                     shape.commit()
                                     
                                     remaining_text = page.insert_textbox(
-                                        rect,
+                                        text_rect,
                                         translated_text,
                                         fontsize=current_fontsize,
                                         fontname=font_to_use,

@@ -116,5 +116,70 @@ class TranslationService:
             return x
         
         df_translated = df_normalized.applymap(apply_translation)
+
+        # Step 5: Apply Financial Glossary (Post-Processing)
+        logger.info("Step 5: Applying Financial Glossary...")
+        
+        financial_glossary = {
+            "Untraded liabilities": "Non-current liabilities",
+            "Traded liabilities": "Current liabilities",
+            "Untraded Assets": "Non-current assets",
+            "Traded Assets": "Current assets",
+            "Property Rights": "Equity",
+            "Property rights": "Equity",
+            "TotalProperty": "Total Equity",
+            "Cash is like cash": "Cash and cash equivalents",
+            "WantedTax": "Zakat Payable", 
+            "Dion": "Loans",
+            "Rasalmal": "Capital",
+            "EarningsKeeping": "Retained Earnings",
+            "Allocations": "Provisions",
+            "LiabilitiesContracts": "Lease Liabilities",
+            "Contracts Rents": "Lease Liabilities",
+            "AccountsReceivable": "Trade Receivables",
+            "AccountsPayable": "Trade Payables",
+            "Inventory": "Inventories", 
+            "Stocks": "Inventories",
+            "Financing": "Funding",
+            "Derivative Financial Instruments": "Derivative financial instruments",
+            "Property rights related to Shareholders": "Equity attributable to shareholders",
+            "InvestmentsFishratAssociateShare": "Investments in associates",
+            "InvestmentsViaToolsDebt": "Investments in debt instruments",
+            "Shorthagel Loans": "Short-term loans",
+            "Zakat": "Zakat",
+            "Toms Factory & Equipment": "Property, Plant and Equipment",
+            "AssetsTommedMadinaAkhri": "Other Debit Assets",
+            "AssetsTommedCityExtreme": "Other Assets",
+            "InvestmentShortHall11": "Short-term investments",
+            "NaybalreyesExecutive": "Vice Executive President", 
+            "ReyesBoard": "Chairman of Board",
+            "Dhammamedina Commercial": "Trade Receivables",
+            "Dhamdaineh": "Trade Payables"
+        }
+
+        # Also handle partial matches or keys that might be slightly different in casing
+        glossary_keys = list(financial_glossary.keys())
+
+        def apply_glossary(x):
+            if not isinstance(x, str):
+                return x
+            
+            x_clean = x.strip()
+            
+            # Direct match
+            if x_clean in financial_glossary:
+                return financial_glossary[x_clean]
+            
+            # Case insensitive match
+            for k in glossary_keys:
+                if x_clean.lower() == k.lower():
+                    return financial_glossary[k]
+                # Partial match for some known phrases if exact match failed
+                if k in x_clean and len(x_clean) < len(k) + 5: # Close match
+                     return x_clean.replace(k, financial_glossary[k])
+
+            return x
+
+        df_translated = df_translated.applymap(apply_glossary)
         
         return df_translated
