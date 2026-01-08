@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from services.pdf_translation_service import translate_pdf_with_layout
 from services.rag_service import rag_service
+import pandas as pd
 from utils.validators import validate_pdf
 from utils.file_utils import save_content_to_temp, cleanup_file
 
@@ -89,6 +90,34 @@ async def translate_pdf_endpoint(background_tasks: BackgroundTasks, file: Upload
                 print(f"[STEP] Verified Arabic text saved to: {text_file_path_ar}")
             except Exception as e:
                 print(f"[WARNING] Failed to save verified Arabic text: {e}")
+
+        # 3.1 Save Structured Data (Excel & JSON)
+        segments = stats.get('segments', [])
+        if segments:
+            try:
+                # Excel Export
+                excel_dir = os.path.join(os.getcwd(), "verified_excel_docs")
+                os.makedirs(excel_dir, exist_ok=True)
+                excel_path = os.path.join(excel_dir, f"{doc_id}.xlsx")
+                
+                df = pd.DataFrame(segments)
+                # Reorder columns for better readability if keys exist
+                cols = [c for c in ['page', 'type', 'original', 'translated'] if c in df.columns]
+                df = df[cols]
+                df.to_excel(excel_path, index=False)
+                print(f"[STEP] Verified Excel saved to: {excel_path}")
+
+                # JSON Export
+                json_dir = os.path.join(os.getcwd(), "verified_json_docs")
+                os.makedirs(json_dir, exist_ok=True)
+                json_path = os.path.join(json_dir, f"{doc_id}.json")
+                
+                with open(json_path, 'w', encoding='utf-8') as f:
+                    json.dump(segments, f, indent=2, ensure_ascii=False)
+                print(f"[STEP] Verified JSON saved to: {json_path}")
+            
+            except Exception as e:
+                print(f"[WARNING] Failed to save structured data: {e}")
 
         # 4. Vector Storage (RAG Indexing)
         if full_text:

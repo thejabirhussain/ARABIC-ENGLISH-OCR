@@ -1,0 +1,5294 @@
+[
+  {
+    "page": 1,
+    "type": "body",
+    "original": "ك ;ed",
+    "translated": "K ;ed"
+  },
+  {
+    "page": 1,
+    "type": "body",
+    "original": "ﻛﻴﻤﻴﺎء وﺗﻮاﺻﻞ",
+    "translated": "Chemistry continues."
+  },
+  {
+    "page": 1,
+    "type": "heading",
+    "original": "اﻟﺸﺮﻛﺔ اﻟﺴﻌﻮدﻳﺔ ﻟﻠﺼﻨﺎﻋﺎت اﻷﺳﺎﺳﻴﺔ ( ﺳﺎﺑﻚ )",
+    "translated": "Saudi Basic Industries Company ( SABIC )"
+  },
+  {
+    "page": 1,
+    "type": "small",
+    "original": "( ﺷﺮﻛﺔ ﻣﺴﺎﻫﻤﺔ ﺳﻌﻮدﻳﺔ )",
+    "translated": "(Saudi Joint Stock Company)"
+  },
+  {
+    "page": 1,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "Consolidated Annual Financial Statements"
+  },
+  {
+    "page": 1,
+    "type": "small",
+    "original": "ﻟﻠﺴﻨﺔ اﻟﻤﻨﺘﻬﻴﺔ ﻓﻲ ١٣ دﻳﺴﻤﺒﺮ",
+    "translated": "for the year ending December 13"
+  },
+  {
+    "page": 1,
+    "type": "small",
+    "original": "وﺗﻘﺮﻳﺮ اﻟﻤﺮاﺟﻊ اﻟﻤﺴﺘﻘﻞ ٤٢٠٢",
+    "translated": "Independent Auditor Report 4202"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٠٢٤",
+    "translated": "2024"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح",
+    "translated": "Explain."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "As of 31 December"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲ٣١دﻳﺴﻤﺒﺮ إﻳﻀﺎح ٢٠٢٤ ٢٠٢٣",
+    "translated": "As of 31 December 2024 2023"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔواﻟﻤﻄﻠﻮﺑﺎت",
+    "translated": "Property Rights and Liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﻤﻮﺟﻮدات",
+    "translated": "Assets"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٣٠٬٠٠٠٬٠٠٠",
+    "translated": "30,000,000"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٣٠٬٠٠٠٬٠٠٠",
+    "translated": "30,000,000"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔ",
+    "translated": "Equity"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ا �ﻟﻤﻮﺟﻮداتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔ ١١٢٬٥٨٠٬٥٧٥ ١١٥٬١٢٢٬٥۷٩",
+    "translated": "Non-current assets 112,580,575 115,122,579"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١١٠٬۸۸٩٬٠٣٢",
+    "translated": "110,889,032"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١١٠٬٨٨٩٬٠٣٢",
+    "translated": "110,889,032"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۱۹",
+    "translated": "19"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "رأساﻟﻤﺎل",
+    "translated": "Capital"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻤﺘﻠ توﻣﺼﺎﻧﻊوﻣﻌﺪات ۷ ٤٬٨٣٥٬٥٤٣ ٥٬٥۷۸٬٥۷٢",
+    "translated": "Toms Factory & Equipment 7 4,835,543 5,578,572"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "(١٬٥۷٦٬٥٥۷)",
+    "translated": "(1,576,557)"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "(٤٬١١٢٬٤٧٥)",
+    "translated": "(4,112,475)"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۰",
+    "translated": "20"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺣﺘﻴﺎﻃﻲﻋﺎم",
+    "translated": "General Reserve"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتﺣﻖاﻻﺳﺘﺨﺪام ۸ ١٩٬١٤١٬٦٣٣ ١٩٬۷٦٣٬٠٠٩",
+    "translated": "AssetsUse 8 19,141,633 19,763,009"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢۸٬١١٦٬١٣٩",
+    "translated": "28,116,139"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۰",
+    "translated": "20"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺣﺘﻴﺎﻃﻴﺎتأﺧﺮى",
+    "translated": "Other Reserves"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتﻏﻴﺮﻣﻠﻤﻮﺳﺔ ۹",
+    "translated": "AvailableTabled Change9"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٠٬٠٥٦٬٥٧٦",
+    "translated": "20,056,576"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "أرﺑﺎحﻣﺒﻘﺎة",
+    "translated": "Retained Earnings"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺳﺘﺜﻤﺎراتﻓﻲﺷﺮ�تزﻣﻴﻠﺔوﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔ ۱۰ ٣٥٬٤٣٥٬٧٨٥ ٤١٬٢٣۷٬٣٠١",
+    "translated": "InvestmentFishratAssociateShare 10 35,435,785 41,237,301"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٦۷٬٤٢۸٬٦١٤",
+    "translated": "167,428,614"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٥٦٬٨٣٣٬١٣٣",
+    "translated": "156,833,133"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔاﻟﻤﺘﻌﻠﻘﺔﺑﻤﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔاﻷم",
+    "translated": "Equity attributable to shareholders"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺳﺘﺜﻤﺎراتﻓﻲأدواتاﻟﺪﻳﻦ ۱۱ ٣٣٢٬٤٥٨ ٣٣٢٬٤٥۸",
+    "translated": "InvestmentsViaToolsDebt 11 332,458 332,438"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢۷٬۸٥٣٬٩٢٦",
+    "translated": "27,853,926"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٧٬٠٨٥٬٠٢٦",
+    "translated": "27,085,026"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۱",
+    "translated": "21"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔﻏﻴﺮاﻟﻤﺴﻴﻄﺮة",
+    "translated": "Uncontrolled property rights"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺳﺘﺜﻤﺎراتﻓﻲأدواتﺣﻘﻮقاﻟﻤﻠﻜﻴﺔ ۱۲ ٢٥٣٬٤٠٢ ٢٣٦٬٤۸٥",
+    "translated": "InvestmentsInstrumentsProperty 12 253,402 236,485"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٩٥٬٢۸٢٬٥٤٠",
+    "translated": "195,282,540"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٨٣٬٩١٨٬١٥٩",
+    "translated": "183,918,159"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲﺣﻘﻮقاﻟﻤﻠﻜﻴﺔ",
+    "translated": "Total Equity"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتﺿﺮﻳﺒﺔﻣﺆﺟﻠﺔ ۳۱ ٢٬٣٦٥٬٦٠٩ ١٬۷٤٩٬٢۸٦",
+    "translated": "AvailableUpdate31 2,365,609 1,749,286"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "أدواتﻣﺎﻟﻴﺔﻣﺸﺘﻘﺔ ۱۳ ٣٬٦٦٩٬٦٨٨ ٣٬۷٤٥٬١۷٦",
+    "translated": "Derivatives 13 3,669,688 3,745,176"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﻤﻄﻠﻮﺑﺎتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔ",
+    "translated": "Non-current liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتوذﻣﻢﻣﺪﻳﻨﺔأﺧﺮى ۱٤ ٤٣٬٢٠٠٢٬٨ ٦٦٢٬١١٠٦٬",
+    "translated": "AssetsTommedMadinaAkhri 14 43,2002,8 662,1106,"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٣٬٢٥٥٬١۷٩",
+    "translated": "23,255,179"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٦٬١٦٥٬٠٨٦",
+    "translated": "26,165,086"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۲",
+    "translated": "22"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "دﻳﻮن",
+    "translated": "Loans"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻮﺟﻮداتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔ ٢٧٩٤٬٣٦٦٬١٨ ٢١٣٬٦۷۷٬١٩٣",
+    "translated": "Total Untraded Assets 2794,366,18 213,677,193"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٬٦٢٢٬٤٥٩",
+    "translated": "4,622,459"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٣٬٩٨٣٬٩٦٠",
+    "translated": "3,983,960"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۲",
+    "translated": "22"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﺘﺰاﻣﺎتﻋﻘﻮدإﻳﺠﺎر",
+    "translated": "Lease Liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٢٬۸٩٤٬٣٩٢",
+    "translated": "12,894,392"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٣٬٥٠٧٬٠١٠",
+    "translated": "13,507,010"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۳",
+    "translated": "23"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻨﺎﻓﻊاﻟﻤﻮﻇﻔﻴﻦ",
+    "translated": "Employee Benefits"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﻤﻮﺟﻮداتاﻟﻤﺘﺪاوﻟﺔ",
+    "translated": "Current Assets"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٤٩٬٤١۸",
+    "translated": "249,418"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٨٥٬١١٦",
+    "translated": "285,116"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۱۳",
+    "translated": "13"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻄﻠﻮﺑﺎتﺿﺮﻳﺒﺔﻣﺆﺟﻠﺔ",
+    "translated": "Zakat Payable"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﺨﺰون ٦۱ ١٨٥٬٣١٨٬٨١ ٣٢٢٬٢٣٣٬۸١",
+    "translated": "Stock 61 185,318,81 322,233,81"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٤١٬١١٠٬٢",
+    "translated": "441,110,2"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٩٨٬٥٧٩٬١",
+    "translated": "498,579,1"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۳۱",
+    "translated": "31"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "أدواتﻣﺎﻟﻴﺔﻣﺸﺘﻘﺔ",
+    "translated": "Derivative financial instruments"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ذﻣﻢﻣﺪﻳﻨﺔﺗﺠﺎرﻳﺔ ۷۱ ٣٢٨٬٩٣٤٬٠٢ ٤۷٣٬٥٩٢٬٩١",
+    "translated": "Tel: 971 328 934 02 473,592,91"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٩۸٤٬٠٩٠٬١",
+    "translated": "984,090,1"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥٦٥٬٠٧٨",
+    "translated": "565,078"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤۲",
+    "translated": "42"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﺨﺼﺼﺎت",
+    "translated": "Provisions"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتوذﻣﻢﻣﺪﻳﻨﺔأﺧﺮى ٤۱ ٢٦٣٬٨٩٢٬٠١ ٥٥١٬٥٩٢٬٥",
+    "translated": "AssetsTommedCityExtreme 41 263,892,01 551,592,5"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٠٤٩٬۸٠٦٬١",
+    "translated": "049,806,1"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٩٤٢٬٥٠٬٦١",
+    "translated": "942,50,61"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥۲",
+    "translated": "52"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻄﻠﻮﺑﺎتأﺧﺮى",
+    "translated": "Other."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﺳﺘﺜﻤﺎراتﻗﺼﻴﺮةاﻷﺟﻞ ۱۱ ٧٠٨٬٨٦٦٬٧ ۷١٦٬٢٤۸٬٩",
+    "translated": "InvestmentShortHall11 708,866,7 716,248.9"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٦٬٢٩۷٬٥٤٥",
+    "translated": "46,297,545"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٨٬٧١٩٬٣٤٦",
+    "translated": "48,719,346"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻄﻠﻮﺑﺎتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔ",
+    "translated": "TotalUntraded Liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻧﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔ ۱۸ ٣٠٬٥٣٩٬٦٦٨ ٣٢٬٤١٤٬٩٩٦",
+    "translated": "Cash isSemi-Cash 18 30,539,668 32,414,996"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٨٧٬٧٦٠٬٢٤١ ۸٥٬١۸٠٬٣٦٥",
+    "translated": "87,760,241 85,180,365"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٬٤١٤٬٢٣٣",
+    "translated": "2,414,233"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٬٠٨٠٬٩٢٢",
+    "translated": "2,080,922"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﻤﻄﻠﻮﺑﺎتاﻟﻤﺘﺪاوﻟﺔ",
+    "translated": "Current liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ ٤۳۳٥و ٥٢٦٣٬٢٦٣٬ ٤٥٩٬٣٢٤٬٥١",
+    "translated": "AssetsFor Sale 4335, 5263,263, 459,324,51"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٥٣٬١٠٣٢٬",
+    "translated": "453,1032,"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٦٩٬٩٢٢٢٬٠",
+    "translated": "69,9222,0"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۲",
+    "translated": "22"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻗﺮوضﻗﺼﻴﺮةاﻷﺟﻞ",
+    "translated": "Short-term loans"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻮﺟﻮداتاﻟﻤﺘﺪاوﻟﺔ ٦٦٨٬٣٣٨٬١٩ ٩٣١٬٤٠٦٬٠٠١",
+    "translated": "Total Active Assets 668,338,19 931,406,001"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٦٣٬٣٠٩",
+    "translated": "263,309"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥٠١٥٬٤٩",
+    "translated": "5015,49"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۲",
+    "translated": "22"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﺠﺰءاﻟﻤﺘﺪاولﻣﻦاﻟﺪﻳﻮن",
+    "translated": "Part of the debt"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻮﺟﻮدات ٢٧٨٬٠١٨٬٧٩٣ ٢٩٤٬٣۸٠٬٤٥١",
+    "translated": "Total Assets 278,018,793 294,380,451"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٠٬٠۸۷٬٠١٦",
+    "translated": "20,087,016"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٩٬٧٩٣٬٦٠٤",
+    "translated": "19,793,604"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲۲",
+    "translated": "22"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "اﻟﺠﺰءاﻟﻤﺘﺪاولﻣﻦاﻟﺘﺰاﻣﺎتﻋﻘﻮدإﻳﺠﺎر",
+    "translated": "Part of obligationsContracts Rents"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٬١۷٥٬٩٦٢",
+    "translated": "1,175,962"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٣٧٬٢٤٨",
+    "translated": "137,248"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲٦",
+    "translated": "26"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ذﻣﻢداﺋﻨﺔﺗﺠﺎرﻳﺔ",
+    "translated": "Trade Payables"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١۸٬١٩۸٬٣٤٩",
+    "translated": "18,198,349"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٩٬٦٩٥٬٩٩٩",
+    "translated": "19,695,999"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲٤",
+    "translated": "24"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﺨﺼﺼﺎت",
+    "translated": "Provisions"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٦٠٤٬٣٠٢",
+    "translated": "604,302"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥٨٧٬٠٧٥",
+    "translated": "587,075"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۲٥",
+    "translated": "25"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻄﻠﻮﺑﺎتأﺧﺮى",
+    "translated": "Other."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١٬٤١٤٬۷١۸",
+    "translated": "1,414,718"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "١١٨٬٣٣٩",
+    "translated": "118,339"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۳۱",
+    "translated": "31"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺿﺮﻳﺒﺔدﺧﻞﻣﺴﺘﺤﻘﺔ",
+    "translated": "His tax return is due."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤۷٬٠٩٩٬٤۷٦",
+    "translated": "47,099,476"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٥٬٣٨١٬٢٨٨",
+    "translated": "45,381,288"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "۳۱",
+    "translated": "31"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ز�ةﻣﺴﺘﺤﻘﺔ",
+    "translated": "Zehmreka"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥٬۷٠٠٬۸٩٠",
+    "translated": "5,700,890"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٥٢٬۸٠٠٬٣٦٦",
+    "translated": "52,800,366"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤٥٬٣٨١٬٢٨٨",
+    "translated": "45,381,288"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٤۳۳٥و",
+    "translated": "4335W"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻣﻄﻠﻮﺑﺎتﻣﺮﺗﺒﻄﺔﻣﺒﺎﺷﺮةﺑﻤﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ",
+    "translated": "Obliged to direct assets held for sale"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﻧﺎﺋﺐاﻟﺮﺋﻴﺲاﻟﺘﻨﻔﻴﺬيﻟﻠﻤﺎﻟﻴﺔ اﻟﺮﺋﻴﺲاﻟﺘﻨﻔﻴﺬي رﺋﻴﺲﻣﺠﻠﺲاﻹدارة",
+    "translated": "NaibalreyesExecutiveFinancialReyesExecutiveReyesBoard of Directors"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٩٩٬٠٩۷٬٩١١",
+    "translated": "99,097,911"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٩٤٬١٠٠٬٦٣٤",
+    "translated": "94,100,634"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻄﻠﻮﺑﺎتاﻟﻤﺘﺪاوﻟﺔ",
+    "translated": "Total LiabilitiesTrading"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": ". ﺟﺰءاًًاًً",
+    "translated": "Part."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٩٤٬٣۸٠٬٤٥١",
+    "translated": "294,380,451"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "٢٧٨٬٠١٨٬٧٩٣",
+    "translated": "278,018,793"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﻤﻄﻠﻮﺑﺎت",
+    "translated": "Total Liabilities"
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "ﺗﻌﺘﺒﺮاﻹﻳﻀﺎﺣﺎتاﻟﻤﺮﻓﻘﺔﻣﻦ١إﱃ٤٢ ﻻﻳﺘﺠﺰأﻣﻦﻫﺬهاﻟﻘﻮاﺋﻢاﻟﻤﺎﻟﻴﺔاﻟﻤﻮﺣﺪة",
+    "translated": "The facility's 1 to 42 is beyond the reach of this unified financial force."
+  },
+  {
+    "page": 2,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲﺣﻘﻮقاﻟﻤﻠﻜﻴﺔواﻟﻤﻄﻠﻮﺑﺎت",
+    "translated": "TotalProperty and Liabilities"
+  },
+  {
+    "page": 2,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ٩",
+    "translated": "SABK 9 4202 Consolidated Annual Financial Statements"
+  },
+  {
+    "page": 2,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﻤﺮﻛﺰ اﻟﻤﺎﻟﻲ اﻟﻤﻮﺣﺪة",
+    "translated": "Consolidated financial position list"
+  },
+  {
+    "page": 2,
+    "type": "small",
+    "original": "ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻتاﻟﺴﻌﻮدﻳﺔﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi RiyalsOther"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٠٢٤",
+    "translated": "2024"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح",
+    "translated": "Explain."
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞ: ﻣﻦاﻟﻌﻤﻠﻴﺎتاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Net income: from ongoing operations"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "١٬٣٠٤٬٦٥٧",
+    "translated": "1,304,657"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٬٠٩٥٬٩٢٨",
+    "translated": "2,095,928"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻟﻤﺘﻌﻠﻖ• ﺑـ",
+    "translated": "Related to B"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٬٣٨٨٬٠٠٥",
+    "translated": "2,388,005"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٬١٨٤٬٥٩٣",
+    "translated": "2,184,593"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "•ﻣﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔاﻷم",
+    "translated": "Shareholders"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔﻏﻴﺮاﻟﻤﺴﻴﻄﺮة",
+    "translated": "Uncontrolled property rights"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٬٦٩٢٬٦٦٢",
+    "translated": "3,692,662"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٤٬٢٨٠٬٥٢١",
+    "translated": "4,280,521"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(",
+    "translated": "Net income (loss)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻟﻤﺘﻌﻠﻖﺑـ:",
+    "translated": "Crab:"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٢٨٢٬٢٧٧٬٢(",
+    "translated": ")282,277,2("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٤٬٥٨٣٬٥١",
+    "translated": "24,583,51"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "•ﻣﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔاﻷم",
+    "translated": "Shareholders"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٥٠٠٬٨٨٣٬٢",
+    "translated": "500,883,2"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٩٥٬٤٨١٬٢",
+    "translated": "395,481,2"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "•ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔﻏﻴﺮاﻟﻤﺴﻴﻄﺮة",
+    "translated": "Rights of non-controlling ownership"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٧٧٢٬٤٨٣(",
+    "translated": ")772,483("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٥٣١٬٣٢٧٬٣",
+    "translated": "531,327,3"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "رﺑﺤﻴﺔاﻟﺴﻬﻢاﻷﺳﺎﺳﻴﺔواﻟﻤﺨّّﻔّّﻔﻀﺔﻣﻦﺻﺎﻓﻲ",
+    "translated": "It's not worth it."
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(اﻟﻤﺘﻌﻠﻖﺑﻤﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔ",
+    "translated": "Income (Loss) Related to Company Shareholders"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٢",
+    "translated": "32"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻷم)ﺑﺎﻟﺮﻳﺎلاﻟﺴﻌﻮدي(",
+    "translated": "Mother (in Saudi Rial)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠٬٤٣",
+    "translated": "0,43"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠٬٧٠",
+    "translated": "0,70"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "•ﺻﺎﻓﻲاﻟﺪﺧﻞﻣﻦاﻟﻌﻤﻠﻴﺎتاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Net income from ongoing operations"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٠٬٩٢)",
+    "translated": "(0,92)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠٬٥١",
+    "translated": "0,51"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "•ﺻﺎﻓﻲاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(",
+    "translated": "Net Income (Loss)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "١٤١٬٥٣٧٬١٨٧٢٠٢٣",
+    "translated": "141,537,1872023"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "١٣٩٬٩٨٠٬٥٠٠٢٠٢٤",
+    "translated": "139,980,5002024"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎ٢٧ح",
+    "translated": "Also 27h"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(١١٩٬٤٦٣٬١٠٥)",
+    "translated": "(119,463,105)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(١١٤٬٣٥٦٬٧٣٢)",
+    "translated": "(114,356,732)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٨",
+    "translated": "28"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "�إﻳﺮادات",
+    "translated": "Revenue"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٢٬٠٧٤٬٠٨٢",
+    "translated": "22,074,082"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٥٬٦٢٣٬٧٦٨",
+    "translated": "25,623,768"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺗ ﻟﻴﻒﻣﺒﻴﻌﺎت",
+    "translated": "TelefSales"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲاﻟﺮﺑﺢ",
+    "translated": "Total Profit"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٩٬١١٩٬٩٩٥)",
+    "translated": "(9,119,995)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٩٬٩٠٩٬١٤٦)",
+    "translated": "(9,909,146)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٢٨",
+    "translated": "28"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﺼﺎرﻳﻒﻋﻤﻮﻣﻴﺔوإدارﻳﺔ",
+    "translated": "ExpensesGeneral"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٥٨٠٬٣٩٨٬١(",
+    "translated": ")580,398,1("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٨٦٬١٣٠٦٬٢(",
+    "translated": ")86,1306,2("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٨٢",
+    "translated": "82"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﺼﺎرﻳﻒأﺑﺤﺎثوﺗﻄﻮﻳﺮ",
+    "translated": "ExpensesResearch and Development"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")١٢٩٬١٥٧٬٧(",
+    "translated": ")129,157,7("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٧٨٠٦٬١٬٤٨(",
+    "translated": ")7806,1,48("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٨٢",
+    "translated": "82"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﺼﺎرﻳﻒﺑﻴﻊوﺗﻮزﻳﻊ",
+    "translated": "ExpensesSale"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٩٥٤٬١٣٩",
+    "translated": "954,139"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٨٥٬١٥٦٧",
+    "translated": "85,1567"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠١",
+    "translated": "01"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻧﺘﺎﺋﺞﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔﺗ�ﻣﻠﻴﺔ",
+    "translated": "Ntayjmshari"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٠٬٣٧٣٬٢١",
+    "translated": "30,373,21"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٥٧٠٬٠٦٣٬١",
+    "translated": "570,063,1"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٩٢",
+    "translated": "92"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "إﻳﺮاداتﺗﺸﻐﻴﻠﻴﺔأﺧﺮى",
+    "translated": "I'll bet."
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٩)٥٤٬٧٥٧٬(١",
+    "translated": "9)54,757,(1"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")١٠٬٥٢٢٬٦١(",
+    "translated": ")10,522,61("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٩٢",
+    "translated": "92"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﺼﺎرﻳﻒﺗﺸﻐﻴﻠﻴﺔأﺧﺮى",
+    "translated": "Operating Expenses"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٬٧٢٠٬٣٩٣",
+    "translated": "3,720,393"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٥٬٧٣٧٬٣٧٩",
+    "translated": "5,737,379"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻟﺪﺧﻞﻣﻦاﻟﻌﻤﻠﻴﺎت",
+    "translated": "Operations Income"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٧٥٤٬٨٠٢(",
+    "translated": ")754,802("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٤٣٦٬٤٣٤(",
+    "translated": ")436,434("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠١",
+    "translated": "01"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻧﺘﺎﺋﺞﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔﻏﻴﺮﺗ�ﻣﻠﻴﺔوﺷﺮ�تزﻣﻴﻠﺔ*",
+    "translated": "sync, corrected by elderman"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٨٢٣٬٦٢٦٬٣",
+    "translated": "823,626,3"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "١٧٩٬٣٣٩٬١",
+    "translated": "179,339,1"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠٣",
+    "translated": "03"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "دﺧﻞﺗﻤﻮﻳﻞ",
+    "translated": "IncomeFund"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٠٥٦٬٤١٦٬٢(",
+    "translated": ")056,416,2("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": ")٧٩٢٬٠٢٨٬٢(",
+    "translated": ")792,028,2("
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٠٣",
+    "translated": "03"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺗ�ﻔﺔﺗﻤﻮﻳﻞ",
+    "translated": "Tafah"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٬٦١٤٤٬٥٢",
+    "translated": "3,6144,52"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٩٤٬٤١٦٬٤١",
+    "translated": "94,416,41"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "اﻟﺪﺧﻞﻗﺒﻞاﻟﺰ�ةوﺿﺮﻳﺒﺔاﻟﺪﺧﻞ",
+    "translated": "Income before income tax"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(١٬٢٦٩٬١٦٠)",
+    "translated": "(1,269,160)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٢١٣٬٨٢٧)",
+    "translated": "(213,827)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣١",
+    "translated": "31"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﺼﺮوفاﻟﺰ�ة",
+    "translated": "Misrl"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٤٣٨٬٢٠٨",
+    "translated": "438,208"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٧٧٬٩٢٩",
+    "translated": "77,929"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣١",
+    "translated": "31"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﻣﻨﺎﻓﻊﺿﺮﻳﺒﺔاﻟﺪﺧﻞ",
+    "translated": "Income Tax Benefits"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٬٦٩٢٬٦٦٢",
+    "translated": "3,692,662"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٤٬٢٨٠٬٥٢١",
+    "translated": "4,280,521"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞﻣﻦاﻟﻌﻤﻠﻴﺎتاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Net income from ongoing operations."
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٤٬٠٧٦٬٩٣٩)",
+    "translated": "(4,076,939)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٥٥٧٬٣٨٦)",
+    "translated": "(557,386)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٤",
+    "translated": "34"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺨﺴﺎرةﻣﻦاﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Net loss is a non-continuous process."
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "(٣٨٤٬٢٧٧)",
+    "translated": "(384,277)"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "٣٬٧٢٣٬١٣٥",
+    "translated": "3,723,135"
+  },
+  {
+    "page": 3,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(",
+    "translated": "Net income (loss)"
+  },
+  {
+    "page": 3,
+    "type": "body",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ٠١",
+    "translated": "SABK Consolidated Annual Financial Statements 01 4202"
+  },
+  {
+    "page": 3,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﺪﺧﻞ اﻟﻤﻮﺣﺪة ȼ ﻓﺔاﻟﻤﺒﺎﻟﻎﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ",
+    "translated": "Consolidated Income List  Amounts in Thousands of Saudi Riyals MalmirdOther"
+  },
+  {
+    "page": 3,
+    "type": "body",
+    "original": "رﺋﻴﺲ ﻣﺠﻠﺲ اﻹدارة",
+    "translated": "Chairman of the Governing Council"
+  },
+  {
+    "page": 3,
+    "type": "body",
+    "original": "ﻧﺎﺋﺐ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي ﻟﻠﻤﺎﻟﻴﺔ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي",
+    "translated": "Executive Vice President of Finance"
+  },
+  {
+    "page": 3,
+    "type": "body",
+    "original": ". ﺗﻌﺘﺒﺮ اﻹﻳﻀﺎﺣﺎت اﻟﻤﺮﻓﻘﺔ ﻣﻦ ١ إﻰﻟ ٢٤ ﺟﺰءً ًا ًً اًً ﻻ ﻳﺘﺠﺰأ ﻣﻦ ﻫﺬه اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "The accompanying disclosures of 1 to 24 are an integral part of these consolidated financial statements."
+  },
+  {
+    "page": 3,
+    "type": "body",
+    "original": "* ﺗﺘﻀﻤﻦ ﺧﺴﺎﺋﺮ اﻧﺨﻔﺎض ﻓﻲ اﻟﻘﻴﻤﺔ ﺑﻤﺒﻠﻎ ٧٨٣٬١ ﻣﻠﻴﻮن رﻳﺎل ﺳﻌﻮدي ( ٣٢٠٢ : ٨٩٣ ﻣﻠﻴﻮن رﻳﺎل ﺳﻌﻮدي .)",
+    "translated": "*Includes impairment losses of SAR 783.1 million (SAR 893 million)."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠٢٤",
+    "translated": "2024"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴ )ﻦاﻟﻤﻨﺘﻬ(ﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "The year ended on December 31st."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲ :اﻟﺨﺴﺎرة اﻟﺪﺧﻞاﻟﺸﺎﻣﻠﺔ",
+    "translated": "Total:Income Total Loss"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٢٬٤١۷٬٦۸٤)",
+    "translated": "(2,417,684)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٣٩٥٬٤٨١)",
+    "translated": "(395,481)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•اﻟﻤﺘﻌﻠﻘﺔﺑـﻣﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔاﻷم",
+    "translated": "Company Shareholders"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠۸٬۷۷٤٬٢",
+    "translated": "208,774,2"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٨٩١٬٨١٢٬٢",
+    "translated": "891,812,2"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•ﺣﻘﻮقاﻟﻤﻠﻜﻴﺔﻏﻴﺮاﻟﻤﺴﻴﻄﺮة",
+    "translated": "Rights of non-controlling ownership"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٤٢٥٬۹٥",
+    "translated": "425,95"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٧٣٬٤٣٢٨٬١",
+    "translated": "73,4328,1"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•إﺟﻤﺎﻟﻲاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(اﻟﺸﺎﻣﻞاﻟﻌﺎﺋﺪإﱃﻣﺴﺎﻫﻤﻲاﻟﺸﺮﻛﺔاﻷم",
+    "translated": "Total Income (Loss) (All)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٣٦٢٬۹۹۷٬١",
+    "translated": "362,997,1"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٠٣٩٬٢٧",
+    "translated": "039,27"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•اﻟﻌﻤﻠﻴﺎتاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Continuous Operations"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": ")۷٤۹٦٬١٢٬٤(",
+    "translated": ")7496,12,4("
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": ")١١٤٬٨٦(٤",
+    "translated": ")114,86(4"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "اﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Operation Incontinuous"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٢٬٤١۷٬٦۸٤)",
+    "translated": "(2,417,684)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٣٩٥٬٤٨١)",
+    "translated": "(395,481)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠٢٣(٣۸٤٬٢۷۷)",
+    "translated": "2023(384,277)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠٢٤٣٬٧٢٣٬١٣٥",
+    "translated": "20243,723,135"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح",
+    "translated": "Explain."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(",
+    "translated": "Net income (loss)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "اﻟﺪﺧﻞاﻟﺸﺎﻣﻞاﻵﺧﺮ ًً ًً",
+    "translated": "Al Shamalalal"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٥٥٥٬٦۷٢)",
+    "translated": "(555,672)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٣٢٣٬١٥٢",
+    "translated": "323,152"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۲۳",
+    "translated": "23"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﺑﻨﻮد•ﻟرﺑﻦﺢﻳ)ﻌﺎﺧدﺴﺗﺎﺼرةﻨ(ﻴإﻔﻋﻬﺎﺎدةﻻﻗﺣﻴﻘﺎﻘﺎسإﱃﺑﺮاﻣﻗﺎﺞﺋاﻟﻤﺔﻤﻨاﺎﻟﻓﺪﻊﺧاﻟﻞﻤاﻟﺤﺪﻤدﻮةﺣﺪة",
+    "translated": "sync, corrected by elderman"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•اﻟﺤﺼﺔﻓﻲﺑﻨﻮد)اﻟﺨﺴﺎرة(اﻟﺮﺑﺢاﻟﺸﺎﻣﻠﺔاﻷﺧﺮى",
+    "translated": "Share in items (Loss) All-Inclusive Profit"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "١٢۸٬٥٠١",
+    "translated": "128,501"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(١٣٥٬٠٩٩)",
+    "translated": "(135,099)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۱۲و۱۰",
+    "translated": "12 and 10."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﻟﻠﺸﺮ�تاﻟﺰﻣﻴﻠﺔواﻟﻤﺸﺎرﻳﻊاﻟﻤﺸﺘﺮﻛﺔ",
+    "translated": "The Associate 's Chart"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•ﺻﺎﻓﻲاﻟﺘﻐﻴﺮﻓﻲإﻋﺎدةﺗﻘﻮﻳﻢاﻻﺳﺘﺜﻤﺎراتﻓﻲ",
+    "translated": "Net change in revaluation of investments in"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٢٬٣۸٤)",
+    "translated": "(2,384)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(١٩٬٢٩٧)",
+    "translated": "(19,297)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "أدواتﺣﻘﻮقاﻟﻤﻠﻜﻴﺔاﻟﻤﺪرﺟﺔﺑﺎﻟﻘﻴﻤﺔاﻟﻌﺎدﻟﺔﻣﻦ",
+    "translated": "Property rights listed at fair value."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٥٬۹٢٥",
+    "translated": "5,925"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٣٦٬٧٩٤",
+    "translated": "36,794"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۲۰",
+    "translated": "20"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•ﺧﻼلاﻟﺪﺧﻞاﻟﺸﺎﻣﻞاﻵﺧﺮ",
+    "translated": "During the whole other"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٤٢٣٬٦٣٠)",
+    "translated": "(423,630)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٢٠٥٬٥٥٠",
+    "translated": "205,550"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۳۱",
+    "translated": "31"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﻣﻨﺎﻓﻊﺿﺮﻳﺒﻴﺔ",
+    "translated": "Tax benefits."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٥٣۸٬٤٢٣",
+    "translated": "538,423"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(١٬٢٥٥٬٩٨١)",
+    "translated": "(1,255,981)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "• ﺑﻨﻮدﺳﻴﻌﺎدﺗﺼﻨﻴﻔﻬﺎﻻﺣًﻘﺎًﺎًإﱃﻗﺎﺋﻤﺔاﻟﺪﺧﻞاﻟﻤﻮﺣﺪة",
+    "translated": "Items will later be reclassified as Unified Income"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۲۰",
+    "translated": "20"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "•ﻓﺮوﻗﺎتﺗﺤﻮﻳﻞاﻟﻌﻤﻼت) (",
+    "translated": "Currency Transfer Differences ("
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "٣٢۹٬٠٠۸",
+    "translated": "329,008"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٨٤٧٬١٥٦)",
+    "translated": "(847,156)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "اﻟﺤﺼﺔﻓﻲ�ﺑﻨﻮد اﻟﺨﺴﺎرة اﻟﺮﺑﺢاﻟﺸﺎﻣﻠ ﺔاﻷﺧﺮى",
+    "translated": "The stakes in the loss items, the all-inclusive gain."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۸٦۷٬٤٣١",
+    "translated": "867,431"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "(٢٬١٠٣٬١٣٧)",
+    "translated": "(2,103,137)"
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "۱۲و۱۰",
+    "translated": "12 and 10."
+  },
+  {
+    "page": 4,
+    "type": "table_cell",
+    "original": "ﻟﻠﺸﺮ تاﻟﺰﻣﻴﻠﺔواﻟﻤﺸﺎرﻳﻊاﻟﻤﺸﺘﺮﻛﺔ",
+    "translated": "Evil is common."
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ١١",
+    "translated": "SABK Consolidated Annual Financial Statements 11 4202"
+  },
+  {
+    "page": 4,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﺪﺧﻞ اﻟﺸﺎﻣﻞ اﻟﻤﻮﺣﺪة",
+    "translated": "Consolidated Comprehensive Income Statement"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "ȼ ﻓﺔاﻟﻤﺒﺎﻟﻎﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals Malmird Otherwise"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "رﺋﻴﺲ ﻣﺠﻠﺲ اﻹدارة",
+    "translated": "Chairman of the Governing Council"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "اﻟﺤﺼﺔ ﻓﻲ ﺑﻨﻮد اﻟﺨﺴﺎرة اﻟﺸﺎﻣﻠﺔ اﻷﺧﺮى ﻟﻠﺸﺮ ȼ ت",
+    "translated": "Share in other comprehensive loss items for evil  C"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "اﻟﺰﻣﻴﻠﺔ واﻟﻤﺸﺎرﻳﻊ اﻟﻤﺸﺘﺮﻛﺔ",
+    "translated": "Associates and Joint Ventures"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "ﻧﺎﺋﺐ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي ﻟﻠﻤﺎﻟﻴﺔ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي",
+    "translated": "Executive Vice President of Finance"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": ". ﺗﻌﺘﺒﺮ اﻹﻳﻀﺎﺣﺎت اﻟﻤﺮﻓﻘﺔ ﻣﻦ ١ إﻰﻟ ٢٤ ﺟﺰءً ًا ًً اًً ﻻ ﻳﺘﺠﺰأ ﻣﻦ ﻫﺬه اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "The accompanying disclosures of 1 to 24 are an integral part of these consolidated financial statements."
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "ﺻﺎﻓﻲ اﻟﺤﺮﻛﺔ ﻓﻲ ﺑﻨﻮد اﻟﺪﺧﻞ اﻟﺸﺎﻣﻞ اﻵﺧ ﺮ",
+    "translated": "Net movement in other comprehensive income items"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "إﺟﻤﺎﻟﻲ اﻟﺪﺧﻞ اﻟﺸﺎﻣ ﻞ",
+    "translated": "Total Gross Income for"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "إﻋﺎدة ﺗﺼﻨﻴﻒ اﻟﺪﺧﻞ اﻟﺸﺎﻣﻞ اﻻﺧﺮ اﻟﻤﺘﻌﻠﻖ ﺑﺎﻟﻌﻤﻠﻴﺔ ﻏﻴﺮ",
+    "translated": "Reclassification of other comprehensive income related to the non-current operation"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "اﻟﻤﺴﺘﻤﺮة",
+    "translated": "Continuous"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "()۱۱۱٬۲ ()۱۱۱٬۲",
+    "translated": "(i) (ii)"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "()۸۹٦٬۹۹۸٬۱",
+    "translated": "()6"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "٬۳٤٤۸۱۰",
+    "translated": "44"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "٥۹٤۲٥٬",
+    "translated": "545"
+  },
+  {
+    "page": 4,
+    "type": "body",
+    "original": "۳٤",
+    "translated": "4"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﻟﻤﻠﻜﻴ٢١۷٬٦١۷٬٢٥۹ﺔ",
+    "translated": "Royal217,617,259"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﻟﻤﺴﻴﻄﺮ٣١٬٥۷٠٬۹٦١ة",
+    "translated": "Dominator31,570,961E"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﻹﺟﻤﺎﻟ١۸٦٬٠٤٦٬٢۹۸ﻲ",
+    "translated": "Total186,046,298"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "أرﺑﺎح٣٢٬٠۸۸٬٤٢١ﻣﺒﻘﺎة",
+    "translated": "Profit32,088,421"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﺣﺘﻴﺎﻃﺎت(١٬۹٣١٬١٥٥)أﺧﺮى",
+    "translated": "Precautions(1,931,155)Other"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﺣﺘﻴﺎﻃﻲ١١٠٬۸۸۹٬٠٣٢ﻋﺎم",
+    "translated": "Reserve110,889,032 years"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﺣﺘﻴﺎﻃﻲ١٥٬٠٠٠٬٠٠٠ﻧﻈﺎﻣﻲ",
+    "translated": "Reserve15,000,000regular"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "رأس٣٠٬٠٠٠٬٠٠٠اﻟﻤﺎل",
+    "translated": "Ras30,000,000Money"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح",
+    "translated": "Explain."
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٣۸٤٬٢۷۷)",
+    "translated": "(384,277)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٬٣۸۸٬٠٠٥",
+    "translated": "2,388,005"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٬۷۷٢٬٢۸٢)",
+    "translated": "(2,772,282)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٬۷۷٢٬٢۸٢)",
+    "translated": "(2,772,282)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": ")ﺮﻳﺎﻨﻳ١ﻲﻓﺎﻤﻛﺪﻴﺻﺮﻟا( ٢٠٢٣",
+    "translated": "(Ryany1 FAMKDISERLA) 2023"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٤٤٣٬۸٠١",
+    "translated": "443,801"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "۸۹٬٢٠٣",
+    "translated": "89,203"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٥٤٬٥۹۸",
+    "translated": "354,598"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٥٤٬٥۹۸",
+    "translated": "354,598"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲ اﻟﺨﺴﺎرة اﻟﺪﺧﻞ",
+    "translated": "Net Loss Income"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٥۹٬٥٢٤",
+    "translated": "59,524"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٬٤۷۷٬٢٠۸",
+    "translated": "2,477,208"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٬٤١۷٬٦۸٤)",
+    "translated": "(2,417,684)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٬۷۷٢٬٢۸٢)",
+    "translated": "(2,772,282)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٥٤٬٥۹۸",
+    "translated": "354,598"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": ")اﻟﺪﺧﻞاﻟﺸﺎﻣﻞاﻵﺧﺮ(",
+    "translated": "(other crossover)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٥٬٠٠٠٬٠٠٠",
+    "translated": "15,000,000"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٥٬٠٠٠٬٠٠٠)",
+    "translated": "(15,000,000)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲ اﻟﺨﺴﺎرة اﻟﺪﺧﻞاﻟﺸﺎﻣﻞ",
+    "translated": "Total Income LossIncluding"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٦٬٢٠٠٬٠٠٠)",
+    "translated": "(16,200,000)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺗﺤﻮﻳﻞاﻻﺣﺘﻴﺎﻃﻲاﻟﻨﻈﺎﻣﻲ",
+    "translated": "Regular Reserve Transfer"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٢٬٣۹٤٬٢٤٣)",
+    "translated": "(22,394,243)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٦٬١۹٤٬٢٤٣)",
+    "translated": "(6,194,243)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٦٬٢٠٠٬٠٠٠)",
+    "translated": "(16,200,000)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٤۰",
+    "translated": "40"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحوأﺧﺮى",
+    "translated": "DistributionsProfitsOther"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١۹٥٬٢۸٢٬٥٤٠",
+    "translated": "195,282,540"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢۷٬۸٥٣٬۹٢٦",
+    "translated": "27,853,926"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٦۷٬٤٢۸٬٦١٤",
+    "translated": "167,428,614"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢۸٬١١٦٬١٣۹",
+    "translated": "28,116,139"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٥۷٦٬٥٥۷)",
+    "translated": "(1,576,557)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١١٠٬۸۸۹٬٠٣٢",
+    "translated": "110,889,032"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٠٬٠٠٠٬٠٠٠",
+    "translated": "30,000,000"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "اﻟﺮﺻﻴﺪﻛﻤﺎﻓﻲ٣١دﻳﺴﻤﺒﺮ ٢٠٢٣",
+    "translated": "BalanceAs of 31 December 2023"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١۹٥٬٢۸٢٬٥٤٠",
+    "translated": "195,282,540"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢۷٬۸٥٣٬۹٢٦",
+    "translated": "27,853,926"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٦۷٬٤٢۸٬٦١٤",
+    "translated": "167,428,614"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢۸٬١١٦٬١٣۹",
+    "translated": "28,116,139"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٥۷٦٬٥٥۷)",
+    "translated": "(1,576,557)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١١٠٬۸۸۹٬٠٣٢",
+    "translated": "110,889,032"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٠٬٠٠٠٬٠٠٠",
+    "translated": "30,000,000"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺮﻳﺎﻨﻳ١ﻲﻓﺎﻤﻛﺪﻴﺻﺮﻟا ٢٠٢٤",
+    "translated": "Riani1FamcDeSerla2024"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٬٧٢٣٬١٣٥",
+    "translated": "3,723,135"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٬١٨٤٬٥٩٣",
+    "translated": "2,184,593"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٬٥٣٨٬٥٤٢",
+    "translated": "1,538,542"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٬٥٣٨٬٥٤٢",
+    "translated": "1,538,542"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺪﺧﻞ",
+    "translated": "Net income"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٨٩٩٬٦٩٨)",
+    "translated": "(1,899,698)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٤٬٣٢٥",
+    "translated": "34,325"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٩٣٤٬٠٢٣)",
+    "translated": "(1,934,023)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٩٣٤٬٠٢٣)",
+    "translated": "(1,934,023)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": ")اﻟﺨﺴﺎرة(اﻟﺪﺧﻞاﻟﺸﺎﻣﻞاﻵﺧﺮ",
+    "translated": "Loss (overall)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٬٨٢٣٬٤٣٧",
+    "translated": "1,823,437"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٬٢١٨٬٩١٨",
+    "translated": "2,218,918"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٣٩٥٬٤٨١)",
+    "translated": "(395,481)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٬٥٣٨٬٥٤٢",
+    "translated": "1,538,542"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٬٩٣٤٬٠٢٣)",
+    "translated": "(1,934,023)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "( )",
+    "translated": "( )"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "إﺟﻤﺎﻟﻲ اﻟﺨﺴﺎرة اﻟﺪﺧﻞاﻟﺸﺎﻣﻞ",
+    "translated": "Total Income LossIncluding"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "إﻋﺎدةﺗﺼﻨﻴﻒرﺑﺢإﻋﺎدةﻗﻴﺎسﺑﺮاﻣﺞاﻟﻤﻨﺎﻓﻊاﻟﻤﺘﻌﻠﻖ",
+    "translated": "ReclassificationProfit RemeasurementProgramsPracticerelated"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٦٠١٬٨٩٥",
+    "translated": "601,895"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٦٠١٬٨٩٥)",
+    "translated": "(601,895)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "۲۰",
+    "translated": "20"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺑﺎﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Operation Incessantly"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٣٬١٨٧٬٨١٨)",
+    "translated": "(13,187,818)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٢٬٩٨٧٬٨١٨)",
+    "translated": "(2,987,818)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٠٬٢٠٠٬٠٠٠)",
+    "translated": "(10,200,000)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(١٠٬٢٠٠٬٠٠٠)",
+    "translated": "(10,200,000)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٤۰",
+    "translated": "40"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحوأﺧﺮى",
+    "translated": "DistributionsProfitsOther"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٨٣٬٩١٨٬١٥٩",
+    "translated": "183,918,159"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٧٬٠٨٥٬٠٢٦",
+    "translated": "27,085,026"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١٥٦٬٨٣٣٬١٣٣",
+    "translated": "156,833,133"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٢٠٬٠٥٦٬٥٧٦",
+    "translated": "20,056,576"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "(٤٬١١٢٬٤٧٥)",
+    "translated": "(4,112,475)"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "١١٠٬٨٨٩٬٠٣٢",
+    "translated": "110,889,032"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "٣٠٬٠٠٠٬٠٠٠",
+    "translated": "30,000,000"
+  },
+  {
+    "page": 5,
+    "type": "table_cell",
+    "original": "ﺮﺒﻤﺴﻳد٣١ﻲﻓﺎﻤﻛﺪﻴﺻﺮﻟا ٢٠٢٤",
+    "translated": "Remsed31Famcedsrla 2024"
+  },
+  {
+    "page": 5,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ٢١",
+    "translated": "SABK Consolidated Annual Financial Statements 21 4202"
+  },
+  {
+    "page": 5,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﺘﻐﻴﺮات ﻓﻲ ﺣﻘﻮق اﻟﻤﻠﻜﻴﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "List of changes in common property rights"
+  },
+  {
+    "page": 5,
+    "type": "body",
+    "original": "ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎ ﻟﻢ ﻳﺮد ﺧﻼف ذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals unless otherwise stated"
+  },
+  {
+    "page": 5,
+    "type": "body",
+    "original": "ﺣﻘﻮق اﻟﻤﻠﻜﻴﺔ اﻟﻤﺘﻌﻠﻘﺔ ﺑﻤﺴﺎﻫﻤﻲ اﻟﺸﺮﻛﺔ اﻷ م",
+    "translated": "Proprietary rights relating to the shareholders of the company"
+  },
+  {
+    "page": 5,
+    "type": "body",
+    "original": "رﺋﻴﺲ ﻣﺠﻠﺲ اﻹدارة",
+    "translated": "Chairman of the Governing Council"
+  },
+  {
+    "page": 5,
+    "type": "body",
+    "original": "ﻧﺎﺋﺐ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي ﻟﻠﻤﺎﻟﻴﺔ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي",
+    "translated": "Executive Vice President of Finance"
+  },
+  {
+    "page": 5,
+    "type": "body",
+    "original": ". ﺗﻌﺘﺒﺮ اﻹﻳﻀﺎﺣﺎت اﻟﻤﺮﻓﻘﺔ ﻣﻦ ١ إﻰﻟ ٢٤ ﺟﺰءً ًا ًً اًً ﻻ ﻳﺘﺠﺰأ ﻣﻦ ﻫﺬه اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "The accompanying disclosures of 1 to 24 are an integral part of these consolidated financial statements."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬۷۸۷٬٤۷٤٢٠٢٣",
+    "translated": "1,787,4742023"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٠٢٤١٬٧٥٦٬٣٩٠",
+    "translated": "20241,756,390"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح",
+    "translated": "Explain."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ �",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬۷٣۸٬٣٢۷",
+    "translated": "1,738,327"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬٩٠٦٬٦١٠",
+    "translated": "1,906,610"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۱۰",
+    "translated": "10"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحﻣﺴﺘﻠﻤﺔﻣﻦﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔﺗ ﻣﻠﻴﺔ",
+    "translated": "Distributions of ProfitsRecipientsProcurementShared"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(١٬۹۸۹٬١٣۸)",
+    "translated": "(1,989,138)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٢٬١٣٠٬٠٠٠)",
+    "translated": "(2,130,000)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﻓﻮاﺋﺪﻣﺴﺘﻠﻤﺔ",
+    "translated": "Voidreceiver"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٢٬۹۹٣٬٣٠۷)",
+    "translated": "(2,993,307)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٢٬٣١٨٬٠٠١)",
+    "translated": "(2,318,001)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "�ﻓﻮاﺋﺪﻣﺪﻓﻮﻋﺔ",
+    "translated": "Wiedmuddoh"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٦٬٣٥٨٬٥٩٦",
+    "translated": "16,358,596"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۳۱",
+    "translated": "31"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ز ةوﺿﺮﻳﺒﺔدﺧﻞﻣﺪﻓﻮﻋﺔ",
+    "translated": "He's coming in paid."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٤٬٤٥٢٬۹٢٠",
+    "translated": "24,452,920"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﻨﻘﺪﻳﺔﻣﻦاﻷﻧﺸﻄﺔاﻟﺘﺸﻐﻴﻠﻴﺔ",
+    "translated": "The net cash is our business."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح ٢٠٢٤",
+    "translated": "Illustration 2024"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻷﻧﺸﻄﺔ) اﻟﺘﺸﻐﻴﻠﻴ( ﺔ �",
+    "translated": "Operational activities e)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤٬٥٢٣٬٦١٤",
+    "translated": "4,523,614"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤٬٤١٦٬٤١٩",
+    "translated": "4,416,419"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﺪﺧﻞ• اﻟﺨﺴﺎرة ﻗﺒﻞاﻟﺰ ةوﺿﺮﻳﺒﺔاﻟﺪﺧﻞ",
+    "translated": "Income  Loss before income tax"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٣٬۹٦١٬٦٤٢)",
+    "translated": "(3,961,642)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٥١٣٬٠٥٣)",
+    "translated": "(513,053)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•ﻣﻦاﻟﻌﻤﻠﻴﺎتاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Continuous Operations"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۳٤",
+    "translated": "34"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﻣﻦاﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "From the non-continuing process."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﺘﻌﺪﻳﻼتﻟﺘﺴﻮﻳﺔاﻟﺪﺧﻞ)اﻟﺨﺴﺎرة(ﻗﺒﻞاﻟﺰ�ةوﺿﺮﻳﺒﺔاﻟﺪﺧﻞ",
+    "translated": "Adjustments for income (loss) before income tax"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "إﱃﺻﺎﻓﻲاﻟﻨﻘﺪﻳﺔﻣﻦاﻷﻧﺸﻄﺔاﻟﺘﺸﻐﻴﻠﻴﺔ:",
+    "translated": "Cash is important to us for operating it:"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٢٬٤١٤٬٦۸٤",
+    "translated": "12,414,684"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۷ ١١٬٤٩٤٬٦٤٩",
+    "translated": "7 11,494,649"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•اﺳﺘﻬﻼكﻣﻤﺘﻠ�توﻣﺼﺎﻧﻊوﻣﻌﺪات",
+    "translated": "Consumption of equipment and equipment"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬٣٤۸٬۸١۷",
+    "translated": "1,348,817"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۸ ١٬١٥٥٬٣٩٠",
+    "translated": "8 1,155,390"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•اﺳﺘﻬﻼكﻣﻮﺟﻮداتﺣﻖاﻻﺳﺘﺨﺪام",
+    "translated": "Depreciation of assets right of use"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤٥٠٬۸۷٤",
+    "translated": "450,874"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٣٥٩٬٠٦٦",
+    "translated": "359,066"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•إﻃﻔﺎءﻣﻮﺟﻮداتﻏﻴﺮﻣﻠﻤﻮﺳﺔوﻣﻮﺟﻮداتأﺧﺮى",
+    "translated": "Extinguishing intangible assets is an assetother"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬۸٤٤٬٤٢٢",
+    "translated": "1,844,422"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۸و۹و۷ ٧٢٠٬٣٥٩",
+    "translated": "8, 9, and 7, 720,359."
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•اﻧﺨﻔﺎضوﺷﻄﺐﻗﻴﻤﺔاﻟﻤﻤﺘﻠ�تواﻟﻤﺼﺎﻧﻊ",
+    "translated": "Reduced and depreciated"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•إﻋﺎدةﻗﻴﺎساﻟﻘﻴﻤﺔاﻟﻌﺎدﻟﺔﻟﻠﻤﻮﺟﻮداتاﻟﻤﺤﺘﻔﻆﺑﻬﺎ",
+    "translated": "Remeasurement of fair value of assets held"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٤٠٬١٣۹٬٢",
+    "translated": "240,139,2"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤۳ ٩٢١٬٤٠٣",
+    "translated": "43 921,403"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "• ﻟﻠﺒﻴﻊ",
+    "translated": "For Sale"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٥۳-۲ )٩٥٣٬١٩٢(",
+    "translated": "53-2 )953,192("
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•اﻟﺮﺑﺢﻣﻦﺑﻴﻊاﻟﻤﻮﺟﻮداتاﻟﻤ�ﺤﺘﻔﻆﺑﻬﺎﻟﻠ�ﺒﻴﻊ",
+    "translated": "ProfitSale of AssetsRetainedFor Sale"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۷٥٤٬۸٠٢",
+    "translated": "754,802"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۰۱ ٤٣٦٬٤٣٤",
+    "translated": "01 436,434"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•ﻧﺘﺎﺋﺞﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔﻏﻴ�ﺮﺗ ﻣﻠﻴﺔوﺷﺮ تزﻣﻴﻠﺔ",
+    "translated": "Ntayjmchara"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")۹٥٤٬١٣(۹",
+    "translated": ")954,13(9"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۰۱ )٨٥١٬٥٦٧(",
+    "translated": "01 )851,567("
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•ﻧﺘﺎﺋﺞﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔ�ﺗ ﻣﻠﻴﺔ",
+    "translated": "Ntayjmshari"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۹٥٠٬١٤",
+    "translated": "950,14"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٣٩٦٬٨٣",
+    "translated": "396,83"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•ﺧﺴﺎﺋﺮاﺳﺘﺒﻌﺎدﻣﻤﺘﻠ توﻣﺼﺎﻧﻊوﻣﻌﺪات",
+    "translated": "BesidesExcludingTired TomsManufacturers"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٣٬٦٤٤٬٥٣٥)",
+    "translated": "(3,644,535)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۳۰ (١٬٩٣٣٬٩٧١)",
+    "translated": "30 (1,933,971)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "•�دﺧﻞﺗﻤﻮﻳﻞ",
+    "translated": "Funding Income"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٬۷۸٥٬۸۷٦",
+    "translated": "2,785,876"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "۳۰ ٢٬٨٢٠٬٢٩٧",
+    "translated": "30 2,820,297"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "ﺗ ﻔﺔﺗﻤﻮﻳﻞ",
+    "translated": "Tafah"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﺘﻐﻴﺮاتﻓﻲاﻟﻤﻮﺟﻮداتواﻟﻤﻄﻠﻮﺑﺎتاﻟﺘﺸﻐﻴﻠﻴﺔ:",
+    "translated": "Changes in assets and operating liabilities:"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤۸۸٬٤۸٢",
+    "translated": "488,482"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٧٨٬٠٩٣",
+    "translated": "278,093"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺺﻓﻲاﻟﻤﻮﺟﻮداتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔاﻷﺧﺮىواﻟﺬﻣﻢاﻟﻤﺪﻳﻨﺔ",
+    "translated": "Shortage of non-current assets and receivables"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٥٬۹۸۸٬١۷٦",
+    "translated": "5,988,176"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٩٦٧٬٢٩٦)",
+    "translated": "(967,296)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")اﻟﺰﻳﺎدة(اﻟﻨﻘﺺﻓﻲاﻟﻤﺨﺰون",
+    "translated": "(Increase)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬۸٦٣٬٢٥٠",
+    "translated": "1,863,250"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(١٬١٦٦٬٨١٠)",
+    "translated": "(1,166,810)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")اﻟﺰﻳﺎدة(اﻟﻨﻘﺺﻓﻲاﻟﺬﻣﻢاﻟﻤﺪﻳﻨﺔاﻟﺘﺠﺎرﻳﺔ",
+    "translated": "(Increase) (decrease in receivables)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٤۷٬٠۹٣",
+    "translated": "47,093"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬٩٨٦٬٤١١",
+    "translated": "1,986,411"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺺﻓﻲاﻟﻤﻮﺟﻮداتاﻟﻤﺘﺪاوﻟﺔاﻷﺧﺮىواﻟﺬﻣﻢاﻟﻤﺪﻳﻨﺔ",
+    "translated": "Shortage of assets in circulation and receivables"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٣٣٤٬۹٥١",
+    "translated": "334,951"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٦٬٧٩٦)",
+    "translated": "(6,796)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")اﻟﻨﻘﺺ(اﻟﺰﻳﺎدةﻓﻲاﻟﻤﻄﻠﻮﺑﺎتﻏﻴﺮاﻟﻤﺘﺪاوﻟﺔاﻷﺧﺮى",
+    "translated": "(Increase in non-current liabilities)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٬٣٢٣٬٠٢١",
+    "translated": "1,323,021"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(١٬٢٥٨٬٥٢٢)",
+    "translated": "(1,258,522)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")اﻟﻨﻘﺺ(اﻟﺰﻳﺎدةﻓﻲاﻟﻤﺨﺼﺼﺎت",
+    "translated": "(Increase in allocations)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(١٬۹٢١٬۹٣۹)",
+    "translated": "(1,921,939)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(٦٦٨٬٦٦١)",
+    "translated": "(668,661)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺺﻓﻲاﻟﺬﻣﻢاﻟﺪاﺋﻨﺔاﻟﺘﺠﺎرﻳﺔ",
+    "translated": "DeficiencyDamsDinhaltCommercial"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٥٢٦٬١٤٥",
+    "translated": "526,145"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٣٠٧٬٥٩٧",
+    "translated": "307,597"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": ")اﻟﺰﻳﺎدةﻓﻲﻣﻨﺎﻓﻊاﻟﻤﻮﻇﻔﻴﻦ(",
+    "translated": "(Increase in employee engagements)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "(۷٥٠٬۸٢٤)",
+    "translated": "(750,824)"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٣٩٩٬٤٨٦",
+    "translated": "399,486"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "اﻟﺰﻳﺎدة اﻟﻨﻘﺺ ﻓﻲاﻟﻤﻄﻠﻮﺑﺎتاﻟﻤﺘﺪاوﻟﺔاﻷﺧﺮى",
+    "translated": "Increase decrease in other trading liabilities"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "٢٥٬۹٠۹٬٥٦٤",
+    "translated": "25,909,564"
+  },
+  {
+    "page": 6,
+    "type": "table_cell",
+    "original": "١٧٬١٤٣٬٥٩٧",
+    "translated": "17,143,597"
+  },
+  {
+    "page": 6,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ٣١",
+    "translated": "SABK Consolidated Annual Financial Statements 31 4202"
+  },
+  {
+    "page": 6,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﺘﺪﻓﻘﺎت اﻟﻨﻘﺪﻳﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "Consolidated cash flow statement"
+  },
+  {
+    "page": 6,
+    "type": "small",
+    "original": "ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals MalmirdOther"
+  },
+  {
+    "page": 6,
+    "type": "small",
+    "original": "٬٥۲۹۰۹٤٦٥٬",
+    "translated": "5465"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح ٢٠٢٤",
+    "translated": "Illustration 2024"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻷﻧﺸﻄﺔاﻟﺘﻤﻮﻳﻠﻴﺔ",
+    "translated": "Financing Activities"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۹٬٠٠٠٬٠٠٠",
+    "translated": "9,000,000"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۸ ١٢٬٦٤٣٬٧٥٠",
+    "translated": "18 12,643,750"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻗﺮوضﻣﺴﺘﻠﻤﺔ",
+    "translated": "Loans Received"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(۹٬۷٠٦٬١۷٤)",
+    "translated": "(9,706,174)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۸ (١٠٬٤٠٥٬٢٧٥)",
+    "translated": "18 (10,405,275)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻗﺮوضﻣﺴﺪدة",
+    "translated": "Loans repaid"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١٬٤۸٠٬۸٥١)",
+    "translated": "(1,480,851)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۸ (١٬٠٧٥٬٣٢٩)",
+    "translated": "18 (1,075,329)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "إﻳﺠﺎراتﻣﺴﺪدة",
+    "translated": "Rents paid."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١١٬٤٠٠٬۹٦١)",
+    "translated": "(11,400,961)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۸ (١٠٬١٠٠٬٥٤٧)",
+    "translated": "18 (10,100,547)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحﻣﺪﻓﻮﻋﺔﻟﻠﻤﺴﺎﻫﻤﻴﻦ",
+    "translated": "Dividends paid to shareholders"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٥٬٣١٦٬٥٦۸)",
+    "translated": "(5,316,568)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۸ (٢٬٦١٨٬٧٧٠)",
+    "translated": "18 (2,618,770)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحﻣﺪﻓﻮﻋﺔﻟﺤﻘﻮقاﻟﻤﻠﻜﻴﺔﻏﻴﺮاﻟﻤﺴﻴﻄﺮة",
+    "translated": "Dividends paid for non-controlling property rights."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١۸٬۹٠٤٬٥٥٤)",
+    "translated": "(18,904,554)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١١٬٥٥٦٬١٧١)",
+    "translated": "(11,556,171)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﻨﻘﺪﻳﺔاﻟﻤﺴﺘﺨﺪﻣﺔﻓﻲاﻷﻧﺸﻄﺔاﻟﺘﻤﻮﻳﻠﻴﺔ",
+    "translated": "Net cash used in financing activities"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٦٬٢١٦٬٣۷۹)",
+    "translated": "(6,216,379)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٣٬١٨٣٬٩٤١)",
+    "translated": "(3,183,941)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺺﻓﻲاﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔ",
+    "translated": "Lack of cash is like cash."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٢۷٬٣۸١)",
+    "translated": "(27,381)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٧٥٬٠٢٥)",
+    "translated": "(75,025)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺨﺴﺎرةﻓﻲﺳﻌﺮﺗﺤﻮﻳﻞاﻟﻌﻤﻼتاﻷﺟﻨﺒﻴﺔﻋﲆاﻟﻨﻘﺪﻳﺔ",
+    "translated": "Net Loss on Foreign Currency Conversion Price on Cash"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٥٣١٬۹٣٠٠٬٤",
+    "translated": "531,9300,4"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٥٣٧٬٥٧٩٬٣٣",
+    "translated": "537,579,33"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "وﺷﺒﻪاﻟﻨﻘﺪﻳﺔ",
+    "translated": "Semi-Cash"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٥۷٣٥٬۹۷٬٣٣",
+    "translated": "5735,97,33"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۸۱ ٠٩٬٤٦٣٬٥٠٣",
+    "translated": "81 09,463,503"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔﻓﻲﺑﺪاﻳﺔاﻟﺴﻨﺔ",
+    "translated": "Cash is like cash at the beginning of the year."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۸۱",
+    "translated": "81"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔﻓﻲﻧﻬﺎﻳﺔاﻟﺴﻨﺔ",
+    "translated": "Cash is like cash in the end of the year."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٦۹۹٬٤١٤٬٢٣",
+    "translated": "699,414,23"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۸۱ ٨٦٬٦٩٣٠٬٥٣",
+    "translated": "81 86,6930,53"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔ",
+    "translated": "Cash and cash equivalents."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٦٤٦٬٣۸٣٬١",
+    "translated": "646,383,1"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٤و٥۳۳ -",
+    "translated": "4 and 533."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔ)ﻣﺪرﺟﺔﻓﻲﻣﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ(",
+    "translated": "Cash is like cash (listed in assets held for sale)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": ")۷٦٢٬(٣",
+    "translated": ")762,(3"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": ")٩٥٬٢(٣",
+    "translated": ")95,2(3"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻧﺎﻗﺼﺎًًﺎًً:اﻟﻘﺮوضﻗﺼﻴﺮةاﻷﺟﻞ)اﻟﺴﺤﻮﺑﺎتاﻟﺒﻨﻜﻴﺔﻋﲆاﻟﻤﻜﺸﻮف(",
+    "translated": "Less: Short loans (bank withdrawals)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٣٣٬۷۹٥٬٣۷٥",
+    "translated": "33,795,375"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٣٠٬٥٣٦٬٤٠٩",
+    "translated": "30,536,409"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔﻓﻲﻧﻬﺎﻳﺔاﻟﺴﻨﺔ",
+    "translated": "Cash is like cash in the end of the year."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۳٤",
+    "translated": "34"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﺘﺪﻓﻘﺎتاﻟﻨﻘﺪﻳﺔﻟﻠﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Cash flows for the non-continuous process."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٢٠٢٣",
+    "translated": "2023"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "إﻳﻀﺎح ٢٠٢٤",
+    "translated": "Illustration 2024"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻟﻠﺴﻨﺘﻴﻦاﻟﻤﻨﺘﻬﻴﺘﻴﻦﻓﻲ٣١دﻳﺴﻤﺒﺮ",
+    "translated": "For the two years ending December 31st,"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١٠٬٤٥٦٬٥١۸)",
+    "translated": "(10,456,518)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻷﻧﺸﻄﺔاﻻﺳﺘﺜﻤﺎرﻳﺔ",
+    "translated": "ActivitiesInvestment"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١٠٬١١٤٬٣٢٠)",
+    "translated": "(10,114,320)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺷﺮاءﻣﻤﺘﻠ�توﻣﺼﺎﻧﻊوﻣﻌﺪات",
+    "translated": "BuyTiredTomManufacturers"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٢۹٬۷۷٠)",
+    "translated": "(29,770)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۲ (٤٢٬١٢٤)",
+    "translated": "12 (42,124)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺷﺮاءاﺳﺘﺜﻤﺎراتﻓﻲأدواتﺣﻘﻮقاﻟﻤﻠﻜﻴﺔ",
+    "translated": "BuyInvestmentsViaToolsProperty"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٢۸٦٬۹۷۸",
+    "translated": "286,978"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۱ ٥٠٬٠٠٠",
+    "translated": "11 50,000"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻣﺘﺤﺼﻼتﻣﻦاﺳﺘﺤﻘﺎقاﺳﺘﺜﻤﺎراتﻓﻲأدواتدﻳﻦ",
+    "translated": "AccrualsAwardedInvestmentsViaObjects"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٣٦٬۷٥۷)",
+    "translated": "(36,757)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٨٥٬٩٠٩)",
+    "translated": "(85,909)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "إﺿﺎﻓﺎتإﱃﻣﻮﺟﻮداتﻏﻴﺮﻣﻠﻤﻮﺳﺔ",
+    "translated": "Additions to intangible assets"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۸١٬١٦۸",
+    "translated": "81,168"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٣٣٬٣٤٣",
+    "translated": "33,343"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻣﺘﺤﺼﻼتﻣﻦﺑﻴﻊﻣﻤﺘﻠ�توﻣﺼﺎﻧﻊوﻣﻌﺪات",
+    "translated": "Picks, springs, mills, equipment."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻣﺴﺎﻫﻤﺔواﺳﺘﺤﻮاذرأساﻟﻤﺎلﻓﻲاﻟﺸﺮ�تاﻟﺰﻣﻴﻠﺔ",
+    "translated": "Shareholder, acquisition, capital, partner."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١٬٤٦۷٬٣٤٠)",
+    "translated": "(1,467,340)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۰ (١٬٠٤٧٬٧٠٣)",
+    "translated": "10 (1,047,703)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "واﻟﻤﺸﺎرﻳﻊاﻟﻤﺸﺘﺮﻛﺔ",
+    "translated": "Joint Ventures"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺗﻮزﻳﻌﺎتأرﺑﺎحﻣﺴﺘﻠﻤﺔﻣﻦﻣﺸﺎرﻳﻊﻣﺸﺘﺮﻛﺔﻏﻴﺮﺗ�ﻣﻠﻴﺔ",
+    "translated": "DistributionsRecipientsSharedShareUntitled"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "١٬١٣٦٬۸٤١",
+    "translated": "1,136,841"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۰ ٨٤١٬٨٩١",
+    "translated": "10 841,891"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "وﺷﺮ�تزﻣﻴﻠﺔ",
+    "translated": "Schrdel"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "١٠١٬٦٢١",
+    "translated": "101,621"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۱۲و۱۰ ٨٥٥",
+    "translated": "12, 10, 855."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻣﺘﺤﺼﻼتﻣﻦﺑﻴﻊوﺗﺼﻔﻴﺔاﺳﺘﺜﻤﺎراتﻓﻲأدواتﺣﻘﻮقﻣﻠﻜﻴﺔ",
+    "translated": "EarningsSale and LiquidationInvestmentsViaToolsProperty"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": ")(١٬٣۸٠٬۹٦۸",
+    "translated": ")(1,380,968"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٠٦٠٬٠٦١٬٢",
+    "translated": "060,061,2"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﺳﺘﺜﻤﺎراتﻗﺼﻴﺮةاﻷﺟﻞ،ﺻﺎﻓﻲ",
+    "translated": "Short-haul investments, net"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۳٤ ٤٥٠٬٣٦١٬١",
+    "translated": "34 450,361,1"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻤﺘﺤﺼﻞﻣﻦﺑﻴﻊاﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Collected from a non-continuous operation."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "۳٤ (١٬٣٦٥٬١٤٧)",
+    "translated": "34 (1,365,147)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔاﻟﻤﺤﻮﻟﺔ",
+    "translated": "Cash and cash equivalents."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": ")٢٠١٬٢٠٢(",
+    "translated": ")201,202("
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﻨﻘﺪﻳﺔﻣﻦﺑﻴﻊاﻟﻌﻤﻠﻴﺔﻏﻴﺮاﻟﻤﺴﺘﻤﺮة",
+    "translated": "Net cash from the spring of the non-continuing process."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٥۳-۲ ٤٢٬٤٢٦٥",
+    "translated": "53-2 42,4265"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﻣﺘﺤﺼﻼتﻣﻦﺑﻴﻊﻣﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ",
+    "translated": "EarningsSale AssetsRetainedFor Sale"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٥۳-۲ )١٨٧٬٢٤١(",
+    "translated": "53-2 )187,241("
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "اﻟﻨﻘﺪﻳﺔوﺷﺒﻪاﻟﻨﻘﺪﻳﺔاﻟﻤﺤّ ّﻮّﻮﻟﺔ",
+    "translated": "Cash and cash equivalents."
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "٤١٩٬٦٤٣",
+    "translated": "419,643"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﺘﺪﻓﻖاﻟﻨﻘﺪيﻣﻦاﺳﺘﺒﻌﺎداﻟﻤﻮﺟﻮداتاﻟﻤﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ",
+    "translated": "Net cash flowExcluding assets held for sale"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(١١٬۷٦٤٬۷٤٥)",
+    "translated": "(11,764,745)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "(٧٬٩٨٦٬٣٦٦)",
+    "translated": "(7,986,366)"
+  },
+  {
+    "page": 7,
+    "type": "table_cell",
+    "original": "ﺻﺎﻓﻲاﻟﻨﻘﺪﻳﺔاﻟﻤﺴﺘﺨﺪﻣﺔﻓﻲاﻷﻧﺸﻄﺔاﻻﺳﺘﺜﻤﺎرﻳﺔ",
+    "translated": "Net Cash Used In Activities For Investment"
+  },
+  {
+    "page": 7,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ ٤٢٠٢ ٤١",
+    "translated": "SABK 41 4202 Annual Consolidated Financial Statements"
+  },
+  {
+    "page": 7,
+    "type": "heading",
+    "original": "ﻗﺎﺋﻤﺔ اﻟﺘﺪﻓﻘﺎت اﻟﻨﻘﺪﻳﺔ اﻟﻤﻮﺣﺪة ( ﺗﺘﻤﺔ )",
+    "translated": "Consolidated Statement of Cash Flows (Supplement)"
+  },
+  {
+    "page": 7,
+    "type": "body",
+    "original": "ȼ ﻓﺔاﻟﻤﺒﺎﻟﻎﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals Malmird Otherwise"
+  },
+  {
+    "page": 7,
+    "type": "body",
+    "original": "رﺋﻴﺲ ﻣﺠﻠﺲ اﻹدارة",
+    "translated": "Chairman of the Governing Council"
+  },
+  {
+    "page": 7,
+    "type": "body",
+    "original": "ﻧﺎﺋﺐ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي ﻟﻠﻤﺎﻟﻴﺔ اﻟﺮﺋﻴﺲ اﻟﺘﻨﻔﻴﺬي",
+    "translated": "Executive Vice President of Finance"
+  },
+  {
+    "page": 7,
+    "type": "body",
+    "original": "ت",
+    "translated": "T"
+  },
+  {
+    "page": 7,
+    "type": "body",
+    "original": ". ﺗﻌﺘﺒﺮ اﻹﻳﻀﺎﺣﺎت اﻟﻤﺮﻓﻘﺔ ﻣﻦ ١ إﻰﻟ ٢٤ ﺟﺰءً ًا ًً اًً ﻻ ﻳﺘﺠﺰأ ﻣﻦ ﻫﺬه اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة",
+    "translated": "The accompanying disclosures of 1 to 24 are an integral part of these consolidated financial statements."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻤﺴﺘﻘﺒﻠﻴﺔاﻟﻬﺎﻣﺔاﻟﺘﻲﻣﻦﺷﺄﻧﻬﺎﺗﻌﺰﻳﺰأداءاﻟﻮﺣﺪةاﻟﻤﺪرةﻟﻠﻨﻘﺪﻳﺔ",
+    "translated": "The future is important to strengthen the performance of the Madrul Unit."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺘﻘﺪﻳﺮاتإذا�ﻧﺖاﻟﺘﻘﺪﻳﺮاتاﻟﻤﺘﻐﻴﺮةﺗﺆﺛﺮﻋﲆاﻟﻔﺘﺮاتاﻟﺤﺎﻟﻴﺔواﻟﻔﺘﺮات",
+    "translated": "RatingsVariable estimates affect current periods and periods"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "٢.أﺳﺲاﻹﻋﺪاد)ﺗﺘﻤﺔ(",
+    "translated": "2.Scale(Complete)"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺨﺎﺿﻌﺔﻻﺧﺘﺒﺎرﻫﺎأواﻟﻤﺒﺎدراتاﻷﺧﺮىاﻟﺘﻲﻟﻢﺗﻠﺘﺰمﺑﻬﺎاﻟﻤﺠﻤﻮﻋﺔﺑﻌﺪ.",
+    "translated": "Tested or other initiatives you haven't committed to the group yet."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻤﺴﺘﻘﺒﻠﻴﺔ.",
+    "translated": "Futurism."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﺗﺘﺄﺛﺮاﻟﻘﻴﻤﺔاﻟﻘﺎﺑﻠﺔﻟﻼﺳﺘﺮدادﺑﻤﻌﺪلاﻟﺨﺼﻢاﻟﻤﺴﺘﺨﺪمﻓﻲﻃﺮﻳﻘﺔ",
+    "translated": "Reimbursable values are affected by the discount rate used in the method."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "-ﺔﻴﺒﻨﺟﻷاتﻼﻤﻌﻟا٢٢)ﺗﺘﻤﺔ(",
+    "translated": "- Hebbinglaaaaalma22"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺘﺪﻓﻘﺎتاﻟﻨﻘﺪﻳﺔاﻟﻤﺨﺼﻮﻣﺔوﻛﺬﻟﻚﺻﺎﻓﻲاﻟﺘﺪﻓﻘﺎتاﻟﻨﻘﺪﻳﺔاﻟﻮاردة",
+    "translated": "Discounted cash flows as well as net cash inflows"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﺗﺸﺘﻤﻞاﻻﻓﺼﺎﺣﺎت :اﻷﺧﺮىاﻟﻤﺘﻌﻠﻘﺔﺑﺎﻟﻤﺨﺎﻃﺮاﻟﺘﻲﺗﺘﻌﺮضﻟﻬﺎاﻟﻤﺠﻤﻮﻋﺔ",
+    "translated": "Disclosures include: Other Risks to the Group"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻳﺘﻢاﻋﺘﺒﺎراﻟﺸﻬﺮةاﻟﻨﺎﺗﺠﺔﻋﻦاﻻﺳﺘﺤﻮاذﻋﲆﻋﻤﻠﻴﺔأﺟﻨﺒﻴﺔوﻛﺬﻟﻚ",
+    "translated": "The month is considered the result of the acquisition of her foreign currency as well as"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻤﺴﺘﻘﺒﻠﻴﺔاﻟﻤﺘﻮﻗﻌﺔوﻣﻌﺪلاﻟﻨﻤﻮاﻟﻤﺴﺘﺨﺪمﻷﻏﺮاضاﻻﺳﺘﻘﺮاء.",
+    "translated": "Anticipated future is the growth rate used for induction purposes."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "وﺣﺎﻻتﻋﺪماﻟﺘﺄﻛﺪﻋﲆ",
+    "translated": "Uncertainty."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "•",
+    "translated": "•"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﺗﺴﻮﻳﺎتاﻟﻘﻴﻤﺔاﻟﻌﺎدﻟﺔإﱃاﻟﻘﻴﻤﺔاﻟﺪﻓﺘﺮﻳﺔﻟﻠﻤﻮﺟﻮداتواﻟﻤﻄﻠﻮﺑﺎت",
+    "translated": "AdjustmentsAdequate valuesAdequacy of assets and liabilities"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "إدارةرأساﻟﻤﺎل،وإدارةوﺳﻴﺎﺳﺎتﻣﺨﺎﻃﺮاﻷدواتاﻟﻤﺎﻟﻴﺔ)اﻧﻈﺮ",
+    "translated": "Money management, money management, risk management, financial instruments."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻨﺎﺗﺠﺔﻋﻦاﻻﺳﺘﺤﻮاذﻛﻤﻮﺟﻮداتوﻣﻄﻠﻮﺑﺎتﺧﺎﺻﺔﺑﺎﻟﻌﻤﻠﻴﺔاﻟﺨﺎرﺟﻴﺔ،",
+    "translated": "The resulting acquisition as assets and liabilities of the offshore operation,"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": ").٣٨و٣٧ﻲﺣﺎﻀﻳإ",
+    "translated": ".38 and 37."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "وﺗﺤﻮلﺑﺴﻌﺮاﻟﺘﺤﻮﻳﻞاﻟﻔﻮريﺑﺘﺎرﻳﺦإﻋﺪاداﻟﻘﻮاﺋﻢاﻟﻤﺎﻟﻴﺔاﻟﻤﻮﺣﺪة.",
+    "translated": "And it's converted at the price of the F.R.T. by the date of the Unified Financial Times."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "( ) . •",
+    "translated": "( ) . •"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻓﻴﻤﺎﻳﻠﻲﺑﻴﺎنﺑﺄﺳﻌﺎراﻟﻌﻤﻼتاﻟﺮﺋﻴﺴﻴﺔﻟﺴﺎﺑﻚ:",
+    "translated": "In terms of currency exchange rates:"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻹﻓﺼﺎﺣﺎتاﻟﻤﺘﻌﻠﻘﺔﺑﺘﺤﺎﻟﻴﻞاﻟﺤﺴﺎﺳﻴﺔ ٣٧حﺎﻀﻳﻹاﺮﻈﻧأ",
+    "translated": "Disclosures Related to Sensitivity Analysis 37"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "٣-١ اﻟﺘﻘﺪﻳﺮاتواﻻﻓﺘﺮاﺿﺎت",
+    "translated": "3.1 Estimates and assumptions"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "٢٠٢٤ ٢٠٢٣",
+    "translated": "2024 2023"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﺳﺘﺨﺪﻣﺖاﻟﻤﺠﻤﻮﻋﺔاﻻﻓﺘﺮاﺿﺎتواﻟﺘﻘﺪﻳﺮاتاﻟﻤﺘﺎﺣﺔﻋﻨﺪإﻋﺪاداﻟﻘﻮاﺋﻢ",
+    "translated": "The group used the assumptions and estimates available when setting the values."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺴﻌﺮاﻟﻔﻮريﻣﺘﻮﺳﻂ اﻟﺴﻌﺮاﻟﻔﻮريﻣﺘﻮﺳﻂ",
+    "translated": "PriceInstantAverageAvergent"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻤﺎﻟﻴﺔاﻟﻤﻮﺣﺪة.وﻣﻊذﻟﻚ،ﻗﺪﺗﺘﻐﻴﺮاﻟﻈﺮوفواﻻﻓﺘﺮاﺿﺎتاﻟﺤﺎﻟﻴﺔ",
+    "translated": "However, circumstances and assumptions may change."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻓﻲ٣٫٧٥٣١دﻳﺴﻤﺒﺮاﻟﺴﻌﺮ٣٫٧٥ ﻓﻲ٣٫٧٥٣١دﻳﺴﻤﺒﺮاﻟﺴﻌﺮ٣٫٧٥",
+    "translated": "At3.7531DecPrice3.75In3.75/31DecP Price3.75"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "-دوﻻرأﻣﺮﻳﻜﻲ",
+    "translated": "- U.S. dollars."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": ".واﻟﻤﺘﻌﻠﻘﺔﺑﺎﻟﺘﻄﻮراتاﻟﻤﺴﺘﻘﺒﻠﻴﺔﻧﺘﻴﺠﺔﻟﺘﻐﻴﺮاتاﻟﺴﻮقأواﻟﻈﺮوفاﻟﺘﻲ",
+    "translated": "And it's about future developments that result in market changes and circumstances."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "-اﻟﻴﻮرو ٣٫٩٠ ٤٫٠٦ ٤٫١٤ ٤٫٠٦",
+    "translated": "-Euro 3.90 4.06 4.14 4.06"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﺗﻨﺸﺄﺧﺎرﺟﺔﻋﻦﺳﻴﻄﺮةاﻟﻤﺠﻤﻮﻋﺔ ﺗﻨﻌﻜﺲﻫﺬهاﻟﺘﻐﻴﺮاتﻓﻲاﻻﻓﺘﺮاﺿﺎت",
+    "translated": "Out of control, the group reverses these changes in assumptions."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "-ﺟﻨﻴﻪإﺳﺘﺮﻟﻴﻨﻲ٤٫٧١ ٤٫٧٩ ٤٫٧٧ ٤٫٦٦",
+    "translated": "-Ginhastrellini4.71 4.79 4.77 4.66"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻋﻨﺪﺣﺪوﺛﻬﺎ.ﺗﻢاﻹﻓﺼﺎحﻋﻦاﻻﻓﺘﺮاﺿﺎتاﻷﺳﺎﺳﻴﺔاﻟﻤﺘﻌﻠﻘﺔﺑﺎﻟﻤﺴﺘﻘﺒﻞ",
+    "translated": "When it happens, the basic assumptions about the future will be disclosed."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "- ٠٫٥١ ٠٫٥٢ ٠٫٥٣ ٠٫٥٣",
+    "translated": "- 0.51 0.52 0.53 0.53"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "واﻟﻤﺼﺎدراﻟﺮﺋﻴﺴﻴﺔاﻷﺧﺮىﻟﻌﺪماﻟﺘﺄﻛﺪﻣﻦاﻟﺘﻘﺪﻳﺮات،واﻟﺘﻲﻟﻬﺎﺗﺄﺛﻴﺮﻫﺎم",
+    "translated": "And the other sources of uncertainty are estimates, which are exciting."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻳﻮانﺻﻴﻨﻲ",
+    "translated": "Yuansinyi"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻗﺪﻳﺆديإﱃإﺟﺮاءﺗﻌﺪﻳﻞﺟﻮﻫﺮيﻋﲆاﻟﻘﻴﻤﺔاﻟﺪﻓﺘﺮﻳﺔﻟﻠﻤﻮﺟﻮدات",
+    "translated": "LeadLeadershipSubstantial adjustment of values to assets"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "٣. اﻟﺘﻘﺪﻳﺮاتواﻻﻓﺘﺮاﺿﺎتواﻷﺣ�ماﻟﻤﺤﺎﺳﺒﻴﺔاﻟﻬﺎﻣﺔ",
+    "translated": "3. Estimates, Assumptions, and Important Accounting"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "واﻟﻤﻄﻠﻮﺑﺎتﺧﻼلاﻟﻔﺘﺮةاﻟﻤﺎﻟﻴﺔاﻟﺘﺎﻟﻴﺔﻓﻲاﻟﻔﻘﺮاتاﻟﺘﺎﻟﻴﺔ.",
+    "translated": "and liabilities during the next financial period in the following paragraphs."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻳﺘﻄﻠﺐإﻋﺪاداﻟﻘﻮاﺋﻢاﻟﻤﺎﻟﻴﺔاﻟﻤﻮﺣﺪةﻟﻠﻤﺠﻤﻮﻋﺔﻣﻦاﻹدارةإﺟﺮاءاﻷﺣ م",
+    "translated": "It requires a unified financial base for the group."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "١١٣-- اﻻﻧﺨﻔﺎضﻓﻲﻗﻴﻤﺔاﻟﻤﻮﺟﻮداتﻏﻴﺮ اﻟﻤﺎﻟﻴﺔ)اﻧﻈﺮ",
+    "translated": "113.- Decrease in non-financial assets (see"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "واﻟﺘﻘﺪﻳﺮاتواﻻﻓﺘﺮاﺿﺎتﺑﺘﺎرﻳﺦإﻋﺪاداﻟﻘﻮاﺋﻢاﻟﻤﺎﻟﻴﺔاﻟﻤﻮﺣﺪة،اﻟﺘﻲﻗﺪﺗﺆﺛﺮ",
+    "translated": "And estimates and assumptions by date of the unified financial powerhouses, which I believe to be"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": ")٧حﺎﻀﻳﻹا",
+    "translated": "7 days."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": ".ﻋﲆﻣﺒﺎﻟﻎاﻹﻳﺮاداتواﻟﻤﺼﺎرﻳﻒواﻟﻤﻮﺟﻮداتواﻟﻤﻄﻠﻮﺑﺎتاﻟﻤﺴﺠﻠﺔ",
+    "translated": "In terms of revenue, expenses, assets, and liabilities."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "واﻹﻓﺼﺎﺣﺎت وﻗﺪﻳﺘﺮﺗﺐﻋﻦﻋﺪماﻟﺘﺄﻛﺪﻣﻦﻫﺬهاﻻﻓﺘﺮاﺿﺎتواﻟﺘﻘﺪﻳﺮات",
+    "translated": "And disclosures may result from the uncertainty of these assumptions and estimates."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻳﺤﺪث اﻻﻧﺨﻔﺎض ﻋﻨﺪ زﻳﺎدة اﻟﻘﻴﻤﺔ اﻟﺪﻓﺘﺮﻳﺔ ﻟﻸﺻﻞ أو اﻟﻮﺣﺪة اﻟﻤﺪرة ﻟﻠﻨﻘﺪﻳﺔ",
+    "translated": "The decrease occurs when the book value of the asset or the cash-generating unit increases"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": ".إﺟﺮاءﺗﻌﺪﻳﻞﺟﻮﻫﺮيﻓﻲاﻟﻤﺴﺘﻘﺒﻞﻋﲆاﻟﻘﻴﻢاﻟﺪﻓﺘﺮﻳﺔﻟﻠﻤﻮﺟﻮداتأو",
+    "translated": "Make a fundamental adjustment in the future to the book values of assets or"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻋﻦ اﻟﻘﻴﻤﺔ اﻟﻘﺎﺑﻠﺔ ﻟﻼﺳﺘﺮداد، واﻟﺘﻲ ﺗﻤﺜﻞ اﻟﻘﻴﻤﺔ اﻟﻌﺎدﻟﺔ ﻧﺎﻗﺼﺔ ﺗ�ﻟﻴﻒ",
+    "translated": "About the recoverable value, which represents the fair value minus the fibrosis."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻤﻄﻠﻮﺑﺎتاﻟﺘﻲﺳﺘﺘﺄﺛﺮﺑﺬﻟﻚ",
+    "translated": "The stuff that's going on."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻻﺳﺘﺒﻌﺎدأواﻟﻘﻴﻤﺔاﻟﺤﺎﻟﻴﺔ،أﻳﻬﻤﺎأﻋﲆ.ﻳﺘﻢاﺣﺘﺴﺎباﻟﻘﻴﻤﺔ",
+    "translated": "Exclusions and current values, whichever is higher."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻌﺎدﻟﺔﻧﺎﻗﺼﺔﺗ�ﻟﻴﻒاﻻﺳﺘﺒﻌﺎدﻋﲆأﺳﺎساﻟﺒﻴﺎﻧﺎتاﻟﻤﺘﺎﺣﺔﻟﻤﻌﺎﻣﻼت",
+    "translated": "Fair is the reason for exclusion based on the data available for transactions"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﺗﺴﺘﻨﺪﻫﺬهاﻟﺘﻘﺪﻳﺮاتوﻓﻘﺎًًﺎًًواﻻﻓﺘﺮاﺿﺎتﻋﲆاﻟﺨﺒﺮةوﻋﻮاﻣﻞأﺧﺮىﻣﺨﺘﻠﻔﺔ",
+    "translated": "These estimates are based on assumptions based on experience and other factors."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺒﻴﻊاﻟﻤﻠﺰﻣﺔ،اﻟﺘﻲﺗﺘﻢﺑﺸﺮوطﺗﻌﺎﻣﻞﻋﺎدل،ﻟﻤﻮﺟﻮداتﻣﻤﺎﺛﻠﺔأوأﺳﻌﺎر",
+    "translated": "Obligatory sale, which is on terms of fair dealing, for similar assets and prices."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻳﻌﺘﻘﺪﺑﺄﻧﻬﺎﻣﻌﻘﻮﻟﺔ ﻟﻠﻈﺮوفوﺗﺴﺘﺨﺪمﻟﻘﻴﺎساﻟﻘﻴﻢاﻟﺪﻓﺘﺮﻳﺔ .",
+    "translated": "He thinks his brains are for conditions and used to measure book values."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺴﻮقاﻟﻘﺎﺑﻠﺔﻟﻠﻤﻼﺣﻈﺔﻧﺎﻗﺼﺔاﻟﺘ�ﻟﻴﻒاﻹﺿﺎﻓﻴﺔﻻﺳﺘﺒﻌﺎداﻷﺻﻞ.ﺗﺤﺪد",
+    "translated": "MarketableNot noticed its lack of extra fiberWill exclude the original."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻟﻠﻤﻮﺟﻮداتواﻟﻤﻄﻠﻮﺑﺎتاﻟﺘﻲﻳﺼﻌﺐاﻟﺤﺼﻮلﻋﻠﻴﻬﺎﻣﻦﻣﺼﺎدرأﺧﺮى. ﻳﺘﻢ",
+    "translated": "For assets and liabilities that are difficult to obtain from other sources."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﻘﻴﻤﺔاﻟﺤﺎﻟﻴﺔﻋﲆأﺳﺎسﻃﺮﻳﻘﺔاﻟﺘﺪﻓﻘﺎتاﻟﻨﻘﺪﻳﺔاﻟﻤﺨﺼﻮﻣﺔ.ﺗﺤﺪد",
+    "translated": "The current value is based on its way to discounted cash flows."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "ﻣﺮاﺟﻌﺔاﻟﺘﻘﺪﻳﺮاتواﻻﻓﺘﺮاﺿﺎتاﻟﻤﻌﻨﻴﺔﺑﺼﻮرةﻣﺴﺘﻤﺮة ﻳﺘﻢإﺛﺒﺎت",
+    "translated": "ReviewsEstimates and AssumptionsContinued"
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺘﺪﻓﻘﺎتاﻟﻨﻘﺪﻳﺔﻋﲆأﺳﺎساﻟﻤﻮازﻧﺔاﻟﻤﻌﺘﻤﺪةوﺧﻄﺔاﻟﻌﻤﻞﻟﻠﺴﻨﻮات",
+    "translated": "Cash flow is basically a budget. It's a business plan for years."
+  },
+  {
+    "page": 8,
+    "type": "table_cell",
+    "original": "اﻟﺘﻌﺪﻳﻼتﻋﲆاﻟﺘﻘﺪﻳﺮاتاﻟﻤﺤﺎﺳﺒﻴﺔﺧﻼلاﻟﻔﺘﺮةاﻟﺘﻲﻳﺘﻢﻓﻴﻬﺎﺗﻌﺪﻳﻞ",
+    "translated": "Adjustments to accounting estimates during the period in which they are adjusted"
+  },
+  {
+    "page": 8,
+    "type": "small",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑﻚ ٤٢٠٢ ٧١",
+    "translated": "SABIC Annual Consolidated Financial Statements 4202 71"
+  },
+  {
+    "page": 8,
+    "type": "heading",
+    "original": "إﻳﻀﺎﺣﺎت ﺣﻮل اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة ( ﺗﺘﻤﺔ )",
+    "translated": "Clarifications on the Consolidated Financial Statements (Complete)"
+  },
+  {
+    "page": 8,
+    "type": "small",
+    "original": "ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎ ﻟﻢ ﻳﺮد ﺧﻼف ذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals unless otherwise stated"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻹﺟﻤﺎﻟﻲ",
+    "translated": "Total"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻟﻤﻮﺟﻮداتﻗﻴﺪاﻹﻧﺸﺎء",
+    "translated": "AssetsUnder Construction"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻟﺴﻴﺎرات",
+    "translated": "Automotive"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻷﺛﺎثواﻟﺘﺮﻛﻴﺒﺎت",
+    "translated": "Furniture & Fittings"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٠١٬٠٨٣٬٧٥٢",
+    "translated": "301,083,752"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٤٬٢٨٤٬٦٨٢",
+    "translated": "14,284,682"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦٦٢٬٤٨٣",
+    "translated": "662,483"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٠٤٨٬٨٧٣",
+    "translated": "1,048,873"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٠٬٥٠٣٬٤٦٣",
+    "translated": "10,503,463"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٨٬٠٢٧٬٠٧١",
+    "translated": "8,027,071"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٠٬٨٥٠",
+    "translated": "10,850"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٤٬٧١٩",
+    "translated": "14,719"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٤١٧)(٧٢٬",
+    "translated": "417)(72,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٥٧٢)٢٥٠٬(٥٬",
+    "translated": "572)250,(5,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٤٬٥٨٩",
+    "translated": "34,589"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٩٬٧١٨",
+    "translated": "39,718"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٩٢٤)٤٧٢٬(١٬",
+    "translated": "924)472,(1,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١١٨)(٤٣٬",
+    "translated": "118)(43,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٥٩٤)(٢٬",
+    "translated": "594)(2,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٧٧١)(٥٬",
+    "translated": "771)(5,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٣١)(٩٧٤٬",
+    "translated": "131)(974,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٠٥)(٨٬",
+    "translated": "305)(8,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٢٬١٢٥)",
+    "translated": "(2,125)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٬٥٤١)",
+    "translated": "(1,541)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٥٠٨)٨٧٣٬(١٬",
+    "translated": "508)873,(1,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٨٤٦)(١٥٨٬",
+    "translated": "846)(158,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٧٩١)",
+    "translated": "(791)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٩٬٢٣٣)",
+    "translated": "(9,233)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٠٧٬١٩٤٬٢٣٥",
+    "translated": "307,194,235"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٦٬٨٥٠٬٩١٢",
+    "translated": "16,850,912"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٧٠٢٬٤١٢",
+    "translated": "702,412"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٠٨٦٬٧٦٥",
+    "translated": "1,086,765"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻟﻤﺼﺎﻧﻊواﻟﻤﻌﺪات ١()",
+    "translated": "Factories and equipment 1"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻷراﺿﻲواﻟﻤﺒﺎﻧﻲ",
+    "translated": "Land and buildings"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻟﺘ�ﻔﺔ:",
+    "translated": "Tag:"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٥٦٬٥٩١٬٩٦٩",
+    "translated": "256,591,969"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٨٬٤٩٥٬٧٤٥",
+    "translated": "28,495,745"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲﺑﺪاﻳﺔاﻟﺴﻨﺔ",
+    "translated": "As in the beginning of the year."
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٬٣٩٠٬٣٢٠",
+    "translated": "2,390,320"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦٠٬٥٠٣",
+    "translated": "60,503"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "إﺿﺎﻓﺎت",
+    "translated": "Additions"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٤٬٩١٦٬٦٨٥",
+    "translated": "4,916,685"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٨٧٬١٦٣",
+    "translated": "187,163"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﺗﺤﻮﻳﻼت)٢(",
+    "translated": "Transfers(2)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٧٠)٣٨٦٬(١٬",
+    "translated": "270)386,(1,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٧١)(٣٥٬",
+    "translated": "171)(35,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻻﺳﺘﺒﻌﺎداتواﻻﺳﺘﻐﻨﺎءات",
+    "translated": "Exclusions and dispensations"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٣٥)(٩١٣٬",
+    "translated": "335)(913,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٨٢٥)(٤٨٬",
+    "translated": "825)(48,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻣﻌﺎدﺗﺼﻨﻴﻔﻬﺎإﱃﻣﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ",
+    "translated": "Reclassified as held for sale."
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٠٢٢)٤٠٧٬(١٬",
+    "translated": "022)407,(1,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦١٦)(٢٩٧٬",
+    "translated": "616)(297,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﺗﺴﻮﻳﺎتﺗﺤﻮﻳﻞﻋﻤﻼتأﺟﻨﺒﻴﺔ",
+    "translated": "Foreign Currency Conversion Adjustments"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٦٠٬١٩٢٬٣٤٧",
+    "translated": "260,192,347"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٨٬٣٦١٬٧٩٩",
+    "translated": "28,361,799"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲﻧﻬﺎﻳﺔاﻟﺴﻨﺔ",
+    "translated": "Kamphinhae"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٨٥٬٩٦١٬١٧٣)",
+    "translated": "(185,961,173)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٬١٠٠٬٣١٧)",
+    "translated": "(1,100,317)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٤٥٢٬٤٦٥)",
+    "translated": "(452,465)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٧٦١٬٨٠٤)",
+    "translated": "(761,804)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٦٩٬٠٧٥٬٧٢٥)",
+    "translated": "(169,075,725)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٤٬٥٧٠٬٨٦٢)",
+    "translated": "(14,570,862)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲﺑﺪاﻳﺔاﻟﺴﻨﺔ",
+    "translated": "As in the beginning of the year."
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١١٬٤٩٤٬٦٤٩)",
+    "translated": "(11,494,649)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٤٨٬١٨٨)",
+    "translated": "(48,188)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٩١٬٤٣٣)",
+    "translated": "(91,433)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(١٠٬٥٣١٬٩٥٤)",
+    "translated": "(10,531,954)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٨٢٣٬٠٧٤)",
+    "translated": "(823,074)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻟﻤﺤﻤﻞﻟﻠﺴﻨﺔ",
+    "translated": "Year-old."
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٠٤١)(٣١٬",
+    "translated": "041)(31,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٥٤",
+    "translated": "254"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٤٧٧)",
+    "translated": "(477)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٣٬٩٥٦",
+    "translated": "33,956"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٢٬٦٩٢)",
+    "translated": "(2,692)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﺗﺤﻮﻳﻼت)٢(",
+    "translated": "Transfers(2)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٩٨٧)(٦٠٩٬",
+    "translated": "987)(609,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٥٣٠٬٥٣١)",
+    "translated": "(530,531)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "-",
+    "translated": "-"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٩٠)(٢٥٬",
+    "translated": "390)(25,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "(٥٤٬٠٦٦)",
+    "translated": "(54,066)"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻧﺨﻔﺎضﻓﻲاﻟﻘﻴﻤﺔوﻣﺸﻄﻮﺑﺎت",
+    "translated": "Decline in ValuesMiscellaneous"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٤٠٠٬٨٨٨",
+    "translated": "1,400,888"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٦",
+    "translated": "36"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٬٥٨٦",
+    "translated": "2,586"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٥٬٥٨٣",
+    "translated": "5,583"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٣٥٨٬٧٣٩",
+    "translated": "1,358,739"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٣٬٩٤٤",
+    "translated": "33,944"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "اﻻﺳﺘﺒﻌﺎداتواﻻﺳﺘﻐﻨﺎءات",
+    "translated": "Exclusions and dispensations"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٧٠٣٬٧٦٣",
+    "translated": "703,763"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٥",
+    "translated": "25"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٨٨٨",
+    "translated": "1,888"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٣٤٢",
+    "translated": "1,342"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦٦٤٬٣٥٧",
+    "translated": "664,357"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٣٦٬١٥١",
+    "translated": "36,151"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻣﻌﺎدﺗﺼﻨﻴﻔﻬﺎإﱃﻣﻮﺟﻮداتﻣﺤﺘﻔﻆﺑﻬﺎﻟﻠﺒﻴﻊ",
+    "translated": "Reclassified as held for sale."
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٣٤٧٬٤٩٨",
+    "translated": "1,347,498"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٩٬٦٩٦",
+    "translated": "9,696"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٧٥٩",
+    "translated": "759"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦٬٥٦٦",
+    "translated": "6,566"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٬٠٩٦٬١٦٩",
+    "translated": "1,096,169"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٣٤٬٣٠٨",
+    "translated": "234,308"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﺗﺴﻮﻳﺎتﺗﺤﻮﻳﻞﻋﻤﻼتأﺟﻨﺒﻴﺔ",
+    "translated": "Foreign Currency Conversion Adjustments"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٦٦٠)٦١٣٬(١٩٤٬",
+    "translated": "660)613,(194,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٣٢)٦٥٢٬(١٬",
+    "translated": "132)652,(1,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "١٦٦)(٤٩٥٬",
+    "translated": "166)(495,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٢٣)(٨٤٠٬",
+    "translated": "223)(840,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٨٤٨)٤٧٩٬(١٧٦٬",
+    "translated": "848)479,(176,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "٢٩١)١٤٦٬(١٥٬",
+    "translated": "291)146,(15,"
+  },
+  {
+    "page": 9,
+    "type": "table_cell",
+    "original": "ﻛﻤﺎﻓﻲﻧﻬﺎﻳﺔاﻟﺴﻨﺔ",
+    "translated": "Kamphinhae"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑﻚ ٤٢٠٢ ٦٣",
+    "translated": "SABIC Annual Consolidated Financial Statements 4202 63"
+  },
+  {
+    "page": 9,
+    "type": "heading",
+    "original": "٧ . ﻣﻤﺘﻠ ȼ ت وﻣﺼﺎﻧﻊ وﻣﻌﺪات",
+    "translated": "7."
+  },
+  {
+    "page": 9,
+    "type": "heading",
+    "original": "إﻳﻀﺎﺣﺎت ﺣﻮل اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﻤﻮﺣﺪة ( ﺗﺘﻤﺔ )",
+    "translated": "Clarifications on the Consolidated Financial Statements (Complete)"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻت اﻟﺴﻌﻮدﻳﺔ ﻣﺎ ﻟﻢ ﻳﺮد ﺧﻼف ذﻟﻚ",
+    "translated": "Amounts in thousands of Saudi Riyals unless otherwise stated"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ﻣﻠﻴﻮن ﻋﻰﻠ ،اﻟﺘﻮاﻟﻲ ﻓﻲ ﺣﻴﻦ ﺑﻠﻎ إﺟﻤﺎﻟﻲ اﻻﺳﺘﻬﻼك اﻟﻤﺘﺮاﻛﻢ ﻓﻲ ﺑﺪاﻳﺔ وﻧﻬﺎﻳﺔ",
+    "translated": "1 million consecutively, while the total accumulated consumption at the beginning and end"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ﺻﺎﻓﻲ اﻟﻘﻴﻤﺔ اﻟﺪﻓﺘﺮﻳﺔ :",
+    "translated": "Net book value:"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ﻛﻤﺎ ﻓﻲ ١٣ دﻳﺴﻤﺒﺮ",
+    "translated": "Just like on December 13."
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ﻛﻤﺎ ﻓﻲ ١ ﻳﻨﺎﻳﺮ",
+    "translated": "ﻛﻤﺎ ﻓﻲ 1 ﻳﻨﺎﻳﺮ"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": ") ١ (",
+    "translated": ") 1 ("
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٤٢٠٢ ۸۰٥٬٥۱۲٬۳۱",
+    "translated": "4202 55"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٤٤۲٬٦۱٥٬۷۸",
+    "translated": "4465"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "۲٤٥٬٦٤۲",
+    "translated": "4564"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٦٤۲٬۷۰۲",
+    "translated": "64"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٥٦۳٬٤۸۱٬۳۱",
+    "translated": "564"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٥۷٥٬۰۸٥٬۲۱۱",
+    "translated": "5x5x5"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "۹۷٥٬۲۲۱٬٥۱۱",
+    "translated": "55"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "٤٢٠٢",
+    "translated": "4202"
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "ﺗﺸﻤﻞ اﻟﻤﺼﺎﻧﻊ واﻟﻤﻌﺪات ﻋﻰﻠ اﻟﻤﻮﺟﻮدات اﻟﻤﺆﺟﺮة ﻟﻸﻃﺮاف ذات اﻟﻌﻼﻗﺔ واﻷﻃﺮاف اﻟﺜﺎﻟﺜﺔ . وﻗﺪ ﺑﻠﻎ إﺟﻤﺎﻟﻲ ﺗ ȼ ﻔﺔ ﻫﺬه اﻟﻤﻮﺟﻮدات ﻓﻲ ﺑﺪاﻳﺔ وﻧﻬﺎﻳﺔ اﻟﻔﺘﺮة ٣٥٤٬٢ ﻣﻠﻴﻮن و ٣٥٤٬٢",
+    "translated": "Factories and equipment include assets leased to related parties and third parties."
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": "اﻟﻔﺘﺮة ٩٣٨ ﻣﻠﻴﻮن و٨٦٩ ﻣﻠﻴﻮن ﻋﻰﻠ اﻟﺘﻮاﻟﻲ . وﻗﺪ ارﺗﺒﻄﺖ اﻟﺤﺮﻛﺔ ﺧﻼل اﻟﻌﺎم ﺑﺸ ȼ أﺳﺎﺳﻲ ﻋﻰﻠ اﻻﺳﺘﻬﻼك اﻟﻤﺤﻤﻞ ﻟﻠﻌﺎم واﻟﺒﺎﻟﻎ ٩٢١ ﻣﻠﻴﻮن .",
+    "translated": "938 million and 869 million respectively."
+  },
+  {
+    "page": 9,
+    "type": "body",
+    "original": ". ﺗﻤﺜﻞ اﻟﺘﺤﻮﻳﻼت رﺳﻤﻠﺔ ﻣﻮﺟﻮدات ﻗﻴﺪ اﻹﻧﺸﺎء وﺗﺤﻮﻳﻼت إﻰﻟ ﻣﻮﺟﻮدات ﻏﻴﺮ ﻣﻠﻤﻮﺳﺔ وﺗﺤﻮﻳﻞ اﻟﻤﻮﺟﻮدات اﻟﻤﺘﻌﻠﻘﺔ ﺑﺒﺮﻧﺎﻣﺞ ﺗﻤﻠﻚ اﻟﻤﻨﺎزل ﻟﻠﻤﻮﻇﻔﻴﻦ إﻰﻟ \" اﻟﻤﻮﺟﻮدات واﻟﺬﻣﻢ اﻟﻤﺪﻳﻨﺔ اﻷﺧﺮى \" ﺿﻤﻦ اﻟﻤﻮﺟﻮدات ﻏﻴﺮ اﻟﻤﺘﺪاوﻟﺔ وﻫﻲ ﻏﻴﺮ ﻧﻘﺪﻳﺔ ﺑﻄﺒﻴﻌﺘﻬﺎ ) ٢ (",
+    "translated": "Transfers represent capitalization of assets under construction, transfers to intangible assets, and transfer of assets related to the Employee Home Ownership Program to other “assets and receivables” within non-current assets and are non-monetary in nature."
+  }
+]

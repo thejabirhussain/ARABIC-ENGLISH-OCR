@@ -21,12 +21,32 @@ function ChatSidebar({ isOpen, onClose, docId }) {
         fetch('http://127.0.0.1:8000/chat/models')
             .then(res => res.json())
             .then(data => {
-                if (data.models && data.models.length > 0) {
-                    setModels(data.models)
-                    setSelectedModel(data.models[0])
+                let availableModels = data.models || []
+
+                // Fallback if empty
+                if (availableModels.length === 0) {
+                    availableModels = ["llama3.2:3b-instruct-q4_k_m"]
+                }
+
+                // FORCE: Ensure Gemini is always available in UI
+                if (!availableModels.includes("gemini-pro")) {
+                    availableModels.push("gemini-pro")
+                }
+
+                setModels(availableModels)
+
+                // Default to Ollama if available, else Gemini
+                if (!selectedModel) {
+                    setSelectedModel(availableModels[0])
                 }
             })
-            .catch(err => console.error("Failed to fetch models", err))
+            .catch(err => {
+                console.error("Failed to fetch models", err)
+                // Fallback on error
+                const defaults = ["llama3.2:3b-instruct-q4_k_m", "gemini-pro"]
+                setModels(defaults)
+                setSelectedModel(defaults[0])
+            })
     }, [])
 
     const scrollToBottom = () => {
@@ -84,6 +104,13 @@ function ChatSidebar({ isOpen, onClose, docId }) {
         }
     }
 
+    // Model Name Mapping Helper
+    const getDisplayName = (name) => {
+        if (name.includes("llama")) return "Ollama 3b"
+        if (name === "gemini-pro") return "Gemini Pro"
+        return name
+    }
+
     return (
         <div
             className={`fixed top-0 right-0 h-full w-[400px] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -123,7 +150,7 @@ function ChatSidebar({ isOpen, onClose, docId }) {
                             className="flex-1 bg-white border border-slate-200 text-slate-700 py-1 px-2 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-300 cursor-pointer"
                         >
                             {models.map(m => (
-                                <option key={m} value={m}>{m}</option>
+                                <option key={m} value={m}>{getDisplayName(m)}</option>
                             ))}
                         </select>
                     </div>

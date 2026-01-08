@@ -143,7 +143,8 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         'text_blocks_translated': 0,
         'tables_translated': 0,
         'full_translated_text': [],  # Accumulate English text here
-        'full_original_text': []     # Accumulate Arabic text here
+        'full_original_text': [],    # Accumulate Arabic text here
+        'segments': []               # Structured segments for JSON/Excel
     }
 
     # Path to our custom font
@@ -342,14 +343,24 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                                 if not trans_text:
                                                     continue
                                                 
-                                                # Add to stats
+                                                 # Add to stats
                                                 stats['full_translated_text'].append(trans_text)
                                                 
                                                 # Add original text to stats
+                                                orig_val_str = ""
                                                 if r_idx < len(orig_df) and c_idx < len(orig_df.columns):
                                                      orig_val = orig_df.iloc[r_idx, c_idx]
                                                      if str(orig_val).strip():
-                                                         stats['full_original_text'].append(str(orig_val).strip())
+                                                         orig_val_str = str(orig_val).strip()
+                                                         stats['full_original_text'].append(orig_val_str)
+                                                
+                                                # Add to segments
+                                                stats['segments'].append({
+                                                    "page": page_num + 1,
+                                                    "type": "table_cell",
+                                                    "original": orig_val_str,
+                                                    "translated": trans_text
+                                                })
                                                 
                                                 # Get original text for stats if possible
                                                 # We need to read original CSV or infer it.
@@ -473,6 +484,12 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                                             # Accumulate for RAG
                                             stats['full_translated_text'].append(translated_text)
                                             stats['full_original_text'].append(cell_text)
+                                            stats['segments'].append({
+                                                "page": page_num + 1,
+                                                "type": "table_cell_legacy",
+                                                "original": cell_text,
+                                                "translated": translated_text
+                                            })
                                             # Cover and Insert
                                             # Use padding for cover
                                             cell_rect = fitz.Rect(cell)
@@ -655,6 +672,12 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                         # Accumulate for RAG
                         stats['full_translated_text'].append(translated_text)
                         stats['full_original_text'].append(original_text)
+                        stats['segments'].append({
+                            "page": page_num + 1,
+                            "type": text_block.get('type', 'body'),
+                            "original": original_text,
+                            "translated": translated_text
+                        })
                         
                         # Create rectangle for the text area
                         rect = fitz.Rect(bbox)
