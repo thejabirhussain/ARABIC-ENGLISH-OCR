@@ -181,6 +181,17 @@ def _is_bad_translation(translated: str, original: str) -> bool:
     if re.search(r'\b(\w+)\s*,\s*\1\s*,\s*\1', translated, re.IGNORECASE):
         return True
     
+    # Check for numeric hallucinations (e.g., "6x4x6x4", "22 22 22")
+    if re.search(r'\d+x\d+x\d+', translated, re.IGNORECASE):
+        return True
+        
+    # Check for excessive number repetition
+    digits = re.findall(r'\d+', translated)
+    if len(digits) > 3:
+        # Check if same digit sequence repeats
+        if len(set(digits)) == 1: # All same numbers e.g. "20 20 20 20"
+            return True
+        
     return False
 
 def _translate_batch(text: str, model, tokenizer) -> str:
@@ -273,15 +284,179 @@ def _translate_batch(text: str, model, tokenizer) -> str:
         # Return empty string instead of error message to avoid rendering errors
         return ""
 
+
+def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
+    """
+    Translate a list of Arabic texts to English in batch.
+    Preserves structure and uses sentence splitting for quality.
+    """
+    if not texts:
+        return []
+
+    model, tokenizer = get_translation_model()
+
+    # Pre-processing:
+    # 1. Identify which texts actually need translation (have Arabic)
+    # 2. For those that do, split into sentences/segments if they are long
+    # 3. Create a flat list of segments to translate
+    
+    import re
+    arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+    sentence_endings = r'([.!؟!?؛]\s+)'
+    
+    # Store the mapping to reconstruct original texts
+    # operations[i] = { 'type': 'direct' | 'split', 'indices': [idx1, idx2...] | value }
+    operations = []
+    flat_segments = []
+    
+    for text in texts:
+        if not text or not text.strip():
+            operations.append({'type': 'const', 'value': ""})
+            continue
+            
+        if not arabic_pattern.search(text):
+            # No Arabic, keep as is
+            operations.append({'type': 'const', 'value': text})
+            continue
+
+        # CHECK FOR PURE NUMERIC CONTENT (Bypass model)
+        # If text consists only of Arabic/English digits and punctuation, convert directly.
+        # This fixes issues where model hallucinates on pure numbers (e.g. 36794 -> 64).
+        clean_for_check = re.sub(r'[ \t\r\n]', '', text)
+        # Match digits (Arabic/English), commas, dots, parens, dashes, percent
+        if re.match(r'^[\u0660-\u0669\d\.,\(\)\-\+%]+$', clean_for_check):
+            # Convert directly
+            mapping = {
+                '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4',
+                '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9',
+                '،': ',', '٪': '%'
+            }
+            converted = "".join(mapping.get(c, c) for c in text)
+            operations.append({'type': 'const', 'value': converted})
+            print(f"Directly converted numeric: {text} -> {converted}")
+            continue
+            
+        # Clean text
+        clean_text = text.strip()
+        clean_text = re.sub(r'[ \t]+', ' ', clean_text)
+        
+        # Split logic similar to translate_to_english
+        lines = clean_text.split('\n')
+        text_ops = {'type': 'rebuild_lines', 'lines': []}
+        
+        for line in lines:
+            if not line.strip():
+                text_ops['lines'].append({'type': 'const', 'value': ""})
+                continue
+                
+            # Split line into sentences
+            parts = re.split(sentence_endings, line)
+            
+            # Recombine pairs (sentence + punctuation)
+            line_segments = []
+            
+            # Helper to process a segment
+            current_segment = ""
+            
+            for part in parts:
+                if not part: continue
+                # simple reconstruction for now to get chunks
+                # Actually, we want to split by sentence endings.
+                pass
+            
+            # Re-implementing the pair logic from translate_to_english properly
+            # sentences = re.split(sentence_endings, line)
+            # sentence_pairs = []
+            # for i in range(0, len(sentences) - 1, 2): ...
+            
+            # Let's simplify: Just use the regex split and treat every part as a potential segment
+            # If a part has Arabic, queue it. If not, keep it constant.
+            
+            line_ops = {'type': 'rebuild_segments', 'indices': []}
+            
+            # We need to handle the split carefully to reconstruct exactly
+            # re.split with groups returns [text, sep, text, sep...]
+            
+            tokens = re.split(r'([.!؟!?؛]\s+)', line)
+            
+            for token in tokens:
+                if not token: continue
+                
+                if arabic_pattern.search(token):
+                    # Needs translation
+                    flat_segments.append(token)
+                    line_ops['indices'].append({'type': 'ref', 'idx': len(flat_segments)-1})
+                else:
+                    # Keep as is
+                    line_ops['indices'].append({'type': 'const', 'value': token})
+                    
+            text_ops['lines'].append(line_ops)
+            
+        operations.append(text_ops)
+
+    # Now batch translate `flat_segments`
+    translated_segments = []
+    if flat_segments:
+        # Sort by length to minimize padding overhead
+        indexed_segments = list(enumerate(flat_segments))
+        indexed_segments.sort(key=lambda x: len(x[1]))
+        
+        sorted_texts = [x[1] for x in indexed_segments]
+        original_indices = [x[0] for x in indexed_segments]
+        
+        print(f"Batch translating {len(flat_segments)} segments (sorted by length)...")
+        sorted_results = _translate_chunks(sorted_texts, model, tokenizer, batch_size=batch_size)
+        
+        # Restore original order
+        result_map = {idx: res for idx, res in zip(original_indices, sorted_results)}
+        translated_segments = [result_map[i] for i in range(len(flat_segments))]
+
+    # Reconstruct
+    results = []
+    for op in operations:
+        if op['type'] == 'const':
+            results.append(op['value'])
+        elif op['type'] == 'rebuild_lines':
+            lines = []
+            for line_op in op['lines']:
+                if line_op['type'] == 'const':
+                    lines.append(line_op['value'])
+                elif line_op['type'] == 'rebuild_segments':
+                    segment_parts = []
+                    for item in line_op['indices']:
+                        if item['type'] == 'const':
+                            segment_parts.append(item['value'])
+                        else:
+                            # ref
+                            seg_idx = item['idx']
+                            trans = translated_segments[seg_idx]
+                            # Validation checks (basic)
+                            if arabic_pattern.search(trans):
+                                # If failed, maybe fallback or keep?
+                                # _translate_chunks might return it as is if failed?
+                                # checking _is_bad_translation might be needed here too?
+                                # _translate_chunks calls _translate_batch which checks weak validation
+                                pass
+                            segment_parts.append(trans if trans is not None else "")
+                    lines.append("".join(segment_parts))
+            results.append("\n".join(lines))
+            
+    return results
+
 def _translate_chunks(chunks, model, tokenizer, batch_size: int = 8):
     results = []
     i = 0
     while i < len(chunks):
-        batch = [c for c in chunks[i:i+batch_size] if c and c.strip()]
+        # Filter empty strings but keep track of indices? 
+        # No, the caller `translate_batch` handles structure. 
+        # But `chunks` here might contain empty strings? 
+        # `translate_batch` logic above skips adding empty strings to `flat_segments`.
+        # So `chunks` are all non-empty Arabic strings.
+        
+        batch = chunks[i:i+batch_size]
         if not batch:
-            results.extend(["" for _ in chunks[i:i+batch_size]])
-            i += batch_size
-            continue
+             break
+             
         try:
             inputs = tokenizer(
                 batch,
@@ -292,20 +467,54 @@ def _translate_chunks(chunks, model, tokenizer, batch_size: int = 8):
             )
             if next(model.parameters()).is_cuda:
                 inputs = {k: v.to(model.device) for k, v in inputs.items()}
+            
             with torch.no_grad():
                 outputs = model.generate(
                     **inputs,
                     max_length=512,
-                    num_beams=5,  # Increased for better quality
+                    num_beams=5,
                     early_stopping=True,
                     length_penalty=1.2,
                     no_repeat_ngram_size=3
                 )
             decoded = tokenizer.batch_decode(outputs.detach().cpu(), skip_special_tokens=True)
-            results.extend([d.strip() for d in decoded])
-        except Exception:
+            
+            # Validate batch results
+            batch_results = []
+            import re
+            arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+            
+            for k, res in enumerate(decoded):
+                clean_res = res.strip()
+                original_text = batch[k]
+                
+                # Check for bad translation or remaining Arabic
+                if _is_bad_translation(clean_res, original_text) or (clean_res and arabic_pattern.search(clean_res)):
+                    print(f"Batch artifact detected: '{clean_res[:30]}...' -> Retrying single.")
+                    try:
+                        # Fallback to single translation which has better retry logic
+                        clean_res = _translate_batch(original_text, model, tokenizer)
+                    except Exception as e:
+                        print(f"Single fallback failed: {e}")
+                        clean_res = ""
+                
+                # Post-processing cleanups (e.g. "Word123" -> "Word 123")
+                # Fix fused separate words and numbers
+                clean_res = re.sub(r'([a-zA-Z])(\d)', r'\1 \2', clean_res)
+                clean_res = re.sub(r'(\d)([a-zA-Z])', r'\1 \2', clean_res)
+                
+                batch_results.append(clean_res)
+                
+            results.extend(batch_results)
+        except Exception as e:
+            print(f"Batch translation error: {e}. Falling back to single item.")
             for c in batch:
-                results.append(_translate_batch(c, model, tokenizer))
+                # Fallback to single
+                try:
+                    res = _translate_batch(c, model, tokenizer)
+                except:
+                    res = ""
+                results.append(res)
         i += batch_size
     return results
 

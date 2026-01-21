@@ -119,16 +119,20 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
     """
     Translate PDF by replacing Arabic text in-place with English translations.
     Preserves exact layout, fonts, and formatting by working at block level.
+    Now optimized with batch translation.
     """
     if not PYMUPDF_AVAILABLE:
         raise Exception("PyMuPDF is required for in-place PDF editing but is not available.")
+    
+    # Import the batch translation function locally to ensure it picks up the latest version
+    from services.translate_service import translate_batch
 
     # Ensure we have a text layer to work with
     working_pdf_path = _ensure_searchable_pdf(pdf_path)
     is_temp_file = working_pdf_path != pdf_path
 
     print("=" * 60)
-    print("Starting in-place PDF translation (block-level processing)")
+    print("Starting in-place PDF translation (Optimized Batch Processing)")
     print("=" * 60)
 
     # Open the PDF
@@ -196,45 +200,49 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                     has_custom_font_bold = False
             print(f"\nProcessing page {page_num + 1}/{len(doc)}...")
 
+            # --- COLLECTION PHASE ---
+            # Collect all items needing translation
+            
+            translation_queue = [] # List of strings to translate
+            # Map index of translation_queue back to the object
+            # queue_map = [ { 'type': 'table_cell', 'obj': cell_ref }, ... ]
+            queue_map = []
+            
             # --- Table Detection Phase ---
             # Used to identify grids and process them cell-by-cell for alignment
             # Also creates an exclusion zone for standard text blocks
             table_exclusion_rects = []
             
+            # Store table processing data to apply later
+            # List of items:
+            # { "type": "maryum_table", "df": orig_df, "layout": layout, "csv_path": path, "translated_df": placeholder_df }
+            # { "type": "legacy_table", "cells": [ { "rect": rect, "text": text, "trans": "" } ] }
+            pending_tables = []
+            
             if maryum_detector and maryum_extractor and maryum_translator:
                 # === MARYUM INTEGRATION PATH ===
                 try:
-
                     # 1. Detect Tables
                     m_configs = maryum_detector.detect_tables_on_page(working_pdf_path, page_num)
                     
                     if m_configs:
                         # FILTER: Remove configs that are likely text paragraphs (high word density)
-                        # This resolves the conflict where 2-column text is detected as a table
                         final_configs = []
                         for cfg in m_configs:
-                            # 1. Check for single column (already done in detector, but double check)
+                            # 1. Check for single column
                             num_cols = len(cfg.columns) - 1
                             if num_cols < 2:
                                 print(f"  Skipping Table candidate (cols={num_cols}): likely single column text.")
                                 continue
                             
                             # 2. Check Text Density
-                            # Extract raw text from the region
                             cfg_rect = fitz.Rect(cfg.bbox.x0, cfg.bbox.y0, cfg.bbox.x1, cfg.bbox.y1)
                             region_text = page.get_text("text", clip=cfg_rect)
                             total_words = len(region_text.split())
-                            
-                            # Estimate cells: (height / 20px) * num_cols
                             approx_rows = max(1, cfg_rect.height / 20)
                             approx_cells = approx_rows * num_cols
-                            
-                            # Keywords per cell
                             density = total_words / approx_cells if approx_cells > 0 else 0
                             
-                            # Threshold: Data tables usually has < 5-8 words per cell. 
-                            # Text paragraphs often have > 10-15.
-                            # We use 12 as a safe threshold.
                             if density > 12:
                                 print(f"  Skipping Table candidate (density={density:.1f}): likely multi-column text.")
                                 continue
@@ -242,202 +250,70 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                             final_configs.append(cfg)
 
                         m_configs = final_configs
-                        
                         print(f"  Maryum found {len(m_configs)} tables on page {page_num+1}.")
                         
                         # 2. Extract & Translate
-                        # DEBUG: Save intermediate CSVs to a persistent folder instead of temp
                         debug_dir = os.path.join(os.path.dirname(output_path), "debug_tables")
                         os.makedirs(debug_dir, exist_ok=True)
                         
-                        # Use debug_dir instead of temp_dir
-                        # with tempfile.TemporaryDirectory() as temp_dir:
-                        if True: # Indentation preservation scope
-                            temp_dir = debug_dir
+                        # Use debug_dir
+                        temp_dir = debug_dir
                             
-                            # Clean old files in debug dir for this page to differ between runs? 
-                            # Optional, but good practice. For now, we overwrite.
-                            # Extract returns list of (csv_path, layout)
-                            extracted_data = maryum_extractor.extract_tables(
-                                working_pdf_path, m_configs, temp_dir, f"p{page_num}"
-                            )
-                            
-                            # Start with empty exclusion (only exclude if we actually replace)
-                            processed_configs_indices = set()
-                            
-                            if extracted_data:
-                                csv_paths = [x[0] for x in extracted_data]
-                                translated_paths = maryum_translator.translate_tables(csv_paths, temp_dir)
-                                
-                                # 3. Re-insert
-                                for idx, ((orig_csv, layout), trans_csv) in enumerate(zip(extracted_data, translated_paths)):
-                                    try:
-                                        # Load translated CSV
-                                        # Use standard pandas read
-                                        df = pd.read_csv(trans_csv, header=None)
-                                        
-                                        # Load original CSV for stats
-                                        orig_df = pd.read_csv(orig_csv, header=None)
-                                        
-                                        # Use simplistic check - if dataframe is empty, likely no translation
-                                        if df.empty:
-                                            continue
+                        # Extract returns list of (csv_path, layout)
+                        extracted_data = maryum_extractor.extract_tables(
+                            working_pdf_path, m_configs, temp_dir, f"p{page_num}"
+                        )
+                        
+                        if extracted_data:
+                            # Iterate extracted tables
+                            for idx, (orig_csv, layout) in enumerate(extracted_data):
+                                try:
+                                    orig_df = pd.read_csv(orig_csv, header=None).fillna("")
+                                    if orig_df.empty:
+                                        continue
 
-                                        # Mark this table as processed/excluded from text phase
-                                        # We only exclude if we successfully processed it
+                                    if not layout or not layout[0]:
+                                        continue
                                         
-                                        # Map back to config? Maryum extract loops configs in order.
-                                        # extracted_data corresponds to indices of m_configs (if all extracted)
-                                        # PDFExtractionService strictly iterates configs and appends result if successful.
-                                        # So this corresponds to m_configs.
-                                        # But wait, PDFExtractionService logic:
-                                        # for idx, config in enumerate(table_configs): ... if table_rows: results.append(...)
-                                        # So extracted_data size <= m_configs size.
-                                        # This index 'idx' in extracted_data does NOT match m_configs index directly if some failed.
-                                        # This is tricky. We need the bbox to exclude.
-                                        
-                                        # Let's fix PDFExtractionService to return bbox or config index?
-                                        # Or we can deduce bbox from layout? 
-                                        # Layout is List[List[CellLayout]]. Each CellLayout has bbox.
-                                        # We can compute the union bbox of all cells in layout.
-                                        
-                                        if not layout or not layout[0]:
-                                            continue
+                                    # Calculate exclusion bbox
+                                    min_x = min(cell.x0 for row in layout for cell in row)
+                                    min_y = min(cell.y0 for row in layout for cell in row)
+                                    max_x = max(cell.x1 for row in layout for cell in row)
+                                    max_y = max(cell.y1 for row in layout for cell in row)
+                                    table_exclusion_rects.append((min_x, min_y, max_x, max_y))
+                                    
+                                    # Prepare table structure for translation
+                                    # We flatten the table into the queue
+                                    table_item = {
+                                        "type": "maryum_table",
+                                        "orig_df": orig_df,
+                                        "layout": layout,
+                                        "rect": (min_x, min_y, max_x, max_y),
+                                        "cells": [] # store (r, c) -> queue_idx
+                                    }
+                                    
+                                    for r_idx, row in orig_df.iterrows():
+                                        for c_idx, val in enumerate(row):
+                                            val_str = str(val).strip()
+                                            if not val_str:
+                                                continue
                                             
-                                        # Calculate bounding box of the processed table from layout
-                                        min_x = min(cell.x0 for row in layout for cell in row)
-                                        min_y = min(cell.y0 for row in layout for cell in row)
-                                        max_x = max(cell.x1 for row in layout for cell in row)
-                                        max_y = max(cell.y1 for row in layout for cell in row)
-                                        
-                                        # Add to exclusion
-                                        table_exclusion_rects.append((min_x, min_y, max_x, max_y))
-
-
-                                        # Clean up any NaN
-                                        df = df.fillna("")
-                                        orig_df = orig_df.fillna("")
-                                        
-                                        # MEGA COVER: Cover the entire table area once to ensure no background text persists in gaps
-                                        try:
-                                            # Add padding to ensuring we cover slightly outside the detected bounds
-                                            # to catch any anti-aliasing or slight misalignment
-                                            mega_cover_rect = fitz.Rect(min_x-2, min_y-2, max_x+2, max_y+2)
-                                            shape = page.new_shape()
-                                            shape.draw_rect(mega_cover_rect)
-                                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                            shape.commit()
-                                        except Exception as cover_e:
-                                            print(f"Warning: Failed to cover table area: {cover_e}")
-                                        
-                                        # Iterate Layout
-                                        for r_idx, row_layout in enumerate(layout):
-                                            for c_idx, cell_layout in enumerate(row_layout):
-                                                # Get translated text
-                                                trans_text = ""
-                                                if r_idx < len(df) and c_idx < len(df.columns):
-                                                    val = df.iloc[r_idx, c_idx]
-                                                    if str(val).strip():
-                                                        trans_text = str(val).strip()
-                                                
-                                                if not trans_text:
-                                                    continue
-                                                
-                                                 # Add to stats
-                                                stats['full_translated_text'].append(trans_text)
-                                                
-                                                # Add original text to stats
-                                                orig_val_str = ""
-                                                if r_idx < len(orig_df) and c_idx < len(orig_df.columns):
-                                                     orig_val = orig_df.iloc[r_idx, c_idx]
-                                                     if str(orig_val).strip():
-                                                         orig_val_str = str(orig_val).strip()
-                                                         stats['full_original_text'].append(orig_val_str)
-                                                
-                                                # Add to segments
-                                                stats['segments'].append({
-                                                    "page": page_num + 1,
-                                                    "type": "table_cell",
-                                                    "original": orig_val_str,
-                                                    "translated": trans_text
+                                            # Add to queue if not numeric
+                                            normalized_text = normalize_arabic_numerals(val_str)
+                                            if not numeric_pattern.match(normalized_text) and arabic_pattern.search(normalized_text):
+                                                translation_queue.append(normalized_text)
+                                                queue_map.append({
+                                                    'type': 'maryum_cell',
+                                                    'table_idx': len(pending_tables),
+                                                    'r': r_idx,
+                                                    'c': c_idx
                                                 })
-                                                
-                                                # Get original text for stats if possible
-                                                # We need to read original CSV or infer it.
-                                                # Reading the original CSV is safest if aligned.
-                                                try:
-                                                    # Lazy load original DF only if needed?
-                                                    # Better to trust that if we are here, we are iterating the structure
-                                                    # But we don't have orig_df loaded yet.
-                                                    pass # Will handle outside loop to be efficient or just accept missing for now?
-                                                    # Let's try to load orig once
-                                                except:
-                                                    pass
-                                                
-                                                # Re-insertion Box
-                                                # Ensure valid rect
-                                                cell_rect = fitz.Rect(cell_layout.x0, cell_layout.y0, cell_layout.x1, cell_layout.y1)
-                                                
-                                                # REMOVED: Per-cell covering.
-                                                # Mega Cover already cleared the table area.
-                                                
-                                                # Font settings
-                                                # English tables usually small font
-                                                current_fontsize = 8 
-                                                # Force standard font for English tables to avoid numeral reversal issues with Noto
-                                                font_to_use = "helv"
-                                                
-                                                # INSERT TEXT (LTR by default with align=0)
-                                                # Use TextWriter for numeric/short LTR text to avoid PyMuPDF Bidi auto-reversal on Arabic pages
-                                                if numeric_pattern.match(trans_text) or re.match(r'^[A-Za-z0-9\s\.,\-%]+$', trans_text):
-                                                    # simple LTR text
-                                                    tw = fitz.TextWriter(page.rect)
-                                                    
-                                                    # Calculate approx position (vertically centered?)
-                                                    # insert_text uses baseline. 
-                                                    # A simple heuristic: y = rect.y1 - (rect.height - fontsize)/2 - warning: approximate
-                                                    text_start = fitz.Point(cell_rect.x0 + 2, cell_rect.y1 - 3) 
-                                                    
-                                                    tw.append(
-                                                        text_start,
-                                                        trans_text,
-                                                        fontsize=current_fontsize,
-                                                        font=fitz.Font(font_to_use)
-                                                    )
-                                                    tw.write_text(page)
-                                                    remaining = 0 # Assume success
-                                                else:
-                                                    # Fallback to textbox for complex wrapping
-                                                    remaining = page.insert_textbox(
-                                                        cell_rect,
-                                                        trans_text,
-                                                        fontsize=current_fontsize,
-                                                        fontname=font_to_use,
-                                                        align=0  # Left Align (LTR)
-                                                    )
-                                                
-                                                # Resize if needed
-                                                while remaining < 0 and current_fontsize > 4:
-                                                    current_fontsize -= 0.5
-                                                    # Re-cover to clear partial draw
-                                                    shape = page.new_shape()
-                                                    shape.draw_rect(cover_rect)
-                                                    shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                                    shape.commit()
-                                                    
-                                                    remaining = page.insert_textbox(
-                                                        cell_rect,
-                                                        trans_text,
-                                                        fontsize=current_fontsize,
-                                                        fontname=font_to_use,
-                                                        align=0
-                                                    )
-                                        
-                                        stats['tables_translated'] += 1
-                                        
-                                    except Exception as e:
-                                        print(f"Error applying Table {trans_csv}: {e}")
-                                
+                                    
+                                    pending_tables.append(table_item)
+
+                                except Exception as e:
+                                    print(f"Error preparing Maryum Table {idx}: {e}")
+                            
                     else:
                         print(f"  No tables found by Maryum on page {page_num+1}")
 
@@ -454,100 +330,51 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                         for table in tables:
                             table_exclusion_rects.append(table.bbox)
                             
+                            legacy_table_item = {
+                                "type": "legacy_table",
+                                "bbox": table.bbox,
+                                "cells": [] # list of { rect, text, queue_idx }
+                            }
+                            
                             # Process cells
                             for row in table.rows:
                                 for cell in row.cells:
-                                    # Get text from cell area
                                     cell_text = page.get_text("text", clip=cell).strip()
+                                    if not cell_text: continue
+                                        
+                                    normalized_text = normalize_arabic_numerals(cell_text)
                                     
-                                    if not cell_text:
-                                        continue
-                                        
-                                    # Check if cell is largely Arabic
-                                    if arabic_pattern.search(cell_text):
-                                        # Normalize
-                                        normalized_text = normalize_arabic_numerals(cell_text)
-                                        
-                                        # Numeric Guard: If it looks like a number/date, DON'T translate
+                                    if arabic_pattern.search(normalized_text):
                                         if numeric_pattern.match(normalized_text):
-                                            translated_text = normalized_text # Keep as is
-                                            # print(f"    Skipping translation for numeric: {normalized_text}")
+                                            # Numeric, keep as is (no translation needed, but we might want to rewrite it?)
+                                            # Currently we only rewrite if translating.
+                                            pass
                                         else:
-                                            # Translate
-                                            try:
-                                                translated_text = translate_to_english(normalized_text)
-                                            except Exception as te:
-                                                print(f"    Table cell translation error: {te}")
-                                                translated_text = normalized_text
-                                        
-                                        if translated_text:
-                                            # Accumulate for RAG
-                                            stats['full_translated_text'].append(translated_text)
-                                            stats['full_original_text'].append(cell_text)
-                                            stats['segments'].append({
-                                                "page": page_num + 1,
-                                                "type": "table_cell_legacy",
-                                                "original": cell_text,
-                                                "translated": translated_text
+                                            # Add to queue
+                                            translation_queue.append(normalized_text)
+                                            queue_map.append({
+                                                'type': 'legacy_cell',
+                                                'table_idx': len(pending_tables),
+                                                'cell_idx': len(legacy_table_item['cells'])
                                             })
-                                            # Cover and Insert
-                                            # Use padding for cover
-                                            cell_rect = fitz.Rect(cell)
-                                            cover_rect = fitz.Rect(cell_rect[0]-1, cell_rect[1]-1, cell_rect[2]+1, cell_rect[3]+1)
                                             
-                                            shape = page.new_shape()
-                                            shape.draw_rect(cover_rect)
-                                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                            shape.commit()
-                                            
-                                            # Insert with auto-scaling
-                                            # For tables, we might want smaller default font
-                                            current_fontsize = 8 # Default for tables often smaller
-                                            
-                                            # Try to determine custom font
-                                            font_to_use = "noto" if has_custom_font else "helv"
-                                            
-                                            remaining = page.insert_textbox(
-                                                cell_rect,
-                                                translated_text,
-                                                fontsize=current_fontsize,
-                                                fontname=font_to_use,
-                                                align=0
-                                            )
-                                            
-                                            # Simple resizing for cells
-                                            while remaining < 0 and current_fontsize > 4:
-                                                current_fontsize -= 0.5
-                                                # Re-cover
-                                                shape = page.new_shape()
-                                                shape.draw_rect(cover_rect)
-                                                shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                                shape.commit()
-                                                
-                                                remaining = page.insert_textbox(
-                                                    cell_rect,
-                                                    translated_text,
-                                                    fontsize=current_fontsize,
-                                                    fontname=font_to_use,
-                                                    align=0
-                                                )
-                                                
-                        stats['tables_translated'] += len(tables)
+                                            legacy_table_item['cells'].append({
+                                                "rect": fitz.Rect(cell),
+                                                "text": cell_text,
+                                                "translated": None # Will be filled
+                                            })
+                            
+                            pending_tables.append(legacy_table_item)
 
                 except Exception as e:
                     print(f"  Table processing warning: {e}")
 
             # --- Text Block Phase ---
-            # Get text blocks (grouped by layout structure)
-            # using "dict" to get structural info including bounding boxes
             text_dict = page.get_text("dict")
-            
-            # Collect all text blocks with their bounding boxes
             text_blocks = []
             
             for block in text_dict["blocks"]:
-                if "lines" not in block:
-                    continue
+                if "lines" not in block: continue
                 
                 # Check intersection with detected tables
                 block_rect = fitz.Rect(block["bbox"])
@@ -557,36 +384,23 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                         in_table = True
                         break
                 
-                if in_table:
-                    # Skip this block as it was likely processed in Table Phase
-                    continue
+                if in_table: continue
 
-                # Group spans in this block into a single text block
+                # Collect text parts
                 block_text_parts = []
                 block_spans = []
-                min_x, min_y = float('inf'), float('inf')
-                max_x, max_y = float('-inf'), float('-inf')
+                min_x, min_y, max_x, max_y = float('inf'), float('inf'), float('-inf'), float('-inf')
                 
                 for line in block["lines"]:
-                    # Sort spans by x-coordinate using bbox[0]
-                    # For Arabic (RTL), we usually want reading order right-to-left if spans are stored visually
-                    # But often PyMuPDF extracts physically.
-                    # We will detect if line has Arabic, and if so, sort spans descending (Right-to-Left)
-                    
                     spans = line["spans"]
-                    if not spans:
-                        continue
-                        
-                    # Check for Arabic in this line
+                    if not spans: continue
+                    
                     line_text = " ".join([s.get("text", "") for s in spans])
                     is_arabic_line = bool(arabic_pattern.search(line_text))
                     
-                    # Sort spans appropriately
                     if is_arabic_line:
-                        # Sort Right-to-Left (descending X)
                         spans.sort(key=lambda s: s["bbox"][0], reverse=True)
                     else:
-                        # Sort Left-to-Right (ascending X) - default
                         spans.sort(key=lambda s: s["bbox"][0])
 
                     for span in spans:
@@ -594,7 +408,6 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                         if span_text:
                             block_text_parts.append(span_text)
                             block_spans.append(span)
-                        # Update bounding box
                         bbox = span["bbox"]
                         min_x = min(min_x, bbox[0])
                         min_y = min(min_y, bbox[1])
@@ -602,177 +415,239 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
                         max_y = max(max_y, bbox[3])
                 
                 if block_text_parts:
-                    # Combine text parts
-                    # Note: Original order often works for PyMuPDF extraction even for RTL 
-                    # because it extracts in reading order usually.
                     combined_text = " ".join(block_text_parts)
-                    
-                    # Check if block contains Arabic
                     if arabic_pattern.search(combined_text):
-                        # Get average font properties from spans
                         font_sizes = [s.get("size", 12) for s in block_spans]
                         avg_font_size = sum(font_sizes) / len(font_sizes) if font_sizes else 12
+                        
+                        # Add to queue
+                        translation_queue.append(normalize_arabic_numerals(combined_text))
+                        queue_map.append({
+                            'type': 'text_block',
+                            'block_idx': len(text_blocks)
+                        })
                         
                         text_blocks.append({
                             'text': combined_text,
                             'bbox': [min_x, min_y, max_x, max_y],
                             'font_size': avg_font_size,
-                            'spans': block_spans
+                            'spans': block_spans,
+                            'translated': None # Will be filled
                         })
 
             print(f"Found {len(text_blocks)} Arabic text blocks on page {page_num + 1}")
-
-            # --- Layout Analysis Phase ---
-            # Determine structural types (Heading vs Body) based on relative font sizes
+            
+            # --- STRUCTURE ANALYSIS (Optional, for headings) ---
             if text_blocks:
                 all_sizes = [b['font_size'] for b in text_blocks]
                 if all_sizes:
                     page_avg_size = sum(all_sizes) / len(all_sizes)
-                    print(f"Page {page_num+1} stats: Avg Font Size={page_avg_size:.2f}")
-                    
                     for block in text_blocks:
                         size = block['font_size']
-                        # Simple heuristics for structure
                         if size > page_avg_size * 1.15:
                             block['type'] = 'heading'
-                            block['md_prefix'] = '## ' if size < page_avg_size * 1.5 else '# '
                         elif size < page_avg_size * 0.85:
                             block['type'] = 'small'
-                            block['md_prefix'] = ''
                         else:
                             block['type'] = 'body'
-                            block['md_prefix'] = ''
-                            
-                        # Debug structure
-                        # print(f"  Block type: {block['type']} (Size: {size:.1f})")
 
-            # --- Text Replacement Phase ---
-            # Process each text block
-            for block_idx, text_block in enumerate(text_blocks):
-                original_text = text_block['text']
-                bbox = text_block['bbox']
-                
-                # Filter out very small blocks or noise
-                if (bbox[2] - bbox[0]) < 5 or (bbox[3] - bbox[1]) < 5:
-                    continue
-
-                # Normalize numerals
-                normalized_text = normalize_arabic_numerals(original_text)
-
-                # Translate the complete block
+            # --- BATCH TRANSLATION ---
+            print(f"  Translating {len(translation_queue)} items in batch...")
+            translated_results = []
+            if translation_queue:
                 try:
-                    # Skip numeric-heavy blocks if needed, but "in-place" usually implies 
-                    # replacing everything that was selected as Arabic block.
-                    # We'll check if it's translatable.
+                    translated_results = translate_batch(translation_queue, batch_size=8)
+                except Exception as e:
+                    print(f"  Batch translation failed: {e}")
+                    # Fallback?
+                    translated_results = [""] * len(translation_queue)
+
+            # --- APPLICATION PHASE ---
+            print(f"  Applying translations to page...")
+            
+            # 1. Distribute translations back to objects
+            for idx, item in enumerate(queue_map):
+                trans_text = translated_results[idx] if idx < len(translated_results) else ""
+                
+                if item['type'] == 'maryum_cell':
+                    table = pending_tables[item['table_idx']]
+                    # We store translations in a dict for easy lookup or just create a new DF later
+                    if 'trans_map' not in table: table['trans_map'] = {}
+                    table['trans_map'][(item['r'], item['c'])] = trans_text
                     
-                    translated_text = translate_to_english(normalized_text)
+                elif item['type'] == 'legacy_cell':
+                    table = pending_tables[item['table_idx']]
+                    cell = table['cells'][item['cell_idx']]
+                    cell['translated'] = trans_text
+                    
+                elif item['type'] == 'text_block':
+                    block = text_blocks[item['block_idx']]
+                    block['translated'] = trans_text
 
-                    # Only replace if translation returned something and isn't just Arabic again
-                    if translated_text and not arabic_pattern.search(translated_text):
-                        # Accumulate for RAG
-                        stats['full_translated_text'].append(translated_text)
-                        stats['full_original_text'].append(original_text)
-                        stats['segments'].append({
-                            "page": page_num + 1,
-                            "type": text_block.get('type', 'body'),
-                            "original": original_text,
-                            "translated": translated_text
-                        })
+            # 2. Apply Tables (Maryum)
+            for table in pending_tables:
+                if table['type'] == 'maryum_table':
+                    try:
+                        orig_df = table['orig_df']
+                        layout = table['layout']
+                        trans_map = table.get('trans_map', {})
+                        rect = table['rect']
                         
-                        # Create rectangle for the text area
-                        rect = fitz.Rect(bbox)
-                        
-                        # Apply padding to ensure we cover the old text fully
-                        # Expand slightly (1-2 points) to cover anti-aliasing artifacts
-                        cover_rect = fitz.Rect(bbox[0]-1, bbox[1]-1, bbox[2]+1, bbox[3]+1)
-
-                        # Draw white rectangle to cover original text
-                        # We use shape to ensure it's drawn over existing content
+                        # Cover table area
+                        mega_cover_rect = fitz.Rect(rect[0]-2, rect[1]-2, rect[2]+2, rect[3]+2)
                         shape = page.new_shape()
-                        shape.draw_rect(cover_rect)
+                        shape.draw_rect(mega_cover_rect)
                         shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
                         shape.commit()
+                        
+                        # Apply cells
+                        for r_idx, row_layout in enumerate(layout):
+                            for c_idx, cell_layout in enumerate(row_layout):
+                                # Get translated text if available, else original (or skip if empty)
+                                trans_text = trans_map.get((r_idx, c_idx), "")
+                                orig_val = str(orig_df.iloc[r_idx, c_idx]).strip() if (r_idx < len(orig_df) and c_idx < len(orig_df.columns)) else ""
+                                
+                                if not trans_text and orig_val:
+                                    # If original was numeric, use it
+                                    norm = normalize_arabic_numerals(orig_val)
+                                    if numeric_pattern.match(norm):
+                                        trans_text = norm
+                                
+                                if not trans_text: continue
 
-                        # Insert new text
-                        try:
-                            # 1. Calculate optimal font size
-                            box_width = rect.width
-                            box_height = rect.height
-                            
-                            # Start with original font size but cap it reasonable for English
-                            # Arabic often compact; English might need adjustment.
-                            # Usually English takes more horizontal space but less vertical per line height sometimes.
-                            current_fontsize = text_block['font_size']
-                            
-                            # Insert textbox allows auto-wrapping
-                            # We might need to scale down if it returns a negative result (overflow)
-                            
-                            # Determine correct font
-                            block_type = text_block.get('type', 'body')
-                            
-                            font_to_use = "helv"
-                            if has_custom_font:
-                                if block_type == 'heading' and has_custom_font_bold:
-                                    font_to_use = "noto-bold"
+                                # Stats
+                                stats['full_translated_text'].append(trans_text)
+                                stats['full_original_text'].append(orig_val)
+                                stats['segments'].append({
+                                    "page": page_num + 1,
+                                    "type": "table_cell",
+                                    "original": orig_val,
+                                    "translated": trans_text
+                                })
+
+                                # Insert
+                                cell_rect = fitz.Rect(cell_layout.x0, cell_layout.y0, cell_layout.x1, cell_layout.y1)
+                                current_fontsize = 8
+                                font_to_use = "helv"
+                                
+                                # Simple LTR check
+                                if numeric_pattern.match(trans_text) or re.match(r'^[A-Za-z0-9\s\.,\-%]+$', trans_text):
+                                    tw = fitz.TextWriter(page.rect)
+                                    text_start = fitz.Point(cell_rect.x0 + 2, cell_rect.y1 - 3) 
+                                    tw.append(text_start, trans_text, fontsize=current_fontsize, font=fitz.Font(font_to_use))
+                                    tw.write_text(page)
                                 else:
-                                    font_to_use = "noto"
+                                    page.insert_textbox(cell_rect, trans_text, fontsize=current_fontsize, fontname=font_to_use, align=0)
+                                    
+                        stats['tables_translated'] += 1
+                        
+                    except Exception as e:
+                        print(f"    Error applying Maryum table: {e}")
+
+                elif table['type'] == 'legacy_table':
+                    try:
+                        for cell in table['cells']:
+                            trans_text = cell.get('translated')
+                            orig_text = cell.get('text')
                             
-                            # Reduce initial font size to avoid overlap
-                            # English often takes more width than Arabic for same meaning
-                            current_fontsize = text_block['font_size'] * 0.85
+                            if not trans_text and orig_text:
+                                norm = normalize_arabic_numerals(orig_text)
+                                if numeric_pattern.match(norm):
+                                    trans_text = norm
                             
-                            # Add margins/padding to rect to prevent touching borders
-                            padding_x = 2
-                            padding_y = 1
-                            text_rect = fitz.Rect(
-                                rect.x0 + padding_x, 
-                                rect.y0 + padding_y, 
-                                rect.x1 - padding_x, 
-                                rect.y1 - padding_y
-                            )
+                            if not trans_text: continue
                             
-                            remaining_text = page.insert_textbox(
+                            stats['full_translated_text'].append(trans_text)
+                            stats['full_original_text'].append(orig_text)
+                            
+                            # Cover and Insert
+                            cell_rect = cell['rect']
+                            cover_rect = fitz.Rect(cell_rect[0]-1, cell_rect[1]-1, cell_rect[2]+1, cell_rect[3]+1)
+                            shape = page.new_shape()
+                            shape.draw_rect(cover_rect)
+                            shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                            shape.commit()
+                            
+                            current_fontsize = 8
+                            page.insert_textbox(cell_rect, trans_text, fontsize=current_fontsize, fontname="helv", align=0)
+                            
+                        stats['tables_translated'] += 1
+                    except Exception as e:
+                        print(f"    Error applying legacy table: {e}")
+
+            # 3. Apply Text Blocks
+            for text_block in text_blocks:
+                trans_text = text_block.get('translated')
+                orig_text = text_block['text']
+                bbox = text_block['bbox']
+                
+                if not trans_text: continue
+                
+                # Check for Arabic in result
+                if arabic_pattern.search(trans_text):
+                    continue # Skip failed translation
+                    
+                stats['full_translated_text'].append(trans_text)
+                stats['full_original_text'].append(orig_text)
+                stats['segments'].append({
+                    "page": page_num + 1,
+                    "type": text_block.get('type', 'body'),
+                    "original": orig_text,
+                    "translated": trans_text
+                })
+                
+                # Cover
+                rect = fitz.Rect(bbox)
+                cover_rect = fitz.Rect(bbox[0]-1, bbox[1]-1, bbox[2]+1, bbox[3]+1)
+                shape = page.new_shape()
+                shape.draw_rect(cover_rect)
+                shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                shape.commit()
+                
+                # Insert
+                try:
+                    font_to_use = "helv"
+                    if has_custom_font:
+                         if text_block.get('type') == 'heading' and has_custom_font_bold:
+                             font_to_use = "noto-bold"
+                         else:
+                             font_to_use = "noto"
+                             
+                    current_fontsize = text_block['font_size'] * 0.85
+                    padding_x = 2
+                    padding_y = 1
+                    text_rect = fitz.Rect(rect.x0 + padding_x, rect.y0 + padding_y, rect.x1 - padding_x, rect.y1 - padding_y)
+                    
+                    remaining = page.insert_textbox(
+                        text_rect,
+                        trans_text,
+                        fontsize=current_fontsize,
+                        fontname=font_to_use,
+                        align=0,
+                        encoding=0
+                    )
+                    
+                    if remaining < 0:
+                         # Resize loop
+                         min_fontsize = 5
+                         while remaining < 0 and current_fontsize > min_fontsize:
+                             current_fontsize -= 1.0
+                             shape = page.new_shape()
+                             shape.draw_rect(cover_rect)
+                             shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
+                             shape.commit()
+                             
+                             remaining = page.insert_textbox(
                                 text_rect,
-                                translated_text,
+                                trans_text,
                                 fontsize=current_fontsize,
                                 fontname=font_to_use,
-                                align=0,  # Left align
-                                encoding=0
-                            )
-                            
-                            if remaining_text < 0:
-                                # Start resizing loop
-                                # Minimum legible size
-                                min_fontsize = 5
-                                while remaining_text < 0 and current_fontsize > min_fontsize:
-                                    current_fontsize -= 1.0 # Aggressive step down
-                                    # Clear previous attempt
-                                    
-                                    shape = page.new_shape()
-                                    shape.draw_rect(cover_rect)
-                                    shape.finish(color=(1, 1, 1), fill=(1, 1, 1), width=0)
-                                    shape.commit()
-                                    
-                                    remaining_text = page.insert_textbox(
-                                        text_rect,
-                                        translated_text,
-                                        fontsize=current_fontsize,
-                                        fontname=font_to_use,
-                                        align=0
-                                    )
-                            
-                            stats['text_blocks_translated'] += 1
-
-                        except Exception as insert_error:
-                            print(f"    Text insertion error: {insert_error}")
-                            # Fallback: simple text insertion if textbox fails completely
-                            # (Unlikely if rect is valid, but good safety)
-                            pass
-                    else:
-                        print(f"    Skipping: Translation failed or empty")
-
+                                align=0
+                             )
+                             
+                    stats['text_blocks_translated'] += 1
                 except Exception as e:
-                    print(f"    Block processing error: {e}")
+                    print(f"    Error inserting text block: {e}")
 
         # Save the modified PDF
         doc.save(output_path)
@@ -789,15 +664,17 @@ def translate_pdf_inplace(pdf_path: str, output_path: str) -> dict:
         print(f"In-place translation complete!")
         print(f"Output saved to: {output_path}")
         print("=" * 60)
-        # Join all text for the final return
-        # Join all text for the final return
+        
         stats['full_text_content'] = "\n\n".join(stats['full_translated_text'])
         stats['full_original_content'] = "\n\n".join(stats['full_original_text'])
         
-        del stats['full_translated_text'] # Remove list to keep dict clean
+        del stats['full_translated_text']
         del stats['full_original_text']
 
         return stats
+    except Exception as e:
+        print(f"Refactored Translation Process Failed: {e}")
+        raise
 
     except Exception as e:
         if 'doc' in locals():
