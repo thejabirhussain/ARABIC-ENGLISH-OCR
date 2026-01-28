@@ -323,12 +323,14 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
         # If text consists only of Arabic/English digits and punctuation, convert directly.
         # This fixes issues where model hallucinates on pure numbers (e.g. 36794 -> 64).
         clean_for_check = re.sub(r'[ \t\r\n]', '', text)
-        # Match digits (Arabic/English), commas, dots, parens, dashes, percent
-        if re.match(r'^[\u0660-\u0669\d\.,\(\)\-\+%]+$', clean_for_check):
+        # Match digits (Arabic/English), commas, dots, parens, dashes, percent, extended digits
+        if re.match(r'^[\u0660-\u0669\u06F0-\u06F9\d\.,\(\)\-\+%\[\]]+$', clean_for_check):
             # Convert directly
             mapping = {
                 '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4',
                 '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9',
+                '۰': '0', '۱': '1', '۲': '2', '۳': '3', '۴': '4',
+                '۵': '5', '۶': '6', '۷': '7', '۸': '8', '۹': '9',
                 '،': ',', '٪': '%'
             }
             converted = "".join(mapping.get(c, c) for c in text)
