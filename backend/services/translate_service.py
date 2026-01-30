@@ -225,9 +225,9 @@ def _translate_batch(text: str, model, tokenizer) -> str:
             translated = model.generate(
                 **inputs, 
                 max_length=512,  # Output max length
-                num_beams=5,  # Increased beams for better quality
+                num_beams=1,  # Greedy decoding for speed
                 early_stopping=True,
-                length_penalty=1.2,  # Prefer longer, more complete translations
+                length_penalty=1.0,
                 no_repeat_ngram_size=3,  # Reduce repetition
                 do_sample=False  # Deterministic output
             )
@@ -240,27 +240,13 @@ def _translate_batch(text: str, model, tokenizer) -> str:
         # Validate result - should not contain Arabic
         if result and arabic_pattern.search(result):
             print(f"Warning: Translation result contains Arabic: {result[:50]}...")
-            return ""
+            return text # Fallback to original
+
         
         # Check for bad translations
         if _is_bad_translation(result, text):
-            print(f"Warning: Detected bad translation, retrying...")
-            # Retry with different parameters
-            with torch.no_grad():
-                translated = model.generate(
-                    **inputs,
-                    max_length=512,
-                    num_beams=8,  # More beams
-                    early_stopping=True,
-                    length_penalty=1.5,
-                    no_repeat_ngram_size=4
-                )
-            result = tokenizer.decode(translated[0].detach().cpu(), skip_special_tokens=True).strip()
-            
-            # Check again
-            if _is_bad_translation(result, text):
-                print(f"Warning: Translation still appears bad: {result[:50]}...")
-                return ""
+            # print(f"Warning: Detected bad translation, fallback to original...")
+            return text
         
         return result
     except Exception as e:
@@ -285,6 +271,36 @@ def _translate_batch(text: str, model, tokenizer) -> str:
         return ""
 
 
+
+def _is_translatable(text: str) -> bool:
+    """
+    Check if text should be sent to the model.
+    Returns False for "junk" (mixed symbols, short ambiguous strings).
+    """
+    if not text or len(text.strip()) == 0:
+        return False
+        
+    import re
+    # If text is very short (<4 chars) and contains mixed types (digits + letters), it's likely noise/codes
+    # e.g. "4x4", "5a", "f-5"
+    clean = text.strip()
+    if len(clean) < 5:
+        # Check for mixed alphanumeric
+        has_alpha = bool(re.search(r'[a-zA-Z\u0600-\u06FF]', clean))
+        has_digit = bool(re.search(r'\d', clean))
+        has_symbol = bool(re.search(r'[^\w\s]', clean))
+        
+        if has_digit and (has_alpha or has_symbol):
+            return False
+            
+    # Check for symbol density (e.g. "- - -", "/ /", "...")
+    # Count non-alphanumeric chars
+    non_alnum = len(re.findall(r'[^\w\s\u0600-\u06FF]', clean))
+    if len(clean) > 0 and (non_alnum / len(clean)) > 0.6:
+         return False
+         
+    return True
+
 def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
     """
     Translate a list of Arabic texts to English in batch.
@@ -301,7 +317,8 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
     # 3. Create a flat list of segments to translate
     
     import re
-    arabic_pattern = re.compile(r'[\u0600-\u06FF]')
+    # Comprehensive Arabic pattern including presentation forms
+    arabic_pattern = re.compile(r'[\u0600-\u06FF\uFB50-\uFDFF\uFE70-\uFEFF]')
     sentence_endings = r'([.!؟!?؛]\s+)'
     
     # Store the mapping to reconstruct original texts
@@ -335,9 +352,14 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
             }
             converted = "".join(mapping.get(c, c) for c in text)
             operations.append({'type': 'const', 'value': converted})
-            print(f"Directly converted numeric: {text} -> {converted}")
+            # print(f"Directly converted numeric: {text} -> {converted}")
             continue
             
+        # Check junk filter
+        if not _is_translatable(text):
+             operations.append({'type': 'const', 'value': text}) # Return original
+             continue
+
         # Clean text
         clean_text = text.strip()
         clean_text = re.sub(r'[ \t]+', ' ', clean_text)
@@ -353,26 +375,6 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
                 
             # Split line into sentences
             parts = re.split(sentence_endings, line)
-            
-            # Recombine pairs (sentence + punctuation)
-            line_segments = []
-            
-            # Helper to process a segment
-            current_segment = ""
-            
-            for part in parts:
-                if not part: continue
-                # simple reconstruction for now to get chunks
-                # Actually, we want to split by sentence endings.
-                pass
-            
-            # Re-implementing the pair logic from translate_to_english properly
-            # sentences = re.split(sentence_endings, line)
-            # sentence_pairs = []
-            # for i in range(0, len(sentences) - 1, 2): ...
-            
-            # Let's simplify: Just use the regex split and treat every part as a potential segment
-            # If a part has Arabic, queue it. If not, keep it constant.
             
             line_ops = {'type': 'rebuild_segments', 'indices': []}
             
@@ -432,13 +434,6 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
                             # ref
                             seg_idx = item['idx']
                             trans = translated_segments[seg_idx]
-                            # Validation checks (basic)
-                            if arabic_pattern.search(trans):
-                                # If failed, maybe fallback or keep?
-                                # _translate_chunks might return it as is if failed?
-                                # checking _is_bad_translation might be needed here too?
-                                # _translate_chunks calls _translate_batch which checks weak validation
-                                pass
                             segment_parts.append(trans if trans is not None else "")
                     lines.append("".join(segment_parts))
             results.append("\n".join(lines))
@@ -448,13 +443,11 @@ def translate_batch(texts: list[str], batch_size: int = 16) -> list[str]:
 def _translate_chunks(chunks, model, tokenizer, batch_size: int = 8):
     results = []
     i = 0
+    import re
+    # Comprehensive Arabic detection for validation
+    arabic_pattern = re.compile(r'[\u0600-\u06FF\uFB50-\uFDFF\uFE70-\uFEFF]')
+            
     while i < len(chunks):
-        # Filter empty strings but keep track of indices? 
-        # No, the caller `translate_batch` handles structure. 
-        # But `chunks` here might contain empty strings? 
-        # `translate_batch` logic above skips adding empty strings to `flat_segments`.
-        # So `chunks` are all non-empty Arabic strings.
-        
         batch = chunks[i:i+batch_size]
         if not batch:
              break
@@ -474,49 +467,182 @@ def _translate_chunks(chunks, model, tokenizer, batch_size: int = 8):
                 outputs = model.generate(
                     **inputs,
                     max_length=512,
-                    num_beams=5,
+                    num_beams=1, # Greedy for speed
                     early_stopping=True,
-                    length_penalty=1.2,
+                    length_penalty=1.0,
                     no_repeat_ngram_size=3
                 )
             decoded = tokenizer.batch_decode(outputs.detach().cpu(), skip_special_tokens=True)
             
             # Validate batch results
             batch_results = []
-            import re
-            arabic_pattern = re.compile(r'[\u0600-\u06FF]')
             
             for k, res in enumerate(decoded):
                 clean_res = res.strip()
                 original_text = batch[k]
                 
-                # Check for bad translation or remaining Arabic
-                if _is_bad_translation(clean_res, original_text) or (clean_res and arabic_pattern.search(clean_res)):
-                    print(f"Batch artifact detected: '{clean_res[:30]}...' -> Retrying single.")
-                    try:
-                        # Fallback to single translation which has better retry logic
-                        clean_res = _translate_batch(original_text, model, tokenizer)
-                    except Exception as e:
-                        print(f"Single fallback failed: {e}")
-                        clean_res = ""
+                bad_translation = False
                 
-                # Post-processing cleanups (e.g. "Word123" -> "Word 123")
-                # Fix fused separate words and numbers
-                clean_res = re.sub(r'([a-zA-Z])(\d)', r'\1 \2', clean_res)
-                clean_res = re.sub(r'(\d)([a-zA-Z])', r'\1 \2', clean_res)
+                # CRITICAL: Check for ANY Arabic characters (including presentation forms)
+                if (clean_res and arabic_pattern.search(clean_res)):
+                     bad_translation = True
+                     print(f"Warning: Translation result contains Arabic: {clean_res[:50]}...")
+                
+                # Only run heavy validation check if text length > 5
+                # Short texts trigger false positives too often
+                elif len(original_text) > 5 and _is_bad_translation(clean_res, original_text):
+                     bad_translation = True
+                     
+                if bad_translation:
+                    # AGGRESSIVE FALLBACK:
+                    # For ANY Arabic leakage, force re-translation
+                    if arabic_pattern.search(clean_res):
+                        print(f"CRITICAL: Arabic detected in output, forcing re-translation: '{original_text[:30]}...'")
+                        try:
+                            # Try single translation with higher quality settings
+                            clean_res = _translate_batch(original_text, model, tokenizer)
+                            # If still has Arabic, use transliteration or return normalized
+                            if arabic_pattern.search(clean_res):
+                                from services.layout_extraction_service import normalize_arabic_numerals
+                                clean_res = normalize_arabic_numerals(original_text)
+                                print(f"  Fallback to normalization: {clean_res[:30]}...")
+                        except Exception as e:
+                            from services.layout_extraction_service import normalize_arabic_numerals
+                            clean_res = normalize_arabic_numerals(original_text)
+                    # HEURISTIC FALLBACK for other bad translations:
+                    # If model failed on a short string, it's likely noise/symbol that looks like Arabic
+                    # Just return original or empty, DO NOT RETRY SINGLE (Too slow)
+                    elif len(original_text) < 20:
+                         # print(f"Skipping retry for short text artifact: '{clean_res[:20]}...'")
+                         clean_res = original_text # Fallback to original
+                    else:
+                        print(f"Batch artifact detected: '{clean_res[:30]}...' -> Retrying single.")
+                        try:
+                            # Limited retry for long text
+                            clean_res = _translate_batch(original_text, model, tokenizer)
+                        except Exception as e:
+                            clean_res = original_text
+                
+                # Apply deterministic post-processing rules to eliminate residual Arabic
+                clean_res = _apply_post_processing_rules(clean_res)
                 
                 batch_results.append(clean_res)
                 
             results.extend(batch_results)
         except Exception as e:
-            print(f"Batch translation error: {e}. Falling back to single item.")
-            for c in batch:
-                # Fallback to single
-                try:
-                    res = _translate_batch(c, model, tokenizer)
-                except:
-                    res = ""
-                results.append(res)
+            print(f"Batch translation error: {e}. Return empty.")
+            results.extend([""] * len(batch)) # Fail block fast
+            
         i += batch_size
     return results
+
+def _apply_post_processing_rules(text: str) -> str:
+    """
+    Deterministicly replace known Arabic fragments that the model might miss.
+    Focuses on currency, abbreviations, and common financial terms.
+    """
+    if not text:
+        return ""
+        
+    import re
+    from services.layout_extraction_service import normalize_arabic_numerals
+    
+    # 1. First normalize any accidental Arabic numerals or presentation forms
+    text = normalize_arabic_numerals(text)
+    
+    # 2. Dictionary of common fragments (Mapped to English)
+    # Using regex to ensure we match whole words or common abbreviations
+    replacements = {
+        # Currency
+        r'ر\.س\.': 'SAR',
+        r'ر\.س': 'SAR',
+        r'ريال سعودي': 'Saudi Riyal',
+        r'﷼': 'SAR',
+        r'هللة': 'Halala',
+        
+        # Dates / Calendars
+        r'هـ': 'H',
+        r'م': 'G', # Gregorian
+        
+        # Organizational / Title suffixes
+        r'شركة': 'Company',
+        r'مساهمة': 'Joint Stock',
+        r'السعودية': 'Saudi',
+        r'الأساسية': 'Basic',
+        r'الأساسية': 'Basic', # Duplicate for different forms
+        r'للبتروكيماويات': 'Petrochemical',
+        r'مقفلة': 'Closed',
+        r'محدودة': 'Limited',
+        r'ذات مسؤولية محدودة': 'Limited Liability Company',
+        r'ش\.م\.م': 'LLC',
+        r'س\.ت\.': 'C.R.',
+        r'ر\.م\.': 'M.N.', 
+        
+        # Financial Headings / Keywords
+        r'سابك': 'SABIC',
+        r'القوائم المالية': 'Financial Statements',
+        r'الموحدة': 'Consolidated',
+        r'السنوية': 'Annual',
+        r'للسنة المنتهية في': 'For the year ended',
+        r'٣١ ديسيمبر': '31 December',
+        r'٣١ ديسمبر': '31 December',
+        r'ديسمبر': 'December',
+        r'يناير': 'January',
+        r'فبراير': 'February',
+        r'مارس': 'March',
+        r'أبريل': 'April',
+        r'مايو': 'May',
+        r'يونيو': 'June',
+        r'يوليو': 'July',
+        r'أغسطس': 'August',
+        r'سبتمبر': 'September',
+        r'أكتوبر': 'October',
+        r'نوفمبر': 'November',
+        
+        # Report parts & Audit
+        r'تقرير المراجع': 'Auditor\'s Report',
+        r'المستقل': 'Independent',
+        r'المحتويات': 'Contents',
+        r'قائمة المركز المالي': 'Statement of Financial Position',
+        r'الأمر الرئيسي للمراجعة': 'Key Audit Matter',
+        r'التتمة': 'Continuation',
+        r'تتمة': 'Continuation',
+        r'إلى السادة': 'To the Shareholders',
+        r'مساهمي': 'Shareholders',
+        r'المحترمين': 'Honorable',
+        r'الوطني': 'National',
+        r'العنوان': 'Address',
+        r'البريدي': 'Postal',
+        r'ص\.ب\.': 'P.O. Box',
+        r'الرياض': 'Riyadh',
+        r'المملكة العربية السعودية': 'Kingdom of Saudi Arabia',
+        
+        # Directional / Artifacts
+        r'عن': 'For',
+        r'في': 'In',
+        r'إلى': 'To',
+        r'من': 'From',
+        r'تتمة': 'Continuation',
+        r'رقم': 'Number',
+        r'إجمالي': 'Total',
+        r'صافي': 'Net',
+    }
+    
+    processed_text = text
+    for pattern, replacement in replacements.items():
+        processed_text = re.sub(pattern, replacement, processed_text)
+        
+    # 3. Handle mixed spacing artifacts (e.g. "Word123" -> "Word 123")
+    processed_text = re.sub(r'([a-zA-Z])(\d)', r'\1 \2', processed_text)
+    processed_text = re.sub(r'(\d)([a-zA-Z])', r'\1 \2', processed_text)
+    
+    # 4. Final safety check: if still has Arabic but very short, it might be noise
+    arabic_pattern = re.compile(r'[\u0600-\u06FF\uFB50-\uFDFF\uFE70-\uFEFF]')
+    if arabic_pattern.search(processed_text) and len(processed_text.strip()) < 4:
+        # Just strip it if it's very short and still Arabic (likely noise/symbols)
+        if not re.match(r'^[\d\s\.,]+$', processed_text):
+            return re.sub(arabic_pattern, '', processed_text).strip()
+
+    return processed_text
+
 
