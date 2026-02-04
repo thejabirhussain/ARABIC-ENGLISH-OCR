@@ -457,10 +457,37 @@ def _create_block_from_ocr_words(words: List[Dict], page_num: int,
     return TextBlock(text, x0, y0, x1, y1, page_num)
 
 def normalize_arabic_numerals(text: str) -> str:
-    """Convert Arabic-Indic numerals (٠-٩) to Western numerals (0-9)"""
-    arabic_numerals = '٠١٢٣٤٥٦٧٨٩'
-    western_numerals = '0123456789'
+    """
+    Comprehensive Arabic normalization:
+    - Convert Arabic-Indic numerals (٠-٩) to Western (0-9)
+    - Convert Extended Arabic-Indic numerals (۰-۹) to Western (0-9)
+    - Normalize presentation forms to base characters
+    """
+    import unicodedata
     
-    translation_table = str.maketrans(arabic_numerals, western_numerals)
-    return text.translate(translation_table)
+    # Arabic-Indic digits (U+0660 to U+0669)
+    arabic_indic = '٠١٢٣٤٥٦٧٨٩'
+    # Extended Arabic-Indic digits (U+06F0 to U+06F9) - Persian/Urdu
+    extended_indic = '۰۱۲۳۴۵۶۷۸۹'
+    # Western digits
+    western = '0123456789'
+    
+    # Create translation table for both numeral sets
+    trans_table = str.maketrans(
+        arabic_indic + extended_indic,
+        western + western
+    )
+    text = text.translate(trans_table)
+    
+    # Normalize presentation forms (U+FB50-U+FDFF, U+FE70-U+FEFF) to base characters
+    # NFKC normalization converts compatibility characters to their canonical equivalents
+    text = unicodedata.normalize('NFKC', text)
+    
+    # Robust Character Unification for search-ability and translation consistency
+    # Unify Farsi/Urdu Yeh variants (0x06cc, 0x0649) to Standard Arabic Yeh (0x064a)
+    text = text.replace('\u06cc', '\u064a').replace('\u0649', '\u064a')
+    # Unify Farsi Kaf (0x06a9) to Standard Arabic Kaf (0x0643)
+    text = text.replace('\u06a9', '\u0643')
+    
+    return text
 

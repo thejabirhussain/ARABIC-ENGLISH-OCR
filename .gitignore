@@ -40,6 +40,13 @@ Thumbs.db
 temp/
 tmp/
 
+# App Specific Outputs
+# backend/output/
+# backend/verified_*docs/
+backend/comparison_gallery/
+backend/uploads/
+backend/temp_parts/
+
 # Model cache (optional - uncomment if you don't want to track model cache)
 # .cache/
 # ~/.cache/

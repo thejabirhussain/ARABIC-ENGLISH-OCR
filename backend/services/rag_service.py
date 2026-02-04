@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 import ollama
+import google.generativeai as genai
 from sentence_transformers import SentenceTransformer
 
 # Configuration
@@ -33,10 +34,46 @@ class RAGService:
             self.ollama_client = ollama.Client(host=OLLAMA_HOST)
             print(f"Connected to Ollama at {OLLAMA_HOST} using model {CHAT_MODEL}")
             
+            # Initialize Gemini
+            self.gemini_available = False
+            # API Key provided by user
+            api_key = "AIzaSyC37146oJcnxI7E9gDxTKUUbCq-Sjq_3Gw"
+            if api_key:
+                try:
+                    genai.configure(api_key=api_key)
+                    self.gemini_model = genai.GenerativeModel('gemini-pro')
+                    self.gemini_available = True
+                    print("Gemini API initialized successfully.")
+                except Exception as e:
+                    print(f"Failed to initialize Gemini: {e}")
+            else:
+                 print("GEMINI_API_KEY not found. Gemini integration disabled.")
+            
+            
         except Exception as e:
             print(f"Failed to connect to services: {e}")
             self.client = None
             self.ollama_client = None
+            self.gemini_available = False
+
+    def list_models(self) -> List[str]:
+        """List available local models from Ollama."""
+        try:
+            if not self.ollama_client:
+                 self.ollama_client = ollama.Client(host=OLLAMA_HOST)
+            
+            models_resp = self.ollama_client.list()
+            # Handle different response structures if necessary
+            # Usually returns {'models': [{'name': '...', ...}, ...]}
+            model_names = [m['name'] for m in models_resp.get('models', [])]
+            
+            if self.gemini_available:
+                model_names.append("gemini-pro")
+                
+            return model_names
+        except Exception as e:
+            print(f"Error listing models: {e}")
+            return [CHAT_MODEL]  # Return default if failed
 
     def _ensure_collection(self):
         """Create collection if it doesn't exist."""
@@ -122,7 +159,7 @@ class RAGService:
         
         return False
 
-    def chat_with_document(self, doc_id: str, query: str) -> str:
+    def chat_with_document(self, doc_id: str, query: str, model_name: Optional[str] = None) -> str:
         """
         RAG flow: Retrieve relevant chunks -> Chat with LLM.
         """
@@ -173,11 +210,32 @@ class RAGService:
         ]
 
         # 4. Generate Response
+        target_model = model_name if model_name else CHAT_MODEL
+        
         try:
+            target_model = model_name if model_name else CHAT_MODEL
+            print(f"Chatting using model: {target_model}")
+            
+            # Gemini Path
+            if target_model.startswith("gemini"):
+                if not self.gemini_available:
+                     return "Error: Gemini model requested but not configured (check GEMINI_API_KEY)."
+
+                # Construct prompt for Gemini (it works best with a direct prompt or history)
+                # We can use the messages format or just concat. For RAG context, concat is often robust.
+                full_prompt = (
+                    f"{system_prompt}\n\n"
+                    f"User Question: {query}"
+                )
+                
+                response = self.gemini_model.generate_content(full_prompt)
+                return response.text
+
+            # Ollama Path (Default)
             if not self.ollama_client:
                  self.ollama_client = ollama.Client(host=OLLAMA_HOST)
             
-            response = self.ollama_client.chat(model=CHAT_MODEL, messages=messages)
+            response = self.ollama_client.chat(model=target_model, messages=messages)
             return response['message']['content']
         except Exception as e:
             return f"Error generating response: {str(e)}"

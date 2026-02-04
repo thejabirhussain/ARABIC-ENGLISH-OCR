@@ -1,0 +1,35 @@
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:79: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_normalized = df.applymap(normalize_cell)
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:93: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_normalized.applymap(collect_if_arabic)
+/Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/services/tables_service/translation_service.py:118: FutureWarning: DataFrame.applymap has been deprecated. Use DataFrame.map instead.
+  df_translated = df_normalized.applymap(apply_translation)
+Translating debug_reversal.pdf to debug_reversal_output.pdf...
+============================================================
+STRICT MODE: Using In-Place Translation Only
+Reconstruction/Re-rendering is disabled to preserve specific layout.
+============================================================
+============================================================
+Starting in-place PDF translation (block-level processing)
+============================================================
+Using custom font: /Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/assets/fonts/NotoSans-Regular.ttf
+Using custom bold font: /Users/shaikmohammedjabirhussain/Desktop/SAMPLE-OCR/backend/assets/fonts/NotoSans-Bold.ttf
+Initializing Maryum Table Services...
+Maryum Services initialized successfully.
+
+Processing page 1/1...
+  Maryum found 1 tables on page 1.
+Found 3 Arabic text blocks on page 1
+Page 1 stats: Avg Font Size=9.76
+DEBUG_TEXT: 'اﻟﻘﻮاﺋﻢ اﻟﻤﺎﻟﻴﺔ اﻟﺴﻨﻮﻳﺔ اﻟﻤﻮﺣﺪة ﻟـﺳﺎﺑ ﻚ 4202 9'
+Loading translation model: Helsinki-NLP/opus-mt-tc-big-ar-en
+Translation model loaded successfully: Helsinki-NLP/opus-mt-tc-big-ar-en
+DEBUG_TEXT: 'ﻗﺎﺋﻤﺔ اﻟﻤﺮﻛﺰ اﻟﻤﺎﻟﻲ اﻟﻤﻮﺣﺪة'
+DEBUG_TEXT: 'ȼ ﻓﺔ اﻟﻤﺒﺎﻟﻎ ﺑﺂﻻف اﻟﺮﻳﺎﻻتاﻟﺴﻌﻮدﻳﺔﻣﺎﻟﻢﻳﺮدﺧﻼفذﻟﻚ'
+
+============================================================
+In-place translation complete!
+Output saved to: debug_reversal_output.pdf
+============================================================
+Translation successful!
+Stats: {'pages_processed': 1, 'text_blocks_translated': 3, 'tables_translated': 1, 'full_text_content': "2023\n\n2024\n\nExplain.\n\nAs of 31 December\n\n2023\n\nAs of 31 December 2024\n\nProperty Rights and Liabilities\n\nAssets\n\n30,000,000\n\n30,000,000\n\nProperty rights\n\n115,122,579\n\nNon-current assets 112,580,575\n\n110,889,032\n\n110,889,032\n\n19\n\nRasalmal\n\n5,578,572\n\nToms Factory & Equipment 7 4,835,543\n\n(1,576,557)\n\n(4,112,475)\n\n20\n\nGeneral Reserve\n\n19,763,009\n\nAssetsUse 8 19,141,633\n\n28,116,139\n\n20\n\nOther Reserves\n\nAvailableTabled Change9\n\n20,056,576\n\nEarningsKeeping\n\n41,237,301\n\nInvestmentFishratAssociateShare 10 35,435,785\n\n167,428,614\n\n156,833,133\n\nProperty rights related to Shareholders\n\n332,458\n\nInvestmentsViaToolsDebt 11 332,458\n\n27,853,926\n\n27,085,026\n\n21\n\nUncontrolled property rights\n\n236,485\n\nInvestmentsInstrumentsProperty 12 253,402\n\n195,282,540\n\n183,918,159\n\nTotalProperty\n\n1,749,286\n\nAvailableFormula 31 2,365,609\n\n3,745,176\n\nDerivatives 13 3,669,688\n\nUntraded liabilities\n\n662,1106,\n\nAssetsTommedMadinaAkhri 14 43,2002,8\n\n23,255,179\n\n26,165,086\n\n22\n\nDion\n\n213,677,193\n\nTotal Untraded Assets 2794,366,18\n\n4,622,459\n\n3,983,960\n\n22\n\nLiabilitiesContracts\n\n12,894,392\n\n13,507,010\n\n23\n\nEmployee Benefits\n\nCurrent Assets\n\n249,418\n\n285,116\n\n13\n\nWantedTax\n\n322,233,81\n\nStock 61 185,318,81\n\n441,110,2\n\n498,579,1\n\n31\n\nDerivative Financial Instruments\n\n473,592,91\n\nDhammamedina Commercial 71 328,934,02\n\n984,090,1\n\n565,078\n\n42\n\nAllocations\n\n551,592,5\n\nAssetsTommedCityExtreme 41 263,892,01\n\n049,806,1\n\n942,50,61\n\n52\n\nOther.\n\n716,248,9\n\nInvestmentShortHall11 708,866,7\n\n46,297,545\n\n48,719,346\n\nTotalUntraded Liabilities\n\n32,414,996\n\nCash is like cash 18 30,539,668\n\n85,180,365\n\n87,760,241\n\n2,414,233\n\n2,080,922\n\nTraded liabilities\n\n459,324,51\n\nStored for sale 4335 and 5263,263,\n\n453,1032,\n\n69,9222,0\n\n22\n\nShorthagel Loans\n\n931,406,001\n\nTotal Assets Traded 668,338,19\n\n263,309\n\n5015,49\n\n22\n\nPart of the debt\n\n294,380,451\n\nTotal Assets 278,018,793\n\n20,087,016\n\n19,793,604\n\n22\n\nPart of obligationsContracts Rents\n\n1,175,962\n\n137,248\n\n26\n\nDhamdaineh\n\n18,198,349\n\n19,695,999\n\n24\n\nAllocations\n\n604,302\n\n587,075\n\n25\n\nOther.\n\n1,414,718\n\n118,339\n\n31\n\nHis tax return is due.\n\n47,099,476\n\n45,381,288\n\n31\n\nZehmreka\n\n5,700,890\n\n-\n\n52,800,366\n\n45,381,288\n\n4335W\n\nObliged to direct assets held for sale\n\nReyesBoard\n\nNaybalreyesExecutive\n\n99,097,911\n\n94,100,634\n\nTotal LiabilitiesTrading\n\nPart.\n\n294,380,451\n\n278,018,793\n\nTotal Liabilities\n\nThe facility's 1 to 42 is beyond the reach of this unified financial force.\n\nTotalProperty and Liabilities\n\nSABK 9 4202 Consolidated Annual Financial Statements\n\nConsolidated financial position list\n\nAmounts in thousands of Saudi RiyalsOther"}

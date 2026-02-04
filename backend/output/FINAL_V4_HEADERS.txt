@@ -1,0 +1,16 @@
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+date: Wed, 04 Feb 2026 18:01:43 GMT
+server: uvicorn
+x-translation-stats: {"pages": 118, "blocks": 11975, "tables": 0}
+x-translation-timing: {"total_sec": 473.98, "translation_sec": 473.11, "indexing_sec": 0.88}
+x-document-id: f01aeb18-b8f0-455c-8979-c9176cffaf7e
+x-legacy-stats: pages=118, blocks=11975
+content-type: application/pdf
+accept-ranges: bytes
+content-disposition: attachment; filename="translated_english.pdf"
+content-length: 9028059
+last-modified: Wed, 04 Feb 2026 18:09:36 GMT
+etag: "b99af64cc4cda2194cb1b435ea6c6bb0"
+
