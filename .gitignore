@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# App Specific Outputs
+# backend/output/
+# backend/verified_*docs/
+backend/comparison_gallery/
+backend/uploads/
+backend/temp_parts/
+
+# Model cache (optional - uncomment if you don't want to track model cache)
+# .cache/
+# ~/.cache/
+
+
